@@ -1,0 +1,258 @@
+.activity-list-scroll {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.activity-error-detail {
+  margin-top: 6px;
+  padding: 6px 8px;
+  max-width: 100%;
+  max-height: 120px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--danger);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+  background: color-mix(in srgb, var(--danger) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 22%, transparent);
+  border-radius: 4px;
+  scrollbar-gutter: stable;
+}
+
+.activity-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.activity-filter-group {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.activity-filter-btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.activity-filter-btn:hover {
+  color: var(--text-primary);
+  background: var(--tab-hover-bg);
+}
+
+.activity-filter-btn.active {
+  color: white;
+  background: var(--accent);
+}
+
+.activity-pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.activity-page-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.activity-total {
+  color: var(--text-tertiary);
+}
+
+.activity-error {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.pro-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pro-pill {
+  font-size: 10px;
+  padding: 2px 6px;
+  vertical-align: middle;
+  background: var(--accent);
+  color: white;
+}
+
+.pro-badge-btn.is-pro-locked {
+  opacity: 0.92;
+}
+
+.activity-clear-intro {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.activity-clear-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activity-clear-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  cursor: pointer;
+}
+
+.activity-clear-option.is-selected {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-secondary));
+}
+
+.activity-clear-option input {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.activity-clear-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.activity-clear-option-text strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.activity-clear-option-meta {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+button.primary.danger {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+button.primary.danger:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.content.activity-full {
+  flex: 1;
+}
+
+.activity-section .activity-table th:first-child,
+.activity-section .activity-table td:first-child {
+  padding-left: 4px;
+}
+
+.activity-section .activity-table th:last-child,
+.activity-section .activity-table td:last-child {
+  padding-right: 4px;
+}
+
+.activity-section .activity-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.activity-section .activity-table td {
+  vertical-align: top;
+}
+
+.activity-section .activity-table th,
+.activity-section .activity-table td {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.activity-section .activity-table col.activity-col-time {
+  width: 132px;
+}
+
+.activity-section .activity-table col.activity-col-category {
+  width: 76px;
+}
+
+.activity-section .activity-table col.activity-col-status {
+  width: 68px;
+}
+
+.activity-section .activity-table col.activity-col-actions {
+  width: 40px;
+}
+
+.activity-section .activity-table td.activity-col-content {
+  max-width: 0;
+  overflow: hidden;
+}
+
+.activity-col-content-inner {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.activity-col-clip {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activity-col-subject {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activity-section .activity-table th.activity-col-actions,
+.activity-section .activity-table td.activity-col-actions {
+  min-width: 0;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.activity-section .activity-table td.activity-col-actions .cell-actions {
+  justify-content: flex-end;
+}
+
+.activity-delete-summary {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+.activity-delete-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+}

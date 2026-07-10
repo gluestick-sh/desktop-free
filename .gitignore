@@ -1,0 +1,28 @@
+# Editor / local AI
+.claude/
+
+# Go build outputs
+*.exe
+*.exe~
+*.test
+scripts/go-dev.exe
+build/bin/shim.exe
+scripts/shim/shim.exe
+
+# Desktop / Wails (generated or local)
+frontend/node_modules/
+frontend/dist/
+build/bin/
+build/appicon.png
+build/windows/icon.ico
+
+# Installer (generated)
+installer/payload/
+installer/output/
+dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

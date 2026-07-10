@@ -1,0 +1,331 @@
+.package-manifest-panel {
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.package-manifest-panel-dialog {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+.package-manifest-toggle {
+  font-size: 13px;
+}
+
+.package-manifest-body {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.package-manifest-panel-dialog .package-manifest-body {
+  margin-top: 0;
+  gap: 16px;
+}
+
+.package-manifest-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.package-manifest-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.package-manifest-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.package-manifest-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.package-manifest-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.package-manifest-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.package-manifest-code-block {
+  display: block;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  line-height: 1.45;
+  word-break: break-all;
+  color: var(--text-primary);
+}
+
+.package-manifest-url-list,
+.package-manifest-hash-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.package-manifest-url-single {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.package-manifest-url-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.package-manifest-url-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary, var(--bg-primary));
+  border: 1px solid var(--border);
+}
+
+.package-manifest-url-main {
+  min-width: 0;
+}
+
+.package-manifest-url {
+  width: 100%;
+  text-align: left;
+  word-break: break-all;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.package-manifest-copy {
+  flex-shrink: 0;
+  font-size: 12px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.package-manifest-url-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.package-manifest-url-actions .table-icon-btn {
+  width: 28px;
+  height: 28px;
+}
+
+.package-manifest-url-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.package-manifest-url-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.package-manifest-url-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.package-manifest-url-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.package-manifest-json-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.package-manifest-json-textarea {
+  width: 100%;
+  min-height: 220px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--text-primary);
+  resize: vertical;
+}
+
+.package-manifest-json-error {
+  margin: 0;
+  font-size: 12px;
+  color: var(--danger, #c62828);
+}
+
+.package-manifest-json-stale {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.package-manifest-hash-list li {
+  margin: 0;
+}
+
+.package-manifest-hash {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  line-height: 1.4;
+  word-break: break-all;
+  color: var(--text-primary);
+}
+
+.package-manifest-json {
+  margin: 0;
+  max-height: 280px;
+  overflow: auto;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text-primary);
+}
+
+.package-manifest-empty {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.package-manifest-dialog {
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header.package-manifest-dialog-header {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.package-manifest-dialog-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.package-manifest-dialog-title-row h2 {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.package-manifest-dialog-title-row .modal-close-btn {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.package-manifest-dialog-ref-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+}
+
+.package-manifest-dialog-ref {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  word-break: break-all;
+  line-height: 1.45;
+}
+
+.package-manifest-dialog-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.package-manifest-dialog-body {
+  overflow: auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.package-manifest-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.package-manifest-dialog .package-manifest-json {
+  max-height: min(50vh, 420px);
+}

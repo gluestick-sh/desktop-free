@@ -1,0 +1,127 @@
+.storage-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.storage-list-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+}
+
+.storage-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.storage-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--danger, #e74c3c) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger, #e74c3c) 35%, transparent);
+  font-size: 13px;
+}
+
+.storage-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 16px;
+}
+
+.storage-empty-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 420px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.storage-confirm-note {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.storage-confirm-note code {
+  font-size: 12px;
+}
+
+.storage-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.storage-task-card {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.storage-task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.storage-task-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* GC/purge: fixed 0% bar, no indeterminate sliding pulse */
+.cache-progress-bar .progress-bar-fill {
+  transition: none;
+}
+
+.storage-task-percent {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.storage-task-message {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.storage-section .package-table .col-size {
+  width: 5.5em;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.storage-section .package-table .col-num {
+  width: 4em;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}

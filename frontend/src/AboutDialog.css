@@ -1,0 +1,79 @@
+.about-dialog-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.about-dialog-icon {
+  flex-shrink: 0;
+  border-radius: 12px;
+  image-rendering: auto;
+}
+
+.about-dialog-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.about-dialog-app-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--text-primary);
+}
+
+.about-dialog-version {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 12px;
+}
+
+.about-dialog-tagline {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 4px;
+  line-height: 1.5;
+}
+
+.about-dialog-data-dir {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.about-dialog-attribution {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.about-dialog-attribution .text-link {
+  font-size: 12px;
+}
+
+.about-dialog-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+
+.about-dialog-data-dir code {
+  display: block;
+  word-break: break-all;
+  padding: 8px 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.about-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+}

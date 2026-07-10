@@ -1,0 +1,84 @@
+.download-workers-dialog-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.download-workers-dialog-body .settings-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 10rem;
+}
+
+.settings-dialog-loading {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted, #666);
+}
+
+.download-workers-hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.download-workers-hint code {
+  font-size: 12px;
+}
+
+.download-workers-control {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.download-workers-label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.download-workers-range {
+  width: 100%;
+  margin: 0;
+}
+
+.download-workers-ticks {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 2px;
+  font-size: 12px;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.download-workers-ticks .is-active {
+  color: var(--accent, #2563eb);
+  font-weight: 600;
+}
+
+.download-workers-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.download-workers-reset {
+  flex-shrink: 0;
+}
+
+.download-workers-dialog-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}

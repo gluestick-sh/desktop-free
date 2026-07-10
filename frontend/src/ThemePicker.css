@@ -1,0 +1,127 @@
+.theme-picker-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+}
+
+.theme-picker-section h3 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+}
+
+.theme-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-card-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-card-main:hover {
+  border-color: var(--border-light);
+}
+
+.theme-card.selected .theme-card-main {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.theme-card.locked .theme-card-main {
+  opacity: 0.75;
+}
+
+.theme-swatch {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 28px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.theme-swatch span {
+  display: block;
+  min-height: 100%;
+}
+
+.theme-card-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.theme-card-pro {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+}
+
+.theme-card-check {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.theme-card-lock {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.theme-card-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.theme-card-actions button {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+.theme-card-delete:hover:not(:disabled) {
+  color: var(--danger);
+}
+
+.theme-picker-empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}

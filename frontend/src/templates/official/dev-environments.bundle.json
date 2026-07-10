@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "kind": "gluestick.template-bundle",
+  "id": "dev-environments",
+  "name": "Dev environments",
+  "description": "Official development environment starter templates.",
+  "origin": "official",
+  "updatedAt": "2026-07-01",
+  "templates": [
+    {
+      "id": "vibe-coding",
+      "category": "ai",
+      "icon": "✨",
+      "packages": [
+        { "name": "claude-code", "bucket": "main", "label": "Claude Code" },
+        { "name": "opencode-desktop", "bucket": "extras", "label": "OpenCode" },
+        { "name": "codex", "bucket": "main", "label": "Codex CLI" },
+        { "name": "cc-switch", "bucket": "extras", "label": "CC Switch" }
+      ]
+    },
+    {
+      "id": "game-dev",
+      "category": "game",
+      "icon": "🎮",
+      "packages": [
+        { "name": "godot", "bucket": "games", "label": "Godot" },
+        { "name": "blender", "bucket": "extras", "label": "Blender" },
+        { "name": "libresprite", "bucket": "games", "label": "LibreSprite" }
+      ]
+    },
+    {
+      "id": "cad-3d",
+      "category": "design",
+      "icon": "📐",
+      "packages": [
+        { "name": "freecad", "bucket": "extras", "label": "FreeCAD" }
+      ]
+    },
+    {
+      "id": "database-dev",
+      "category": "programming",
+      "icon": "🗄️",
+      "packages": [
+        { "name": "mariadb", "bucket": "main", "label": "MariaDB" },
+        { "name": "mysql", "bucket": "main", "label": "MySQL" },
+        { "name": "redis", "bucket": "main", "label": "Redis" },
+        { "name": "mongodb", "bucket": "main", "label": "MongoDB" },
+        { "name": "postgresql", "bucket": "main", "label": "PostgreSQL" },
+        { "name": "sqlite", "bucket": "main", "label": "SQLite" }
+      ]
+    }
+  ]
+}

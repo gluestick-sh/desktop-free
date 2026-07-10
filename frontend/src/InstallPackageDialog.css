@@ -1,0 +1,159 @@
+.install-package-dialog {
+  max-height: calc(100vh - 48px);
+}
+
+.install-package-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.install-package-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.install-package-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  word-break: break-word;
+  color: var(--text-primary);
+}
+
+.install-package-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.install-dialog-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.install-dialog-section-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+.install-dialog-section-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.install-dialog-deps {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.install-dialog-notices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.install-dialog-notice {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--accent, #2563eb) 8%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--accent, #2563eb) 18%, var(--border));
+}
+
+.install-dialog-manifest-section {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.install-dialog-manifest-section .package-manifest-panel {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+}
+
+.install-package-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.install-package-dialog-footer .install-arch-notice {
+  margin-right: auto;
+}
+
+.install-package-dialog-footer .install-arch-notice-tooltip {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
+.install-package-dialog-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.install-package-dialog .install-arch-options {
+  gap: 10px;
+}
+
+.install-package-dialog .install-arch-option {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+}
+
+.install-package-dialog .install-arch-option:has(input:checked) {
+  border-color: color-mix(in srgb, var(--accent, #2563eb) 40%, var(--border));
+  background: color-mix(in srgb, var(--accent, #2563eb) 6%, var(--bg-primary));
+}
+
+.install-dialog-force-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.install-dialog-url-input {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+
+.install-dialog-force-option input {
+  margin: 2px 0 0;
+  flex-shrink: 0;
+}

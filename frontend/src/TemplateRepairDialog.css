@@ -1,0 +1,124 @@
+.template-repair-dialog {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 48px);
+}
+
+.template-repair-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  min-height: 0;
+}
+
+.template-repair-source {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.template-repair-source-label {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.template-repair-source-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.template-repair-search-row {
+  display: flex;
+  gap: 8px;
+}
+
+.template-repair-search-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.template-repair-search-row select {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.template-repair-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.template-repair-results {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 120px;
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px;
+  background: var(--bg-secondary);
+}
+
+.template-repair-result {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.template-repair-result:hover {
+  background: var(--tab-hover-bg);
+}
+
+.template-repair-result.is-selected {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.template-repair-result-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.template-repair-result-desc {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.template-repair-empty,
+.template-repair-loading {
+  margin: 0;
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.template-repair-dialog-footer {
+  gap: 10px;
+}

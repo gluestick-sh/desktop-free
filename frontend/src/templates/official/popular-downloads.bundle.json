@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "kind": "gluestick.template-bundle",
+  "id": "popular-downloads",
+  "name": "Popular downloads",
+  "description": "Official templates curated from Chocolatey, WinGet, and Scoop popularity research (2026-06).",
+  "origin": "official",
+  "updatedAt": "2026-06-11",
+  "templates": [
+    {
+      "id": "popular-essentials",
+      "category": "popular",
+      "icon": "⭐",
+      "packages": [
+        { "name": "git", "bucket": "main", "label": "Git", "ref": "cross:git" },
+        { "name": "7zip", "bucket": "main", "label": "7-Zip", "ref": "cross:7zip" },
+        { "name": "vscode", "bucket": "extras", "label": "VS Code", "ref": "cross:vscode" },
+        { "name": "nodejs-lts", "bucket": "main", "label": "Node.js LTS", "ref": "cross:nodejs" },
+        { "name": "python", "bucket": "main", "label": "Python", "ref": "cross:python" },
+        { "name": "windows-terminal", "bucket": "extras", "label": "Windows Terminal", "ref": "cross:windows-terminal" },
+        { "name": "pwsh", "bucket": "main", "label": "PowerShell", "ref": "cross:pwsh" },
+        { "name": "curl", "bucket": "main", "label": "cURL", "ref": "choco:curl" },
+        { "name": "wget", "bucket": "main", "label": "Wget", "ref": "choco:wget" },
+        { "name": "notepadplusplus", "bucket": "extras", "label": "Notepad++", "ref": "cross:notepadplusplus" },
+        { "name": "everything", "bucket": "extras", "label": "Everything", "ref": "winget:voidtools.Everything" },
+        { "name": "powertoys", "bucket": "extras", "label": "PowerToys", "ref": "winget:Microsoft.PowerToys" }
+      ]
+    },
+    {
+      "id": "popular-browsers",
+      "category": "popular",
+      "icon": "🌐",
+      "packages": [
+        { "name": "googlechrome", "bucket": "extras", "label": "Google Chrome", "ref": "choco:googlechrome" },
+        { "name": "firefox", "bucket": "extras", "label": "Firefox", "ref": "choco:firefox" },
+        { "name": "brave", "bucket": "extras", "label": "Brave", "ref": "winget:Brave.Brave" },
+        { "name": "vivaldi", "bucket": "extras", "label": "Vivaldi", "ref": "winget:Vivaldi.Vivaldi" },
+        { "name": "opera", "bucket": "extras", "label": "Opera", "ref": "winget:Opera.Opera" },
+        { "name": "tor-browser", "bucket": "extras", "label": "Tor Browser", "ref": "winget:TorProject.TorBrowser" }
+      ]
+    },
+    {
+      "id": "popular-communication",
+      "category": "popular",
+      "icon": "💬",
+      "packages": [
+        { "name": "slack", "bucket": "extras", "label": "Slack", "ref": "choco:slack" },
+        { "name": "zoom", "bucket": "extras", "label": "Zoom", "ref": "choco:zoom" },
+        { "name": "discord", "bucket": "extras", "label": "Discord", "ref": "winget:Discord.Discord" },
+        { "name": "telegram", "bucket": "extras", "label": "Telegram", "ref": "winget:Telegram.TelegramDesktop" },
+        { "name": "signal", "bucket": "extras", "label": "Signal", "ref": "winget:OpenWhisperSystems.Signal" },
+        { "name": "obsidian", "bucket": "extras", "label": "Obsidian", "ref": "winget:Obsidian.Obsidian" },
+        { "name": "notion", "bucket": "extras", "label": "Notion", "ref": "winget:Notion.Notion" },
+        { "name": "bitwarden", "bucket": "extras", "label": "Bitwarden", "ref": "winget:Bitwarden.Bitwarden" }
+      ]
+    },
+    {
+      "id": "popular-developer-cli",
+      "category": "popular",
+      "icon": "⌨️",
+      "packages": [
+        { "name": "ripgrep", "bucket": "main", "label": "ripgrep", "ref": "scoop:ripgrep" },
+        { "name": "fzf", "bucket": "main", "label": "fzf", "ref": "scoop:fzf" },
+        { "name": "fd", "bucket": "main", "label": "fd", "ref": "scoop:fd" },
+        { "name": "bat", "bucket": "main", "label": "bat", "ref": "scoop:bat" },
+        { "name": "eza", "bucket": "main", "label": "eza", "ref": "scoop:eza" },
+        { "name": "delta", "bucket": "main", "label": "delta", "ref": "scoop:delta" },
+        { "name": "starship", "bucket": "main", "label": "Starship", "ref": "scoop:starship" },
+        { "name": "zoxide", "bucket": "main", "label": "zoxide", "ref": "scoop:zoxide" },
+        { "name": "gh", "bucket": "main", "label": "GitHub CLI", "ref": "scoop:gh" },
+        { "name": "terraform", "bucket": "main", "label": "Terraform", "ref": "scoop:terraform" },
+        { "name": "kubectl", "bucket": "main", "label": "kubectl", "ref": "scoop:kubectl" },
+        { "name": "helm", "bucket": "main", "label": "Helm", "ref": "scoop:helm" },
+        { "name": "docker", "bucket": "main", "label": "Docker CLI", "ref": "scoop:docker" },
+        { "name": "aws", "bucket": "main", "label": "AWS CLI", "ref": "choco:awscli" },
+        { "name": "azure-cli", "bucket": "main", "label": "Azure CLI", "ref": "scoop:azure-cli" },
+        { "name": "jq", "bucket": "main", "label": "jq", "ref": "choco:jq" },
+        { "name": "yt-dlp", "bucket": "main", "label": "yt-dlp", "ref": "winget:yt-dlp.yt-dlp" },
+        { "name": "ninja", "bucket": "main", "label": "Ninja", "ref": "choco:ninja" }
+      ]
+    },
+    {
+      "id": "popular-media",
+      "category": "popular",
+      "icon": "🎬",
+      "packages": [
+        { "name": "vlc", "bucket": "extras", "label": "VLC", "ref": "cross:vlc" },
+        { "name": "obs-studio", "bucket": "extras", "label": "OBS Studio", "ref": "winget:OBSProject.OBSStudio" },
+        { "name": "audacity", "bucket": "extras", "label": "Audacity", "ref": "winget:Audacity.Audacity" },
+        { "name": "gimp", "bucket": "extras", "label": "GIMP", "ref": "choco:gimp" },
+        { "name": "blender", "bucket": "extras", "label": "Blender", "ref": "winget:BlenderFoundation.Blender" },
+        { "name": "handbrake", "bucket": "extras", "label": "HandBrake", "ref": "winget:HandBrake.HandBrake" },
+        { "name": "ffmpeg", "bucket": "main", "label": "FFmpeg", "ref": "winget:Gyan.FFmpeg" },
+        { "name": "inkscape", "bucket": "extras", "label": "Inkscape", "ref": "winget:Inkscape.Inkscape" },
+        { "name": "sharex", "bucket": "extras", "label": "ShareX", "ref": "winget:ShareX.ShareX" },
+        { "name": "flameshot", "bucket": "extras", "label": "Flameshot", "ref": "winget:Flameshot.Flameshot" },
+        { "name": "spotify", "bucket": "extras", "label": "Spotify", "ref": "choco:spotify" }
+      ]
+    },
+    {
+      "id": "popular-security",
+      "category": "popular",
+      "icon": "🔐",
+      "packages": [
+        { "name": "keepassxc", "bucket": "extras", "label": "KeePassXC", "ref": "winget:KeePassXCTeam.KeePassXC" },
+        { "name": "malwarebytes", "bucket": "extras", "label": "Malwarebytes", "ref": "choco:malwarebytes" },
+        { "name": "wireshark", "bucket": "extras", "label": "Wireshark", "ref": "choco:wireshark" },
+        { "name": "openssh", "bucket": "main", "label": "OpenSSH", "ref": "choco:openssh" },
+        { "name": "putty", "bucket": "extras", "label": "PuTTY", "ref": "choco:putty" },
+        { "name": "winscp", "bucket": "extras", "label": "WinSCP", "ref": "choco:winscp" },
+        { "name": "tailscale", "bucket": "extras", "label": "Tailscale", "ref": "winget:Tailscale.Tailscale" }
+      ]
+    }
+  ]
+}

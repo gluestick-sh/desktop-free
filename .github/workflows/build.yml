@@ -1,0 +1,111 @@
+name: Build
+
+on:
+  push:
+    branches: [main, master]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  GOWORK: off
+
+jobs:
+  build:
+    name: windows-${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: windows-latest
+            platform: windows/amd64
+          - arch: arm64
+            runner: windows-11-arm
+            platform: windows/arm64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache-dependency-path: go.sum
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Wails CLI
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@v2.13.0
+
+      - name: Add Go bin to PATH
+        shell: pwsh
+        run: Add-Content -Path $env:GITHUB_PATH -Value "$(go env GOPATH)\bin"
+
+      - name: Prepare app icon
+        shell: pwsh
+        run: |
+          $publicIcon = "frontend/public/appicon.png"
+          $buildIcon = "build/appicon.png"
+          if ((Test-Path $publicIcon) -and -not (Test-Path $buildIcon)) {
+            New-Item -ItemType Directory -Force -Path build | Out-Null
+            Copy-Item $publicIcon $buildIcon
+          }
+
+      - name: Build
+        shell: pwsh
+        run: .\build.ps1 -Platform ${{ matrix.platform }} -nocolour
+
+      - name: Verify artifacts
+        shell: pwsh
+        run: |
+          if (-not (Test-Path build/bin/gluestick.exe)) { throw "missing gluestick.exe" }
+          if (-not (Test-Path build/bin/shim.exe)) { throw "missing shim.exe" }
+
+      - name: Package
+        shell: pwsh
+        run: |
+          $dest = "dist/gluestick-windows-${{ matrix.arch }}"
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          Copy-Item build/bin/gluestick.exe, build/bin/shim.exe $dest
+          $zip = "dist/gluestick-windows-${{ matrix.arch }}.zip"
+          Compress-Archive -Path "$dest/*" -DestinationPath $zip
+          $hash = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLower()
+          "$hash  gluestick-windows-${{ matrix.arch }}.zip" | Out-File "$zip.sha256" -Encoding ascii
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gluestick-windows-${{ matrix.arch }}
+          path: dist/gluestick-windows-${{ matrix.arch }}.zip*
+          if-no-files-found: error
+
+      - name: Build installer
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        working-directory: installer
+        run: |
+          choco install nsis -y --no-progress
+          $version = "${{ github.ref_name }}" -replace '^v', ''
+          .\build-installer.ps1 -Arch "${{ matrix.arch }}" -Version $version `
+            -GluestickExe "..\build\bin\gluestick.exe" -ShimExe "..\build\bin\shim.exe"
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/gluestick-windows-${{ matrix.arch }}.zip
+            dist/gluestick-windows-${{ matrix.arch }}.zip.sha256
+            installer/output/GluestickDesktopSetup-${{ matrix.arch }}.exe
+            installer/output/GluestickDesktopSetup-${{ matrix.arch }}.exe.sha256
+          fail_on_unmatched_files: true

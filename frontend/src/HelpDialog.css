@@ -1,0 +1,60 @@
+.help-dialog {
+  width: min(640px, calc(100vw - 32px));
+}
+
+.help-dialog-body {
+  max-height: min(70vh, 560px);
+}
+
+.help-dialog-intro {
+  margin: 0 0 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.help-dialog-section {
+  margin: 0 0 18px;
+}
+
+.help-dialog-section:last-child {
+  margin-bottom: 0;
+}
+
+.help-dialog-heading {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+}
+
+.help-dialog-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.help-dialog-list li {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.help-dialog-more p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.help-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+  padding: 14px 20px 16px;
+  border-top: 1px solid var(--border);
+}

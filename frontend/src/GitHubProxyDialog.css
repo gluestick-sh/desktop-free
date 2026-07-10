@@ -1,0 +1,291 @@
+.github-proxy-dialog-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.github-proxy-dialog-body .settings-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 12rem;
+}
+
+.settings-dialog-loading {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted, #666);
+}
+
+.github-proxy-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.github-proxy-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.github-proxy-status-badge.is-direct {
+  color: var(--success, #15803d);
+  background: color-mix(in srgb, var(--success, #15803d) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--success, #15803d) 28%, transparent);
+}
+
+.github-proxy-status-badge.is-proxy {
+  color: var(--accent, #2563eb);
+  background: color-mix(in srgb, var(--accent, #2563eb) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #2563eb) 28%, transparent);
+}
+
+.github-proxy-status-badge.is-env {
+  color: var(--warning);
+  background: color-mix(in srgb, var(--warning) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--warning) 28%, transparent);
+}
+
+.github-proxy-status-count {
+  font-size: 12px;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.github-proxy-scope {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.github-proxy-scope p {
+  margin: 0;
+}
+
+.github-proxy-env-warn {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--warning);
+  background: color-mix(in srgb, var(--warning) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--warning) 28%, transparent);
+}
+
+.github-proxy-env-warn code {
+  font-size: 12px;
+}
+
+.github-proxy-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.github-proxy-panel.is-disabled {
+  opacity: 0.72;
+}
+
+.github-proxy-panel-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.github-proxy-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.github-proxy-panel-hint {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.github-proxy-mirror-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.github-proxy-mirror-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+}
+
+.github-proxy-mirror-item code {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  word-break: break-all;
+  color: var(--text-primary);
+}
+
+.github-proxy-mirror-remove {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-tertiary, var(--text-secondary));
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.github-proxy-mirror-remove:hover:not(:disabled) {
+  color: var(--danger, #dc2626);
+  background: color-mix(in srgb, var(--danger, #dc2626) 10%, transparent);
+}
+
+.github-proxy-mirror-remove:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.github-proxy-empty {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.github-proxy-add-row {
+  display: flex;
+  gap: 8px;
+}
+
+.github-proxy-input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.github-proxy-input:focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  outline-offset: 1px;
+}
+
+.github-proxy-add-btn {
+  flex-shrink: 0;
+}
+
+.github-proxy-presets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.github-proxy-presets-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.github-proxy-preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.github-proxy-preset {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.github-proxy-preset:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  color: var(--text-primary);
+}
+
+.github-proxy-preset.is-active,
+.github-proxy-preset:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.github-proxy-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.github-proxy-preview-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.github-proxy-preview code {
+  font-size: 12px;
+  line-height: 1.45;
+  word-break: break-all;
+  color: var(--text-primary);
+}
+
+.github-proxy-preview-note {
+  font-size: 11px;
+  color: var(--text-tertiary, var(--text-secondary));
+}
+
+.github-proxy-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.github-proxy-reset {
+  flex-shrink: 0;
+}
+
+.github-proxy-dialog-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
