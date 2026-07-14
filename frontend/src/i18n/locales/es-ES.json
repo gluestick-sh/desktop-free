@@ -921,7 +921,13 @@
       "confirm": "Desinstalar"
     },
     "installOutcomeFailed": "La instalación falló",
-    "uninstallOutcomeFailed": "Falló la desinstalación"
+    "uninstallOutcomeFailed": "Falló la desinstalación",
+    "bootstrapInnounpTaskTitle": "Preparando innounp",
+    "bootstrapGitTaskTitle": "Preparando Git",
+    "bootstrapSevenZipTaskTitle": "Preparando 7-Zip",
+    "bootstrapWixTaskTitle": "Preparando el conjunto de herramientas WiX",
+    "bootstrapTaskTitle": "Preparando {{tool}}",
+    "bootstrapFailed": "Error al preparar {{tool}}: {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "Añadir a favoritos",
@@ -984,11 +990,6 @@
     "gcDialogNote": "Igual que CLI <code>glue cache gc</code>. Los archivos en uso no se eliminan. La tarea se ejecuta en segundo plano después de la confirmación.",
     "gcStart": "Iniciar limpieza",
     "gcTaskTitle": "Huérfanos limpios",
-    "bootstrapInnounpTaskTitle": "Preparando innounp",
-    "bootstrapGitTaskTitle": "Preparando Git",
-    "bootstrapSevenZipTaskTitle": "Preparando 7-Zip",
-    "bootstrapWixTaskTitle": "Preparando el conjunto de herramientas WiX",
-    "bootstrapTaskTitle": "Preparando {{tool}}",
     "noSpace": "No hay espacio para reclamar",
     "freed": "Se eliminaron {{removed}} blobs huérfanos, se liberó {{freed}}"
   },

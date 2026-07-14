@@ -921,7 +921,13 @@
       "confirm": "Gỡ cài đặt"
     },
     "installOutcomeFailed": "Cài đặt không thành công",
-    "uninstallOutcomeFailed": "Gỡ cài đặt không thành công"
+    "uninstallOutcomeFailed": "Gỡ cài đặt không thành công",
+    "bootstrapInnounpTaskTitle": "Đang chuẩn bị innounp",
+    "bootstrapGitTaskTitle": "Đang chuẩn bị Git",
+    "bootstrapSevenZipTaskTitle": "Đang chuẩn bị 7-Zip",
+    "bootstrapWixTaskTitle": "Đang chuẩn bị bộ công cụ WiX",
+    "bootstrapTaskTitle": "Đang chuẩn bị {{tool}}",
+    "bootstrapFailed": "Không chuẩn bị được {{tool}}: {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "Thêm vào mục yêu thích",
@@ -984,11 +990,6 @@
     "gcDialogNote": "Tương tự như CLI <code>keo cache gc</code>. Các tập tin đang sử dụng sẽ không bị xóa. Tác vụ chạy ở chế độ nền sau khi xác nhận.",
     "gcStart": "Bắt đầu dọn dẹp",
     "gcTaskTitle": "Sạch trẻ mồ côi",
-    "bootstrapInnounpTaskTitle": "Đang chuẩn bị innounp",
-    "bootstrapGitTaskTitle": "Đang chuẩn bị Git",
-    "bootstrapSevenZipTaskTitle": "Đang chuẩn bị 7-Zip",
-    "bootstrapWixTaskTitle": "Đang chuẩn bị bộ công cụ WiX",
-    "bootstrapTaskTitle": "Đang chuẩn bị {{tool}}",
     "noSpace": "Không còn chỗ để đòi lại",
     "freed": "Đã xóa {{removed}} đốm màu mồ côi, giải phóng {{freed}}"
   },

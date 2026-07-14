@@ -921,7 +921,13 @@
       "confirm": "卸載"
     },
     "installOutcomeFailed": "安裝失敗",
-    "uninstallOutcomeFailed": "卸載失敗"
+    "uninstallOutcomeFailed": "卸載失敗",
+    "bootstrapInnounpTaskTitle": "準備 innounp",
+    "bootstrapGitTaskTitle": "準備 Git",
+    "bootstrapSevenZipTaskTitle": "準備 7-Zip",
+    "bootstrapWixTaskTitle": "準備 WiX 工具集",
+    "bootstrapTaskTitle": "準備 {{tool}}",
+    "bootstrapFailed": "準備 {{tool}} 失敗: {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "加入收藏",
@@ -984,11 +990,6 @@
     "gcDialogNote": "等價於命令行 <code>glue cache gc</code>。正在使用的文件不會被刪除。確認後任務在後臺執行。",
     "gcStart": "開始清理",
     "gcTaskTitle": "清理垃圾",
-    "bootstrapInnounpTaskTitle": "準備 innounp",
-    "bootstrapGitTaskTitle": "準備 Git",
-    "bootstrapSevenZipTaskTitle": "準備 7-Zip",
-    "bootstrapWixTaskTitle": "準備 WiX 工具集",
-    "bootstrapTaskTitle": "準備 {{tool}}",
     "noSpace": "沒有可釋放的空間",
     "freed": "已刪除 {{removed}} 個無用緩存塊，釋放 {{freed}}"
   },

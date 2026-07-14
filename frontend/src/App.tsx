@@ -1388,6 +1388,32 @@ function App() {
     return () => cancelComplete()
   }, [bumpBuckets])
 
+  // Surface MinGit / 7-Zip / WiX bootstrap failures (progress UI alone clears the card on error)
+  useEffect(() => {
+    const toolLabel = (tool?: string) => {
+      switch (tool) {
+        case 'git':
+          return t('appExt.bootstrapGitTaskTitle')
+        case 'seven_zip':
+          return t('appExt.bootstrapSevenZipTaskTitle')
+        case 'wix':
+          return t('appExt.bootstrapWixTaskTitle')
+        case 'innounp':
+          return t('appExt.bootstrapInnounpTaskTitle')
+        default:
+          return tool ? t('appExt.bootstrapTaskTitle', { tool }) : 'bootstrap'
+      }
+    }
+    const onError = EventsOn('bootstrap:task:error', (data: { tool?: string; error?: string }) => {
+      const err = (data?.error || '').trim() || 'unknown error'
+      showTaskDockNotice(t('appExt.bootstrapFailed', { tool: toolLabel(data?.tool), error: err }), 'error', {
+        persistent: true,
+        detail: err,
+      })
+    })
+    return () => onError()
+  }, [showTaskDockNotice, t])
+
   // Update pending-bucket count as each bucket sync/check completes (do not wait for the bulk task to finish)
   useEffect(() => {
     const onPartialSynced = EventsOn('bucket:bucket-synced', (data: { pendingBucketUpdates?: number }) => {

@@ -921,7 +921,13 @@
       "confirm": "제거"
     },
     "installOutcomeFailed": "설치 실패",
-    "uninstallOutcomeFailed": "제거 실패"
+    "uninstallOutcomeFailed": "제거 실패",
+    "bootstrapInnounpTaskTitle": "innounp 준비 중",
+    "bootstrapGitTaskTitle": "Git 준비 중",
+    "bootstrapSevenZipTaskTitle": "7-Zip 준비 중",
+    "bootstrapWixTaskTitle": "WiX 도구 세트 준비",
+    "bootstrapTaskTitle": "{{tool}} 준비 중",
+    "bootstrapFailed": "{{tool}} 준비 실패: {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "즐겨찾기에 추가",
@@ -984,11 +990,6 @@
     "gcDialogNote": "CLI <code>glue 캐시 gc</code>와 동일합니다. 사용 중인 파일은 삭제되지 않습니다. 작업은 확인 후 백그라운드에서 실행됩니다.",
     "gcStart": "청소 시작",
     "gcTaskTitle": "고아를 청소하세요",
-    "bootstrapInnounpTaskTitle": "innounp 준비 중",
-    "bootstrapGitTaskTitle": "Git 준비 중",
-    "bootstrapSevenZipTaskTitle": "7-Zip 준비 중",
-    "bootstrapWixTaskTitle": "WiX 도구 세트 준비",
-    "bootstrapTaskTitle": "{{tool}} 준비 중",
     "noSpace": "회수할 공간이 없음",
     "freed": "{{removed}}개의 고아 blob을 제거하고 해제 {{freed}}"
   },

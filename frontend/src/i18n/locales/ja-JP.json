@@ -921,7 +921,13 @@
       "confirm": "アンインストール"
     },
     "installOutcomeFailed": "インストールに失敗しました",
-    "uninstallOutcomeFailed": "アンインストールに失敗しました"
+    "uninstallOutcomeFailed": "アンインストールに失敗しました",
+    "bootstrapInnounpTaskTitle": "innounp を準備しています",
+    "bootstrapGitTaskTitle": "Git を準備しています",
+    "bootstrapSevenZipTaskTitle": "7-Zip を準備しています",
+    "bootstrapWixTaskTitle": "WiX ツールセットを準備しています",
+    "bootstrapTaskTitle": "{{tool}}を準備しています",
+    "bootstrapFailed": "{{tool}} の準備に失敗しました: {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "お気に入りに追加",
@@ -984,11 +990,6 @@
     "gcDialogNote": "CLI の <code>glue キャッシュ gc</code> と同じです。使用中のファイルは削除されません。タスクは確認後にバックグラウンドで実行されます。",
     "gcStart": "クリーンアップの開始",
     "gcTaskTitle": "きれいな孤児たち",
-    "bootstrapInnounpTaskTitle": "innounp を準備しています",
-    "bootstrapGitTaskTitle": "Git を準備しています",
-    "bootstrapSevenZipTaskTitle": "7-Zip を準備しています",
-    "bootstrapWixTaskTitle": "WiX ツールセットを準備しています",
-    "bootstrapTaskTitle": "{{tool}}を準備しています",
     "noSpace": "再利用できるスペースがない",
     "freed": "{{removed}} 個の孤立 BLOB を削除し、{{freed}} を解放しました"
   },

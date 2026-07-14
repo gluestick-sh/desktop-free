@@ -921,7 +921,13 @@
       "confirm": "Deinstallieren"
     },
     "installOutcomeFailed": "Die Installation ist fehlgeschlagen",
-    "uninstallOutcomeFailed": "Die Deinstallation ist fehlgeschlagen"
+    "uninstallOutcomeFailed": "Die Deinstallation ist fehlgeschlagen",
+    "bootstrapInnounpTaskTitle": "Vorbereitung des Innounp",
+    "bootstrapGitTaskTitle": "Git vorbereiten",
+    "bootstrapSevenZipTaskTitle": "7-Zip vorbereiten",
+    "bootstrapWixTaskTitle": "Vorbereiten des WiX-Toolsets",
+    "bootstrapTaskTitle": "Vorbereiten von {{tool}}",
+    "bootstrapFailed": "{{tool}} konnte nicht vorbereitet werden: {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "Zu Favoriten hinzufügen",
@@ -984,11 +990,6 @@
     "gcDialogNote": "Identisch mit CLI <code>Glue Cache gc</code>. Verwendete Dateien werden nicht gelöscht. Die Aufgabe läuft nach Bestätigung im Hintergrund.",
     "gcStart": "Beginnen Sie mit der Bereinigung",
     "gcTaskTitle": "Saubere Waisenkinder",
-    "bootstrapInnounpTaskTitle": "Vorbereitung des Innounp",
-    "bootstrapGitTaskTitle": "Git vorbereiten",
-    "bootstrapSevenZipTaskTitle": "7-Zip vorbereiten",
-    "bootstrapWixTaskTitle": "Vorbereiten des WiX-Toolsets",
-    "bootstrapTaskTitle": "Vorbereiten von {{tool}}",
     "noSpace": "Kein Platz zum Zurückgewinnen",
     "freed": "{{removed}} verwaiste Blobs entfernt, {{freed}} freigegeben"
   },

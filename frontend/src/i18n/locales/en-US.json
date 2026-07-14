@@ -921,7 +921,13 @@
       "confirm": "Uninstall"
     },
     "installOutcomeFailed": "Install failed",
-    "uninstallOutcomeFailed": "Uninstall failed"
+    "uninstallOutcomeFailed": "Uninstall failed",
+    "bootstrapInnounpTaskTitle": "Preparing innounp",
+    "bootstrapGitTaskTitle": "Preparing Git",
+    "bootstrapSevenZipTaskTitle": "Preparing 7-Zip",
+    "bootstrapWixTaskTitle": "Preparing WiX toolset",
+    "bootstrapTaskTitle": "Preparing {{tool}}",
+    "bootstrapFailed": "Failed to prepare {{tool}}: {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "Add to favorites",
@@ -984,11 +990,6 @@
     "gcDialogNote": "Same as CLI <code>glue cache gc</code>. Files in use are not deleted. The task runs in the background after confirmation.",
     "gcStart": "Start cleanup",
     "gcTaskTitle": "Clean orphans",
-    "bootstrapInnounpTaskTitle": "Preparing innounp",
-    "bootstrapGitTaskTitle": "Preparing Git",
-    "bootstrapSevenZipTaskTitle": "Preparing 7-Zip",
-    "bootstrapWixTaskTitle": "Preparing WiX toolset",
-    "bootstrapTaskTitle": "Preparing {{tool}}",
     "noSpace": "No space to reclaim",
     "freed": "Removed {{removed}} orphan blobs, freed {{freed}}"
   },

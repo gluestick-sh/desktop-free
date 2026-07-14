@@ -921,7 +921,13 @@
       "confirm": "Désinstaller"
     },
     "installOutcomeFailed": "L'installation a échoué",
-    "uninstallOutcomeFailed": "Échec de la désinstallation"
+    "uninstallOutcomeFailed": "Échec de la désinstallation",
+    "bootstrapInnounpTaskTitle": "Préparation de innounp",
+    "bootstrapGitTaskTitle": "Préparation de Git",
+    "bootstrapSevenZipTaskTitle": "Préparation de 7-Zip",
+    "bootstrapWixTaskTitle": "Préparation du jeu d'outils WiX",
+    "bootstrapTaskTitle": "Préparation de {{tool}}",
+    "bootstrapFailed": "Échec de la préparation de {{tool}} : {{error}}"
   },
   "installedExt": {
     "favoriteAdd": "Ajouter aux favoris",
@@ -984,11 +990,6 @@
     "gcDialogNote": "Identique à la CLI <code>glue cache gc</code>. Les fichiers en cours d'utilisation ne sont pas supprimés. La tâche s'exécute en arrière-plan après confirmation.",
     "gcStart": "Commencer le nettoyage",
     "gcTaskTitle": "Des orphelins propres",
-    "bootstrapInnounpTaskTitle": "Préparation de innounp",
-    "bootstrapGitTaskTitle": "Préparation de Git",
-    "bootstrapSevenZipTaskTitle": "Préparation de 7-Zip",
-    "bootstrapWixTaskTitle": "Préparation du jeu d'outils WiX",
-    "bootstrapTaskTitle": "Préparation de {{tool}}",
     "noSpace": "Pas d'espace à récupérer",
     "freed": "Suppression des blobs orphelins {{removed}}, libération de {{freed}}"
   },
