@@ -15,6 +15,9 @@ import {
   IsSearchIndexReady,
   OpenGlueDataDir,
   GetAboutInfo,
+  CheckDesktopUpdate,
+  DismissDesktopUpdate,
+  OpenDesktopUpdateURL,
   UpdateBuckets,
   GetBucketCheckInterval,
   SetBucketCheckInterval,
@@ -31,6 +34,7 @@ import StoragePanel from './StoragePanel'
 import { EventsOn, EventsOnce, Quit } from '../wailsjs/runtime/runtime'
 import AppMenuBar, { type MenuAction } from './AppMenuBar'
 import AboutDialog from './AboutDialog'
+import DesktopUpdateDialog from './DesktopUpdateDialog'
 import HelpDialog from './HelpDialog'
 import GitHubProxyDialog from './GitHubProxyDialog'
 import DownloadWorkersDialog from './DownloadWorkersDialog'
@@ -247,6 +251,8 @@ function mergeInstalledUpdateStatus(
 
 /** Full stats bar refresh interval (install/uninstall do not trigger; only periodic and explicit refresh). */
 const STATS_REFRESH_MS = 10 * 60 * 1000
+/** Delay before the first automatic Desktop self-update check after launch. */
+const DESKTOP_UPDATE_AUTO_CHECK_MS = 30 * 1000
 const INFO_BANNER_AUTO_HIDE_MS = 5000
 const TASK_DOCK_NOTICE_AUTO_HIDE_MS = 5000
 
@@ -378,6 +384,8 @@ function App() {
   const [doctorOK, setDoctorOK] = useState<boolean | null>(null)
   const [doctorLoading, setDoctorLoading] = useState(false)
   const [aboutInfo, setAboutInfo] = useState<main.AboutInfo | null>(null)
+  const [desktopUpdateInfo, setDesktopUpdateInfo] = useState<main.DesktopUpdateInfo | null>(null)
+  const desktopUpdateAutoCheckedRef = useRef(false)
   const [selectedPackage, setSelectedPackage] = useState<SelectedPackage | null>(null)
   const [pendingUninstall, setPendingUninstall] = useState<main.InstalledPackage | null>(null)
   const [pendingUninstallInactiveOnly, setPendingUninstallInactiveOnly] = useState(false)
@@ -755,6 +763,46 @@ function App() {
       }, hideMs)
     }
   }, [clearInfoHideTimer])
+
+  const handleDesktopUpdateCheck = useCallback(async (manual: boolean) => {
+    if (manual) {
+      setFooterRightStatus(t('footer.checkingDesktopUpdate'))
+    }
+    try {
+      const result = await CheckDesktopUpdate(manual)
+      if (result.error) {
+        if (manual) {
+          setError(t('desktopUpdate.checkFailed', { error: result.error }))
+        } else {
+          console.warn('Desktop update check failed:', result.error)
+        }
+        return
+      }
+      if (result.updateAvailable) {
+        setDesktopUpdateInfo(result)
+        return
+      }
+      if (manual) {
+        showInfoMessage(t('desktopUpdate.upToDate', { version: result.currentVersion }), {
+          centered: true,
+          autoHideMs: INFO_BANNER_AUTO_HIDE_MS,
+        })
+      }
+    } finally {
+      if (manual) {
+        setFooterRightStatus(null)
+      }
+    }
+  }, [showInfoMessage, t])
+
+  useEffect(() => {
+    if (desktopUpdateAutoCheckedRef.current) return
+    desktopUpdateAutoCheckedRef.current = true
+    const timerId = window.setTimeout(() => {
+      void handleDesktopUpdateCheck(false)
+    }, DESKTOP_UPDATE_AUTO_CHECK_MS)
+    return () => window.clearTimeout(timerId)
+  }, [handleDesktopUpdateCheck])
 
   const showCenteredInfo = useCallback((message: string) => {
     showInfoMessage(message, { centered: true, autoHideMs: INFO_BANNER_AUTO_HIDE_MS })
@@ -1249,6 +1297,9 @@ function App() {
       case 'docs':
         setShowHelpModal(true)
         break
+      case 'check-desktop-update':
+        void handleDesktopUpdateCheck(true)
+        break
       case 'doctor':
         setDoctorChecks(makeInitialDoctorChecks(t('doctor.checking')))
         setDoctorOK(null)
@@ -1291,7 +1342,7 @@ function App() {
         }
         break
     }
-  }, [loadInstalled, loadStats, setAutoMode, setPageSize, isPro, customThemes, themeId, selectTheme, openThemeEditor, dismissInfoMessage, showInfoMessage, bumpActivityLog, bucketCheckInProgress, bucketSyncInProgress, clearStatAttention, t])
+  }, [loadInstalled, loadStats, handleDesktopUpdateCheck, setAutoMode, setPageSize, isPro, customThemes, themeId, selectTheme, openThemeEditor, dismissInfoMessage, showInfoMessage, bumpActivityLog, bucketCheckInProgress, bucketSyncInProgress, clearStatAttention, t])
 
   useEffect(() => {
     const mod = (e: KeyboardEvent) => e.ctrlKey || e.metaKey
@@ -2416,6 +2467,27 @@ function App() {
             setShowAboutModal(false)
             setAboutInfo(null)
           }}
+        />
+      )}
+
+      {desktopUpdateInfo?.updateAvailable && (
+        <DesktopUpdateDialog
+          info={desktopUpdateInfo}
+          onDownload={() => {
+            const url = desktopUpdateInfo.downloadURL || desktopUpdateInfo.releaseURL
+            OpenDesktopUpdateURL(url)
+          }}
+          onRemindLater={() => {
+            void DismissDesktopUpdate('remind_later', desktopUpdateInfo.latestVersion)
+              .catch((err) => console.error('Dismiss desktop update:', err))
+              .finally(() => setDesktopUpdateInfo(null))
+          }}
+          onSkip={() => {
+            void DismissDesktopUpdate('skip', desktopUpdateInfo.latestVersion)
+              .catch((err) => console.error('Dismiss desktop update:', err))
+              .finally(() => setDesktopUpdateInfo(null))
+          }}
+          onClose={() => setDesktopUpdateInfo(null)}
         />
       )}
 

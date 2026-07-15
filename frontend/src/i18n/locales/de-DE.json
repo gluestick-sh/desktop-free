@@ -348,6 +348,7 @@
     "updateAllBuckets": "Updates synchronisieren…",
     "searchPackages": "Pakete suchen…",
     "checkUpdates": "Nach Updates suchen…",
+    "checkDesktopUpdate": "Nach App-Updates suchen…",
     "doctor": "Umweltcheck…",
     "githubProxy": "GitHub-Proxy-Einstellungen…",
     "downloadWorkers": "Datei-Download",
@@ -682,6 +683,16 @@
     "ok": "OK",
     "rootDir": "Stammverzeichnis"
   },
+  "desktopUpdate": {
+    "title": "Update verfügbar",
+    "summary": "Eine neue Version von Gluestick Desktop ist verfügbar (aktuell {{current}}, neueste {{latest}}).",
+    "downloadHint": "Laden Sie das Installationsprogramm herunter, schließen Sie diese App und führen Sie das Installationsprogramm aus.",
+    "download": "Update herunterladen",
+    "remindLater": "Später erinnern",
+    "skipVersion": "Diese Version überspringen",
+    "upToDate": "Gluestick Desktop ist auf dem neuesten Stand ({{version}}).",
+    "checkFailed": "App-Update-Prüfung fehlgeschlagen: {{error}}"
+  },
   "help": {
     "title": "Benutzerhandbuch",
     "intro": "Gluestick Desktop ist eine grafische Oberfläche für einen Paketmanager unter Windows. Suchen, installieren, aktualisieren und verwalten Sie Software ohne Kommandozeile.",
@@ -836,6 +847,7 @@
     "statsCachedHint": "Ausstehende Updates und Paketzahlen werden zwischengespeichert; Verwenden Sie „Aktualisieren“ für eine vollständige Synchronisierung.",
     "refreshingInstalled": "Installierte Liste wird aktualisiert…",
     "checkingUpdates": "Suche nach Updates…",
+    "checkingDesktopUpdate": "App-Updates werden geprüft…",
     "checkingBuckets": "Bucket-Updates werden geprüft ({{count}})…",
     "checkingBucketsGeneric": "Bucket-Updates werden geprüft…"
   },

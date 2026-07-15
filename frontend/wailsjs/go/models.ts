@@ -304,6 +304,32 @@ export namespace main {
 	        this.bucket = source["bucket"];
 	    }
 	}
+	export class DesktopUpdateInfo {
+	    updateAvailable: boolean;
+	    currentVersion: string;
+	    latestVersion: string;
+	    releaseURL: string;
+	    downloadURL: string;
+	    releaseNotes: string;
+	    manual: boolean;
+	    error?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new DesktopUpdateInfo(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.updateAvailable = source["updateAvailable"];
+	        this.currentVersion = source["currentVersion"];
+	        this.latestVersion = source["latestVersion"];
+	        this.releaseURL = source["releaseURL"];
+	        this.downloadURL = source["downloadURL"];
+	        this.releaseNotes = source["releaseNotes"];
+	        this.manual = source["manual"];
+	        this.error = source["error"];
+	    }
+	}
 	export class DownloadWorkersConfig {
 	    workers: number;
 	    configPath: string;

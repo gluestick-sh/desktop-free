@@ -348,6 +348,7 @@
     "updateAllBuckets": "Đồng bộ cập nhật…",
     "searchPackages": "Tìm kiếm gói…",
     "checkUpdates": "Kiểm tra các bản cập nhật…",
+    "checkDesktopUpdate": "Kiểm tra cập nhật ứng dụng…",
     "doctor": "Kiểm tra môi trường…",
     "githubProxy": "Cài đặt proxy GitHub…",
     "downloadWorkers": "Tải tệp",
@@ -682,6 +683,16 @@
     "ok": "OK",
     "rootDir": "Thư mục gốc"
   },
+  "desktopUpdate": {
+    "title": "Có bản cập nhật mới",
+    "summary": "Gluestick Desktop có phiên bản mới (hiện tại {{current}}, mới nhất {{latest}}).",
+    "downloadHint": "Tải trình cài đặt, đóng ứng dụng này, rồi chạy trình cài đặt để nâng cấp.",
+    "download": "Tải bản cập nhật",
+    "remindLater": "Nhắc sau",
+    "skipVersion": "Bỏ qua phiên bản này",
+    "upToDate": "Gluestick Desktop đã là phiên bản mới nhất ({{version}}).",
+    "checkFailed": "Không thể kiểm tra cập nhật ứng dụng: {{error}}"
+  },
   "help": {
     "title": "Hướng dẫn sử dụng",
     "intro": "Gluestick Desktop là giao diện đồ họa của trình quản lý gói cho Windows. Tìm kiếm, cài đặt, cập nhật và quản lý phần mềm mà không cần dòng lệnh.",
@@ -836,6 +847,7 @@
     "statsCachedHint": "Các bản cập nhật đang chờ xử lý và số lượng gói được lưu vào bộ nhớ đệm; sử dụng Làm mới để đồng bộ hóa đầy đủ.",
     "refreshingInstalled": "Đang làm mới danh sách đã cài đặt…",
     "checkingUpdates": "Đang kiểm tra cập nhật…",
+    "checkingDesktopUpdate": "Đang kiểm tra cập nhật ứng dụng…",
     "checkingBuckets": "Đang kiểm tra cập nhật Bucket ({{count}})…",
     "checkingBucketsGeneric": "Đang kiểm tra cập nhật Bucket…"
   },

@@ -348,6 +348,7 @@
     "updateAllBuckets": "同步更新…",
     "searchPackages": "搜索包…",
     "checkUpdates": "檢查可更新包…",
+    "checkDesktopUpdate": "檢測程式更新…",
     "doctor": "環境診斷…",
     "githubProxy": "GitHub 代理設置…",
     "downloadWorkers": "檔案下載",
@@ -682,6 +683,16 @@
     "ok": "確定",
     "rootDir": "根目錄"
   },
+  "desktopUpdate": {
+    "title": "發現新版本",
+    "summary": "Gluestick Desktop 有新版本可用（目前 {{current}}，最新 {{latest}}）。",
+    "downloadHint": "請下載安裝包，關閉本程式後執行安裝程式完成升級。",
+    "download": "下載更新",
+    "remindLater": "稍後提醒",
+    "skipVersion": "跳過此版本",
+    "upToDate": "Gluestick Desktop 已是最新版本（{{version}}）。",
+    "checkFailed": "檢測程式更新失敗：{{error}}"
+  },
   "help": {
     "title": "使用文檔",
     "intro": "Gluestick Desktop 是 Windows 軟體套件管理器的圖形介面，無需命令列即可搜尋、安裝、更新與管理軟體。",
@@ -836,6 +847,7 @@
     "statsCachedHint": "待更新數與可用包數為緩存；菜單「刷新」可完整刷新。",
     "refreshingInstalled": "正在刷新已安裝列表…",
     "checkingUpdates": "正在檢查可更新包…",
+    "checkingDesktopUpdate": "正在檢測程式更新…",
     "checkingBuckets": "檢查 Bucket 更新中 ({{count}})…",
     "checkingBucketsGeneric": "正在檢查 Bucket 更新…"
   },

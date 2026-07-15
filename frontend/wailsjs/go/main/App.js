@@ -18,6 +18,10 @@ export function CheckBucketUpdates() {
   return window['go']['main']['App']['CheckBucketUpdates']();
 }
 
+export function CheckDesktopUpdate(arg1) {
+  return window['go']['main']['App']['CheckDesktopUpdate'](arg1);
+}
+
 export function ClearActivityLog() {
   return window['go']['main']['App']['ClearActivityLog']();
 }
@@ -36,6 +40,10 @@ export function ClearManifestJSONOverride(arg1) {
 
 export function DeleteActivityLog(arg1) {
   return window['go']['main']['App']['DeleteActivityLog'](arg1);
+}
+
+export function DismissDesktopUpdate(arg1, arg2) {
+  return window['go']['main']['App']['DismissDesktopUpdate'](arg1, arg2);
 }
 
 export function ExportInventoryReport() {
@@ -148,6 +156,10 @@ export function ListPackageLaunchMenu(arg1) {
 
 export function ListPackageLaunchers(arg1) {
   return window['go']['main']['App']['ListPackageLaunchers'](arg1);
+}
+
+export function OpenDesktopUpdateURL(arg1) {
+  return window['go']['main']['App']['OpenDesktopUpdateURL'](arg1);
 }
 
 export function OpenDocs() {

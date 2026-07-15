@@ -10,6 +10,8 @@ export function CancelInstall(arg1:string):Promise<void>;
 
 export function CheckBucketUpdates():Promise<Record<string, main.BucketUpdateStatus>>;
 
+export function CheckDesktopUpdate(arg1:boolean):Promise<main.DesktopUpdateInfo>;
+
 export function ClearActivityLog():Promise<void>;
 
 export function ClearActivityLogByTimeRange(arg1:string):Promise<number>;
@@ -19,6 +21,8 @@ export function ClearManifestDownloadOverride(arg1:string):Promise<void>;
 export function ClearManifestJSONOverride(arg1:string):Promise<void>;
 
 export function DeleteActivityLog(arg1:number):Promise<void>;
+
+export function DismissDesktopUpdate(arg1:string,arg2:string):Promise<void>;
 
 export function ExportInventoryReport():Promise<string>;
 
@@ -75,6 +79,8 @@ export function ListKnownBuckets():Promise<Array<main.KnownBucketInfo>>;
 export function ListPackageLaunchMenu(arg1:string):Promise<Array<main.PackageLaunchEntry>>;
 
 export function ListPackageLaunchers(arg1:string):Promise<Array<main.PackageLauncher>>;
+
+export function OpenDesktopUpdateURL(arg1:string):Promise<void>;
 
 export function OpenDocs():Promise<void>;
 

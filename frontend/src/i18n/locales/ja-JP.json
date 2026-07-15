@@ -348,6 +348,7 @@
     "updateAllBuckets": "更新を同期…",
     "searchPackages": "パッケージを検索…",
     "checkUpdates": "アップデートを確認してください…",
+    "checkDesktopUpdate": "アプリの更新を確認…",
     "doctor": "環境チェック…",
     "githubProxy": "GitHub プロキシ設定…",
     "downloadWorkers": "ファイルダウンロード",
@@ -682,6 +683,16 @@
     "ok": "OK",
     "rootDir": "ルートディレクトリ"
   },
+  "desktopUpdate": {
+    "title": "更新があります",
+    "summary": "Gluestick Desktop の新しいバージョンがあります（現在 {{current}}、最新 {{latest}}）。",
+    "downloadHint": "インストーラーをダウンロードし、このアプリを終了してからインストーラーを実行してください。",
+    "download": "更新をダウンロード",
+    "remindLater": "後で通知",
+    "skipVersion": "このバージョンをスキップ",
+    "upToDate": "Gluestick Desktop は最新です（{{version}}）。",
+    "checkFailed": "アプリの更新確認に失敗しました: {{error}}"
+  },
   "help": {
     "title": "ユーザーガイド",
     "intro": "Gluestick Desktop は Windows 向けのパッケージマネージャーの GUI です。コマンドラインなしでソフトウェアの検索・インストール・更新・管理ができます。",
@@ -836,6 +847,7 @@
     "statsCachedHint": "保留中のアップデートとパッケージ数はキャッシュされます。完全同期には [更新] を使用します。",
     "refreshingInstalled": "インストール済みリストを更新しています…",
     "checkingUpdates": "アップデートをチェック中…",
+    "checkingDesktopUpdate": "アプリの更新を確認中…",
     "checkingBuckets": "Bucket 更新を確認中 ({{count}})…",
     "checkingBucketsGeneric": "Bucket 更新を確認中…"
   },

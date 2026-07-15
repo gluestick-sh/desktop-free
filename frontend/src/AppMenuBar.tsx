@@ -45,6 +45,7 @@ export type MenuAction =
   | 'search'
   | 'check-updates'
   | 'docs'
+  | 'check-desktop-update'
   | 'doctor'
   | 'github-proxy'
   | 'download-workers'
@@ -197,6 +198,7 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[], isPro: b
       accessKey: 'H',
       items: [
         { label: t('menu.docs'), action: 'docs', shortcut: 'F1' },
+        { label: t('menu.checkDesktopUpdate'), action: 'check-desktop-update' },
         { type: 'separator' },
         { label: t('menu.upgradePro'), action: 'pro', shortcut: 'Ctrl+Shift+P', icon: 'pro' },
         { type: 'separator' },

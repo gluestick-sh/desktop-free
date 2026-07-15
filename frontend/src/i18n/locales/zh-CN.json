@@ -348,6 +348,7 @@
     "updateAllBuckets": "同步更新…",
     "searchPackages": "搜索包…",
     "checkUpdates": "检查可更新包…",
+    "checkDesktopUpdate": "检测程序更新…",
     "doctor": "环境诊断…",
     "githubProxy": "GitHub 代理设置…",
     "downloadWorkers": "文件下载",
@@ -682,6 +683,16 @@
     "ok": "确定",
     "rootDir": "根目录"
   },
+  "desktopUpdate": {
+    "title": "发现新版本",
+    "summary": "Gluestick Desktop 有新版本可用（当前 {{current}}，最新 {{latest}}）。",
+    "downloadHint": "请下载安装包，关闭本程序后运行安装程序完成升级。",
+    "download": "下载更新",
+    "remindLater": "稍后提醒",
+    "skipVersion": "跳过此版本",
+    "upToDate": "Gluestick Desktop 已是最新版本（{{version}}）。",
+    "checkFailed": "检测程序更新失败：{{error}}"
+  },
   "help": {
     "title": "使用文档",
     "intro": "Gluestick Desktop 是 Windows 软件包管理器的图形界面，无需命令行即可搜索、安装、更新与管理软件。",
@@ -836,6 +847,7 @@
     "statsCachedHint": "待更新数与可用包数为缓存；菜单「刷新」可完整刷新。",
     "refreshingInstalled": "正在刷新已安装列表…",
     "checkingUpdates": "正在检查可更新包…",
+    "checkingDesktopUpdate": "正在检测程序更新…",
     "checkingBuckets": "检查仓库更新中 ({{count}})…",
     "checkingBucketsGeneric": "正在检查仓库更新…"
   },

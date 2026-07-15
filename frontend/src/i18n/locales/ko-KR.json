@@ -348,6 +348,7 @@
     "updateAllBuckets": "업데이트 동기화…",
     "searchPackages": "패키지 검색…",
     "checkUpdates": "업데이트 확인…",
+    "checkDesktopUpdate": "앱 업데이트 확인…",
     "doctor": "환경점검…",
     "githubProxy": "GitHub 프록시 설정…",
     "downloadWorkers": "파일 다운로드",
@@ -682,6 +683,16 @@
     "ok": "OK",
     "rootDir": "루트 디렉터리"
   },
+  "desktopUpdate": {
+    "title": "업데이트 사용 가능",
+    "summary": "Gluestick Desktop 새 버전이 있습니다(현재 {{current}}, 최신 {{latest}}).",
+    "downloadHint": "설치 프로그램을 다운로드한 뒤 이 앱을 종료하고 설치 프로그램을 실행하세요.",
+    "download": "업데이트 다운로드",
+    "remindLater": "나중에 알림",
+    "skipVersion": "이 버전 건너뛰기",
+    "upToDate": "Gluestick Desktop이 최신 버전입니다({{version}}).",
+    "checkFailed": "앱 업데이트 확인 실패: {{error}}"
+  },
   "help": {
     "title": "사용 설명서",
     "intro": "Gluestick Desktop은 Windows용 패키지 관리자 GUI입니다. 명령줄 없이 소프트웨어를 검색, 설치, 업데이트, 관리할 수 있습니다.",
@@ -836,6 +847,7 @@
     "statsCachedHint": "보류 중인 업데이트 및 패키지 수가 캐시됩니다. 전체 동기화를 위해 새로 고침을 사용하세요.",
     "refreshingInstalled": "설치된 목록 새로고침 중…",
     "checkingUpdates": "업데이트 확인 중…",
+    "checkingDesktopUpdate": "앱 업데이트 확인 중…",
     "checkingBuckets": "Bucket 업데이트 확인 중 ({{count}})…",
     "checkingBucketsGeneric": "Bucket 업데이트 확인 중…"
   },
