@@ -29,10 +29,11 @@ export default function AboutDialog({ info, onClose }: AboutDialogProps) {
         <div className="modal-body about-dialog-body">
           <img src="/appicon.png" alt="" className="about-dialog-icon" width={64} height={64} />
           <div className="about-dialog-text">
-            <p className="about-dialog-app-name">{t('app.title')}</p>
-            <p className="about-dialog-version">
-              {t('about.editionVersion', { version: info.version })}
+            <p className="about-dialog-app-name">
+              {t('app.title')}
+              <span className="pill pro-pill about-dialog-edition-badge">{t('about.edition')}</span>
             </p>
+            <p className="about-dialog-version">{t('about.version', { version: info.version })}</p>
             <p className="about-dialog-tagline">{t('about.tagline')}</p>
             <p className="about-dialog-data-dir">
               <span className="about-dialog-label">{t('about.rootDir')}</span>
