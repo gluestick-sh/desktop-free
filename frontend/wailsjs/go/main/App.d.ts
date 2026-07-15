@@ -24,6 +24,8 @@ export function DeleteActivityLog(arg1:number):Promise<void>;
 
 export function DismissDesktopUpdate(arg1:string,arg2:string):Promise<void>;
 
+export function DownloadAndRunDesktopUpdate(arg1:string):Promise<void>;
+
 export function ExportInventoryReport():Promise<string>;
 
 export function ExportTemplateDefinitions(arg1:string):Promise<string>;

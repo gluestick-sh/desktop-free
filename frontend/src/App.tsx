@@ -18,6 +18,7 @@ import {
   CheckDesktopUpdate,
   DismissDesktopUpdate,
   OpenDesktopUpdateURL,
+  DownloadAndRunDesktopUpdate,
   UpdateBuckets,
   GetBucketSyncConfig,
   SetBucketCheckInterval,
@@ -2505,9 +2506,17 @@ function App() {
       {desktopUpdateInfo?.updateAvailable && (
         <DesktopUpdateDialog
           info={desktopUpdateInfo}
+          directInstall={/\.exe(\?|#|$)/i.test(desktopUpdateInfo.downloadURL || '')}
           onDownload={() => {
+            const installer = desktopUpdateInfo.downloadURL || ''
+            if (/\.exe(\?|#|$)/i.test(installer)) {
+              void DownloadAndRunDesktopUpdate(installer)
+              return
+            }
             const url = desktopUpdateInfo.downloadURL || desktopUpdateInfo.releaseURL
-            OpenDesktopUpdateURL(url)
+            if (url) {
+              void OpenDesktopUpdateURL(url)
+            }
           }}
           onRemindLater={() => {
             void DismissDesktopUpdate('remind_later', desktopUpdateInfo.latestVersion)

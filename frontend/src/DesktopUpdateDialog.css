@@ -37,6 +37,27 @@
   line-height: 1.5;
 }
 
+.desktop-update-dialog-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.desktop-update-dialog-progress-text {
+  align-self: flex-end;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.desktop-update-dialog-error {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--danger, #e5484d);
+  word-break: break-word;
+}
+
 .desktop-update-dialog-footer {
   display: flex;
   flex-wrap: wrap;

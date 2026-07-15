@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	goruntime "runtime"
 	"strconv"
@@ -113,12 +114,211 @@ func (a *App) DismissDesktopUpdate(action, version string) error {
 }
 
 // OpenDesktopUpdateURL opens a release or installer download URL in the default browser.
+// It shells out to the OS handler directly because wails' BrowserOpenURL fails to
+// launch the default browser on some Windows setups ("Unable to open default system browser").
 func (a *App) OpenDesktopUpdateURL(url string) {
 	url = strings.TrimSpace(url)
-	if url == "" || a.ctx == nil {
+	if a.ctx != nil {
+		wailsruntime.LogInfo(a.ctx, fmt.Sprintf("OpenDesktopUpdateURL called: %q", url))
+	}
+	if url == "" {
 		return
 	}
-	wailsruntime.BrowserOpenURL(a.ctx, url)
+	if err := openInBrowser(url); err != nil {
+		if a.ctx != nil {
+			wailsruntime.LogError(a.ctx, fmt.Sprintf("open update URL failed: %v", err))
+			wailsruntime.BrowserOpenURL(a.ctx, url)
+		}
+		return
+	}
+	if a.ctx != nil {
+		wailsruntime.LogInfo(a.ctx, "OpenDesktopUpdateURL launched browser handler")
+	}
+}
+
+// openInBrowser launches the given URL using the platform's default handler.
+func openInBrowser(url string) error {
+	switch goruntime.GOOS {
+	case "windows":
+		// explorer hands the URL to ShellExecute, which resolves the default
+		// browser association. Same mechanism used to open folders in the app,
+		// and it avoids cmd's finicky "start" argument parsing.
+		return exec.Command("explorer", url).Start()
+	case "darwin":
+		return exec.Command("open", url).Start()
+	default:
+		return exec.Command("xdg-open", url).Start()
+	}
+}
+
+const desktopUpdateDownloadTimeout = 15 * time.Minute
+
+// DownloadAndRunDesktopUpdate downloads the installer at url and launches it.
+// It runs asynchronously and reports status via "desktop-update:download:*" events
+// so the UI can show progress. This avoids relying on a default browser, which may
+// not be configured on some machines.
+func (a *App) DownloadAndRunDesktopUpdate(url string) {
+	url = strings.TrimSpace(url)
+	if url == "" {
+		a.emitDesktopDownloadError("empty download url")
+		return
+	}
+	go a.downloadAndRunDesktopUpdate(url)
+}
+
+func (a *App) downloadAndRunDesktopUpdate(url string) {
+	a.emitDesktopDownloadEvent("desktop-update:download:start", map[string]any{})
+	if a.ctx != nil {
+		wailsruntime.LogInfo(a.ctx, "Downloading desktop update: "+url)
+	}
+	dest, err := a.downloadDesktopInstaller(url)
+	if err != nil {
+		if a.ctx != nil {
+			wailsruntime.LogError(a.ctx, fmt.Sprintf("download desktop update failed: %v", err))
+		}
+		a.emitDesktopDownloadError(err.Error())
+		return
+	}
+	if err := runInstaller(dest); err != nil {
+		if a.ctx != nil {
+			wailsruntime.LogError(a.ctx, fmt.Sprintf("launch installer failed: %v", err))
+		}
+		a.emitDesktopDownloadError(err.Error())
+		return
+	}
+	if a.ctx != nil {
+		wailsruntime.LogInfo(a.ctx, "Launched desktop update installer: "+dest)
+	}
+	a.emitDesktopDownloadEvent("desktop-update:download:complete", map[string]any{"path": dest})
+}
+
+func (a *App) downloadDesktopInstaller(url string) (string, error) {
+	dest := filepath.Join(os.TempDir(), installerFileName(url))
+	var lastErr error
+	for _, candidate := range config.MirrorURLs(url, config.LoadProxies(a.glueRootDir())) {
+		if err := a.downloadFileWithProgress(candidate, dest); err != nil {
+			lastErr = err
+			continue
+		}
+		return dest, nil
+	}
+	if lastErr == nil {
+		lastErr = fmt.Errorf("unable to download installer")
+	}
+	return "", lastErr
+}
+
+func (a *App) downloadFileWithProgress(url, dest string) error {
+	client := &http.Client{Timeout: desktopUpdateDownloadTimeout}
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		return err
+	}
+	req.Header.Set("User-Agent", "Gluestick-Desktop/"+Version)
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("download failed (%d)", resp.StatusCode)
+	}
+
+	tmp := dest + ".part"
+	f, err := os.Create(tmp)
+	if err != nil {
+		return err
+	}
+
+	total := resp.ContentLength
+	var received int64
+	buf := make([]byte, 128*1024)
+	lastEmit := time.Now()
+	for {
+		n, rerr := resp.Body.Read(buf)
+		if n > 0 {
+			if _, werr := f.Write(buf[:n]); werr != nil {
+				f.Close()
+				os.Remove(tmp)
+				return werr
+			}
+			received += int64(n)
+			if time.Since(lastEmit) >= 200*time.Millisecond {
+				a.emitDesktopDownloadProgress(received, total)
+				lastEmit = time.Now()
+			}
+		}
+		if rerr == io.EOF {
+			break
+		}
+		if rerr != nil {
+			f.Close()
+			os.Remove(tmp)
+			return rerr
+		}
+	}
+	if err := f.Close(); err != nil {
+		os.Remove(tmp)
+		return err
+	}
+	a.emitDesktopDownloadProgress(received, total)
+
+	_ = os.Remove(dest)
+	if err := os.Rename(tmp, dest); err != nil {
+		os.Remove(tmp)
+		return err
+	}
+	return nil
+}
+
+// installerFileName derives a safe local filename from the download URL.
+func installerFileName(rawURL string) string {
+	name := rawURL
+	if idx := strings.IndexAny(name, "?#"); idx >= 0 {
+		name = name[:idx]
+	}
+	if idx := strings.LastIndexAny(name, "/\\"); idx >= 0 {
+		name = name[idx+1:]
+	}
+	name = strings.TrimSpace(name)
+	if name == "" || !strings.HasSuffix(strings.ToLower(name), ".exe") {
+		name = fmt.Sprintf("GluestickDesktopSetup-%s.exe", desktopInstallerArch())
+	}
+	return name
+}
+
+// runInstaller launches the downloaded installer.
+func runInstaller(path string) error {
+	if goruntime.GOOS != "windows" {
+		return fmt.Errorf("installer launch is only supported on windows")
+	}
+	return exec.Command(path).Start()
+}
+
+func (a *App) emitDesktopDownloadEvent(event string, payload map[string]any) {
+	if a.ctx != nil {
+		wailsruntime.EventsEmit(a.ctx, event, payload)
+	}
+}
+
+func (a *App) emitDesktopDownloadProgress(received, total int64) {
+	percent := 0.0
+	if total > 0 {
+		percent = float64(received) / float64(total) * 100
+		if percent > 100 {
+			percent = 100
+		}
+	}
+	a.emitDesktopDownloadEvent("desktop-update:download:progress", map[string]any{
+		"received": received,
+		"total":    total,
+		"percent":  percent,
+	})
+}
+
+func (a *App) emitDesktopDownloadError(msg string) {
+	a.emitDesktopDownloadEvent("desktop-update:download:error", map[string]any{"error": msg})
 }
 
 type fetchedDesktopRelease struct {

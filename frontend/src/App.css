@@ -1481,6 +1481,7 @@ button.detail-external-link:hover:not(:disabled) {
 .download-workers-dialog-footer,
 .install-package-dialog-footer,
 .package-manifest-dialog-footer,
+.desktop-update-dialog-footer,
 .activity-delete-dialog-footer {
   flex-shrink: 0;
   padding: 14px 20px 16px;

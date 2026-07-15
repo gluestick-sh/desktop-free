@@ -46,6 +46,10 @@ export function DismissDesktopUpdate(arg1, arg2) {
   return window['go']['main']['App']['DismissDesktopUpdate'](arg1, arg2);
 }
 
+export function DownloadAndRunDesktopUpdate(arg1) {
+  return window['go']['main']['App']['DownloadAndRunDesktopUpdate'](arg1);
+}
+
 export function ExportInventoryReport() {
   return window['go']['main']['App']['ExportInventoryReport']();
 }
