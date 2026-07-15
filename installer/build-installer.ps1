@@ -10,7 +10,7 @@
 
 .EXAMPLE
   .\build-installer.ps1
-  .\build-installer.ps1 -Version 0.1.5
+  .\build-installer.ps1 -Version 0.1.6
   .\build-installer.ps1 -Arch amd64 -GluestickExe ..\build\bin\gluestick.exe -ShimExe ..\build\bin\shim.exe
 #>
 param(
