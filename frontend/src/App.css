@@ -1446,6 +1446,21 @@ button.detail-external-link:hover:not(:disabled) {
   min-width: 0;
 }
 
+button.pro-feature-action {
+  width: 100%;
+  border: 1px solid transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+button.pro-feature-action:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-secondary));
+}
+
 .pro-feature-icon {
   font-size: 24px;
   width: 40px;

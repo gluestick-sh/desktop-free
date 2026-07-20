@@ -18,7 +18,7 @@ import (
 // These may be overridden at link time via:
 // -ldflags "-X gluestick.sh/desktop.Version=..." etc.
 var (
-	Version = "0.1.8"
+	Version = "0.1.9"
 	Commit  = "none"
 	Date    = "unknown"
 )
@@ -172,6 +172,8 @@ func (a *App) initEngineAsync() {
 	a.mu.Lock()
 	a.engine = eng
 	a.mu.Unlock()
+
+	a.touchDesktopDeviceClient()
 
 	runtime.LogInfo(a.ctx, "Glue engine initialized successfully")
 	runtime.EventsEmit(a.ctx, "engine-ready")
@@ -413,7 +415,9 @@ func (a *App) Install(name string, _ bool, force bool, architecture string, inte
 	}
 
 	if _, pinVersion := engine.ParsePkgRef(name); pinVersion != "" {
-		return fmt.Errorf("installing a pinned version (name@version) requires Gluestick Desktop Pro; use glue install %s from CLI", name)
+		if err := a.requireProActive(); err != nil {
+			return fmt.Errorf("installing a pinned version (name@version) requires Gluestick Desktop Pro; use glue install %s from CLI", name)
+		}
 	}
 
 	key := installTaskKey(name)
@@ -652,17 +656,26 @@ func (a *App) GetActivityLogPage(query ActivityLogQuery) (*ActivityLogPage, erro
 	}, nil
 }
 
-// ClearActivityLog removes all activity log entries (Pro-only).
+// ClearActivityLog removes all activity log entries.
 func (a *App) ClearActivityLog() error {
-	return a.requireProActive()
+	if err := a.requireEngine(); err != nil {
+		return err
+	}
+	_, err := a.engine.ClearActivityLogSince("")
+	return err
 }
 
-// ClearActivityLogByTimeRange deletes activity log entries in a time range (Pro-only).
+// ClearActivityLogByTimeRange deletes activity log entries in a time range (all/today/week/month) and returns the count removed.
 func (a *App) ClearActivityLogByTimeRange(timeRange string) (int, error) {
-	if err := a.requireProActive(); err != nil {
+	if err := a.requireEngine(); err != nil {
 		return 0, err
 	}
-	return 0, fmt.Errorf("requires Gluestick Desktop Pro")
+	since := activityLogSince(timeRange)
+	n, err := a.engine.ClearActivityLogSince(since)
+	if err != nil {
+		return 0, err
+	}
+	return int(n), nil
 }
 
 // RecordCheckUpdatesResult writes a check-updates result to the activity log.

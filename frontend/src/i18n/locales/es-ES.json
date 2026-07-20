@@ -20,7 +20,7 @@
     "updates": "Actualizaciones",
     "activity": "Registro de actividad",
     "storage": "Almacenamiento",
-    "templates": "Catalogar"
+    "recipes": "Catalogar"
   },
   "stats": {
     "buckets": "cubos",
@@ -39,8 +39,8 @@
     "noUpdates": "Todos los paquetes están actualizados.",
     "browsePackages": "Explorar paquetes y categorías de depósitos",
     "storageHint": "Tamaño total instalado; excluye el caché sin referencia.",
-    "templates": "Plantillas",
-    "templatesHint": "Abrir biblioteca de plantillas"
+    "recipes": "Plantillas",
+    "recipesHint": "Abrir biblioteca de plantillas"
   },
   "progress": {
     "phase": {
@@ -325,9 +325,9 @@
     "help": "Ayuda",
     "quit": "Abandonar",
     "exportInventory": "Exportar inventario de software...",
-    "templateDefinitions": "Definiciones de plantillas",
-    "templateDefinitionsExport": "Exportar…",
-    "templateDefinitionsImport": "Importar…",
+    "recipeDefinitions": "Definiciones de plantillas",
+    "recipeDefinitionsExport": "Exportar…",
+    "recipeDefinitionsImport": "Importar…",
     "zoomIn": "Dar un golpe de zoom",
     "zoomOut": "alejar",
     "zoomReset": "Restablecer zoom",
@@ -363,7 +363,8 @@
     "upgradePro": "Actualízate a Pro...",
     "about": "Acerca de",
     "ariaLabel": "Menú de aplicaciones",
-    "openRootDir": "Abrir directorio raíz…"
+    "openRootDir": "Abrir directorio raíz…",
+    "snapshots": "Snapshots & rollback…"
   },
   "table": {
     "sortColumn": "Ordenar por {{column}}",
@@ -513,13 +514,13 @@
     "noResults": "No hay paquetes coincidentes. Pruebe diferentes palabras clave.",
     "emptyBucket": "Este cubo no tiene paquetes.",
     "resultSummary": "{{total}} paquetes coincidentes",
-    "addToTemplate": "Agregar a la plantilla",
-    "addToTemplateAria": "Agregar {{name}} a una plantilla de desarrollo",
+    "addToRecipe": "Agregar a la plantilla",
+    "addToRecipeAria": "Agregar {{name}} a una plantilla de desarrollo",
     "installed": "Instalado",
     "loadBucketsFailed": "No se pudieron cargar las categorías de depósitos: {{error}}",
     "loadPackagesFailed": "No se pudo cargar la lista de paquetes: {{error}}",
-    "addedToTemplate": "Se agregó {{name}} a \"{{title}}\"",
-    "alreadyInTemplate": "El paquete ya está en la plantilla.",
+    "addedToRecipe": "Se agregó {{name}} a \"{{title}}\"",
+    "alreadyInRecipe": "El paquete ya está en la plantilla.",
     "hideDeprecated": "Ocultar obsoleto",
     "hideDeprecatedHint": "Ocultar paquetes en obsoleto/ y manifiestos con un campo obsoleto",
     "deprecatedBadge": "En desuso",
@@ -687,7 +688,10 @@
     "attributionLink": "Iconos de botellas de pegamento creados por andinur - Flaticon",
     "attributionTitle": "iconos de botella de pegamento",
     "ok": "OK",
-    "rootDir": "Directorio raíz"
+    "rootDir": "Directorio raíz",
+    "device": "Dispositivo",
+    "deviceId": "ID del dispositivo",
+    "platform": "Plataforma"
   },
   "desktopUpdate": {
     "title": "Actualización disponible",
@@ -743,32 +747,36 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "Actualice a Pro y desbloquee funciones más potentes:",
+    "intro": "Pro gestiona tu entorno con seis capacidades: sync, recetas, instantáneas, auditoría de cumplimiento, compartir y salud del entorno.",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "Plantillas de entorno",
-        "desc": "Guarde y comparta configuraciones del entorno de desarrollo; Implemente cadenas de herramientas completas con un solo clic."
+      "deviceSync": {
+        "title": "Sincronización entre dispositivos",
+        "desc": "Tras iniciar sesión, alinea inventario y preferencias entre dispositivos; restaura el estado actual en un equipo nuevo, con uso completo sin conexión"
       },
-      "batchQueue": {
-        "title": "cola de lotes",
-        "desc": "Instale varios paquetes con resolución de dependencia inteligente y descargas paralelas"
+      "workspace": {
+        "title": "Recetas",
+        "desc": "Declara el entorno objetivo de un rol (p. ej. frontend/datos) y alinea esta máquina en un clic"
       },
-      "versionRollback": {
-        "title": "Reversión de versión",
-        "desc": "Mantenga las versiones anteriores después de las actualizaciones; volver a cambiar con un solo clic; bloquear versiones para evitar actualizaciones sorpresa"
+      "snapshot": {
+        "title": "Instantáneas y rollback",
+        "desc": "Instantánea automática antes de instalar/desinstalar/actualizar; vuelve al estado anterior si falla"
       },
-      "exportReport": {
-        "title": "Exportar informes",
-        "desc": "Genere informes de inventario de software para auditoría y cumplimiento."
+      "complianceAudit": {
+        "title": "Auditoría de cumplimiento",
+        "desc": "Inventaria el software instalado y exporta informes Markdown/Word para revisión, archivo de activos y conciliación de cambios"
       },
-      "logCleanup": {
-        "title": "Limpieza de registros",
-        "desc": "Borre o filtre registros de actividad de forma masiva para mantener los registros ordenados"
+      "teamCollab": {
+        "title": "Compartir",
+        "desc": "Exporta recetas para otros o importa archivos compartidos (funciones de organización próximamente)"
       },
-      "themes": {
-        "title": "Temas premium",
-        "desc": "8 temas de codificación seleccionados con colores personalizados e importación/exportación"
+      "envHealth": {
+        "title": "Salud del entorno",
+        "desc": "Panel y sugerencias a partir del último diagnóstico, fallos recientes y actualizaciones disponibles"
+      },
+      "recipe": {
+        "title": "Recetas",
+        "desc": "Declara el entorno objetivo de un rol (p. ej. frontend/datos) y alinea esta máquina en un clic"
       }
     },
     "later": "tal vez más tarde",
@@ -776,7 +784,8 @@
     "lockedTitle": "Característica profesional: limpieza masiva del registro de actividad",
     "clearLogsTitle": "Limpieza masiva por filtro",
     "themeExclusive": "{{name}} (exclusivo para Pro)",
-    "themeMenuSuffix": "[Pro]"
+    "themeMenuSuffix": "[Pro]",
+    "trialDev": "Prueba Pro (modo de desarrollo)"
   },
   "theme": {
     "preview": "Avance",
@@ -844,10 +853,7 @@
       "forest": "Verde bosque",
       "dracula": "Dracula",
       "nord": "Nord",
-      "rose": "rosa rosa",
-      "solarized": "Solarized",
-      "high-contrast": "Alto contraste",
-      "retro": "terminal verde"
+      "solarized": "Solarized"
     }
   },
   "footer": {
@@ -884,12 +890,12 @@
     "updateBucketsFailed": "Error en la actualización del depósito: {{error}}",
     "exportInventoryFailed": "Error al exportar inventario: {{error}}",
     "exportInventoryOk": "Inventario exportado: {{path}}",
-    "exportTemplateDefinitionsFailed": "Error en las definiciones de plantilla de exportación: {{error}}",
-    "exportTemplateDefinitionsOk": "Definiciones de plantilla exportadas: {{path}}",
-    "importTemplateDefinitionsOk": "Se importaron {{applied}} plantillas ({{packages}} paquetes){{skipped}}",
-    "importTemplateDefinitionsFailed": "Error al importar definiciones de plantilla: {{error}}",
-    "importTemplateDefinitionsNone": "No se pudo importar ninguna plantilla (omitidas: {{skipped}})",
-    "importTemplateDefinitionsSkipped": "; plantillas desconocidas omitidas: {{ids}}",
+    "exportRecipeDefinitionsFailed": "Error en las definiciones de plantilla de exportación: {{error}}",
+    "exportRecipeDefinitionsOk": "Definiciones de plantilla exportadas: {{path}}",
+    "importRecipeDefinitionsOk": "Se importaron {{applied}} plantillas ({{packages}} paquetes){{skipped}}",
+    "importRecipeDefinitionsFailed": "Error al importar definiciones de plantilla: {{error}}",
+    "importRecipeDefinitionsNone": "No se pudo importar ninguna plantilla (omitidas: {{skipped}})",
+    "importRecipeDefinitionsSkipped": "; plantillas desconocidas omitidas: {{ids}}",
     "installFailed": "Error de instalación: {{error}}",
     "installSuccess": "{{label}} instalado correctamente",
     "planInstallFailed": "No se puede resolver el plan de instalación: {{error}}",
@@ -950,7 +956,13 @@
     "bootstrapSevenZipTaskTitle": "Preparando 7-Zip",
     "bootstrapWixTaskTitle": "Preparando el conjunto de herramientas WiX",
     "bootstrapTaskTitle": "Preparando {{tool}}",
-    "bootstrapFailed": "Error al preparar {{tool}}: {{error}}"
+    "bootstrapFailed": "Error al preparar {{tool}}: {{error}}",
+    "exportInventoryDialogTitle": "Exportar inventario de software",
+    "exportInventoryFilterJson": "Informe JSON (*.json)",
+    "exportInventoryFilterCsv": "Tabla CSV (*.csv)",
+    "exportRecipeDefinitionsDialogTitle": "Exportar definiciones de plantilla",
+    "importRecipeDefinitionsDialogTitle": "Importar definiciones de plantilla",
+    "recipeDefinitionsFilterJson": "Definición de plantilla JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "Añadir a favoritos",
@@ -1041,7 +1053,7 @@
     "cleared": "Se borraron {{count}} entradas de actividad",
     "nothingToClear": "No hay entradas de actividad para borrar"
   },
-  "templateLibrary": {
+  "officialRecipes": {
     "title": "Catalogar",
     "subtitle": "Plantillas de entorno de desarrollo: edite listas de paquetes e instálelos con un solo clic",
     "indexPendingSubtitle": "El índice de paquetes se está construyendo en segundo plano...",
@@ -1073,9 +1085,9 @@
     "repairEnterQuery": "Escriba una palabra clave para buscar",
     "repairConfirm": "Confirmar asignación",
     "repairOk": "«{{label}}» asignado a {{ref}}",
-    "repairAlreadyInTemplate": "Ese paquete ya está en la plantilla",
-    "removeFromTemplate": "Quitar de la plantilla",
-    "removeFromTemplateAria": "Eliminar {{name}} de la plantilla",
+    "repairAlreadyInRecipe": "Ese paquete ya está en la plantilla",
+    "removeFromRecipe": "Quitar de la plantilla",
+    "removeFromRecipeAria": "Eliminar {{name}} de la plantilla",
     "addPackage": "Agregar paquete",
     "addPackagePlaceholder": "Nombre del paquete, p.e. git, nodejs-lts",
     "autoMatch": "coincidencia automática",
@@ -1084,11 +1096,11 @@
     "loadFailed": "No se pudieron cargar los paquetes de plantillas: {{error}}",
     "enterPackageName": "Introduzca un nombre de paquete",
     "packageNotFound": "Paquete no encontrado en el índice: verifique el nombre y el depósito",
-    "alreadyInTemplate": "El paquete ya está en la plantilla.",
-    "addedToTemplate": "Se agregó {{name}} a \"{{title}}\"",
+    "alreadyInRecipe": "El paquete ya está en la plantilla.",
+    "addedToRecipe": "Se agregó {{name}} a \"{{title}}\"",
     "addFailed": "No se pudo agregar el paquete: {{error}}",
-    "removedFromTemplate": "Se eliminó {{name}} de la plantilla",
-    "resetTemplateOk": "Restablecer la plantilla predeterminada",
+    "removedFromRecipe": "Se eliminó {{name}} de la plantilla",
+    "resetRecipeOk": "Restablecer la plantilla predeterminada",
     "export": "Exportar JSON",
     "exportOk": "Exportado “{{title}}” como JSON",
     "exportFailed": "No se pudo exportar la plantilla: {{error}}",
@@ -1103,7 +1115,7 @@
       "programming": "Programación",
       "editor": "Edición de texto"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "Popular essentials",
         "summary": "Elementos imprescindibles de todos los ecosistemas para una nueva configuración de Windows",
@@ -1155,5 +1167,51 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
+  },
+  "snapshot": {
+    "title": "Snapshots & rollback",
+    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
+    "create": "Create snapshot",
+    "import": "Import snapshot…",
+    "localList": "Local snapshots",
+    "loading": "Loading…",
+    "empty": "No local snapshots yet",
+    "detail": "Details",
+    "selectHint": "Select a snapshot to view details",
+    "fieldId": "Snapshot ID",
+    "fieldDevice": "Device",
+    "fieldSource": "Source",
+    "fieldCreated": "Created",
+    "preview": "Preview changes",
+    "apply": "Apply snapshot",
+    "export": "Export…",
+    "delete": "Delete",
+    "planTitle": "Apply plan",
+    "planHint": "Click Preview changes to see what will be applied.",
+    "planEmpty": "Already up to date — nothing to apply",
+    "planPackages": "Will install {{count}} packages",
+    "planActivate": "Will switch current version for {{count}} packages",
+    "planBuckets": "Will add {{count}} buckets",
+    "planConfig": "Will update {{count}} config values",
+    "planMore": "…and {{count}} more",
+    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
+    "createOk": "Created snapshot {{id}}",
+    "createFailed": "Failed to create snapshot: {{error}}",
+    "exportDialogTitle": "Export environment snapshot",
+    "importDialogTitle": "Import environment snapshot",
+    "filterJson": "Environment snapshot (*.json)",
+    "exportOk": "Snapshot exported: {{path}}",
+    "exportFailed": "Failed to export snapshot: {{error}}",
+    "importFailed": "Failed to import snapshot: {{error}}",
+    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
+    "previewFailed": "Failed to preview: {{error}}",
+    "applyOk": "Snapshot applied",
+    "applyFailed": "Failed to apply snapshot: {{error}}",
+    "deleteOk": "Snapshot deleted",
+    "deleteFailed": "Failed to delete snapshot: {{error}}",
+    "loadFailed": "Failed to load snapshots: {{error}}",
+    "applying": "Applying snapshot…",
+    "applyProgress": "Processing {{name}}…",
+    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

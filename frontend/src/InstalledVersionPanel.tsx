@@ -8,17 +8,14 @@ import {
 import type { main } from '../wailsjs/go/models'
 import { EventsOn } from '../wailsjs/runtime/runtime'
 import SwitchVersionDialog from './SwitchVersionDialog'
-import NavIcon from './NavIcon'
 import TableIconButton from './TableIconButton'
 
 interface InstalledVersionPanelProps {
   packageName: string
   bucket?: string
-  isPro: boolean
   operationBusy: boolean
   isPackageInstalling: (ref: string) => boolean
   currentUninstallName: string | null
-  onProRequired: () => void
   onUninstallVersion: (packageName: string, version: string) => void
   onInspectManifest?: (packageName: string, version: string, bucket?: string) => void
   onChanged: () => void
@@ -42,11 +39,9 @@ function isVersionUninstalling(
 export default function InstalledVersionPanel({
   packageName,
   bucket,
-  isPro,
   operationBusy,
   isPackageInstalling,
   currentUninstallName,
-  onProRequired,
   onUninstallVersion,
   onInspectManifest,
   onChanged,
@@ -91,15 +86,7 @@ export default function InstalledVersionPanel({
     }
   }, [packageName, loadVersions])
 
-  const requirePro = () => {
-    onProRequired()
-  }
-
   const handleToggleLock = async () => {
-    if (!isPro) {
-      requirePro()
-      return
-    }
     if (!info) return
     setBusy(true)
     try {
@@ -146,13 +133,12 @@ export default function InstalledVersionPanel({
         </div>
         <button
           type="button"
-          className={`secondary installed-version-lock-btn${!isPro ? ' is-pro-locked' : ''}`}
+          className="secondary installed-version-lock-btn"
           disabled={loading || busy || !info}
           onClick={() => void handleToggleLock()}
-          title={isPro ? t('installedExt.versions.lockTitle') : t('pro.locked')}
+          title={t('installedExt.versions.lockTitle')}
         >
           {info?.versionLocked ? t('installedExt.versions.unlock') : t('installedExt.versions.lock')}
-          <span className="pill pro-pill">{t('pro.badge')}</span>
         </button>
       </div>
 
@@ -176,30 +162,20 @@ export default function InstalledVersionPanel({
                   <>
                     <button
                       type="button"
-                      className={`secondary installed-version-switch-btn${!isPro ? ' is-pro-locked' : ''}`}
+                      className="secondary installed-version-switch-btn"
                       disabled={busy || operationBusy || packageUpdating}
-                      onClick={() => {
-                        if (!isPro) {
-                          requirePro()
-                          return
-                        }
-                        setPendingSwitch(entry.version)
-                      }}
-                      title={isPro ? t('installedExt.versions.switchTitle') : t('pro.locked')}
+                      onClick={() => setPendingSwitch(entry.version)}
+                      title={t('installedExt.versions.switchTitle')}
                     >
-                      <NavIcon name="pro" className="nav-icon-pro" />
                       {t('installedExt.versions.switch')}
                     </button>
                     <TableIconButton
                       icon="trash"
                       variant="danger"
-                      className={!isPro ? 'is-pro-locked' : undefined}
                       title={
-                        !isPro
-                          ? t('pro.locked')
-                          : isVersionUninstalling(currentUninstallName, packageName, entry.version)
-                            ? t('package.uninstalling')
-                            : t('package.uninstall')
+                        isVersionUninstalling(currentUninstallName, packageName, entry.version)
+                          ? t('package.uninstalling')
+                          : t('package.uninstall')
                       }
                       ariaLabel={
                         isVersionUninstalling(currentUninstallName, packageName, entry.version)
@@ -216,10 +192,6 @@ export default function InstalledVersionPanel({
                       busy={isVersionUninstalling(currentUninstallName, packageName, entry.version)}
                       onClick={(e) => {
                         e.stopPropagation()
-                        if (!isPro) {
-                          requirePro()
-                          return
-                        }
                         onUninstallVersion(packageName, entry.version)
                       }}
                     />

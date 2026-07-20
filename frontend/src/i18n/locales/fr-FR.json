@@ -20,7 +20,7 @@
     "updates": "Mises à jour",
     "activity": "Journal d'activité",
     "storage": "Stockage",
-    "templates": "Catalogue"
+    "recipes": "Catalogue"
   },
   "stats": {
     "buckets": "Bucket",
@@ -39,8 +39,8 @@
     "noUpdates": "Tous les packages sont à jour",
     "browsePackages": "Parcourir les packages et les catégories de buckets",
     "storageHint": "Taille totale installée ; exclut le cache non référencé.",
-    "templates": "Modèles",
-    "templatesHint": "Ouvrir la bibliothèque de modèles"
+    "recipes": "Modèles",
+    "recipesHint": "Ouvrir la bibliothèque de modèles"
   },
   "progress": {
     "phase": {
@@ -325,9 +325,9 @@
     "help": "Aide",
     "quit": "Quitter",
     "exportInventory": "Exporter l’inventaire des logiciels…",
-    "templateDefinitions": "Définitions de modèles",
-    "templateDefinitionsExport": "Exporter…",
-    "templateDefinitionsImport": "Importer…",
+    "recipeDefinitions": "Définitions de modèles",
+    "recipeDefinitionsExport": "Exporter…",
+    "recipeDefinitionsImport": "Importer…",
     "zoomIn": "Zoomer",
     "zoomOut": "Zoom arrière",
     "zoomReset": "Réinitialiser le zoom",
@@ -513,13 +513,13 @@
     "noResults": "Aucun package correspondant. Essayez différents mots-clés.",
     "emptyBucket": "Ce bucket ne contient aucun package",
     "resultSummary": "{{total}} packages correspondants",
-    "addToTemplate": "Ajouter au modèle",
-    "addToTemplateAria": "Ajouter {{name}} à un modèle de développement",
+    "addToRecipe": "Ajouter au modèle",
+    "addToRecipeAria": "Ajouter {{name}} à un modèle de développement",
     "installed": "Installé",
     "loadBucketsFailed": "Échec du chargement des catégories de bucket : {{error}}",
     "loadPackagesFailed": "Échec du chargement de la liste des packages : {{error}}",
-    "addedToTemplate": "Ajout de {{name}} à « {{title}} »",
-    "alreadyInTemplate": "Le package est déjà dans le modèle",
+    "addedToRecipe": "Ajout de {{name}} à « {{title}} »",
+    "alreadyInRecipe": "Le package est déjà dans le modèle",
     "hideDeprecated": "Masquer obsolète",
     "hideDeprecatedHint": "Masquer les packages sous obsolète/ et les manifestes avec un champ obsolète",
     "deprecatedBadge": "Obsolète",
@@ -743,40 +743,45 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "Passez à Pro et débloquez des fonctionnalités plus puissantes :",
+    "intro": "Pro gère votre environnement via six capacités : sync, recettes, instantanés, audit de conformité, partage et santé de l'environnement.",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "Modèles d'environnement",
-        "desc": "Enregistrez et partagez les configurations de l'environnement de développement ; déployer des chaînes d'outils complètes en un clic"
+      "deviceSync": {
+        "title": "Sync multi-appareils",
+        "desc": "Après connexion, alignez inventaire et préférences entre appareils ; restaurez l'état actuel sur une nouvelle machine, usage hors ligne complet"
       },
-      "batchQueue": {
-        "title": "File d'attente par lots",
-        "desc": "Installez plusieurs packages avec une résolution intelligente des dépendances et des téléchargements parallèles"
+      "workspace": {
+        "title": "Recettes",
+        "desc": "Déclarez l'environnement cible d'un rôle (ex. front/data) et alignez cette machine en un clic"
       },
-      "versionRollback": {
-        "title": "Restauration de version",
-        "desc": "Conservez les anciennes versions après les mises à niveau ; revenez en un clic ; verrouillez les versions pour éviter les mises à niveau surprises"
+      "snapshot": {
+        "title": "Instantanés et rollback",
+        "desc": "Instantané auto avant install/désinstall/mise à niveau ; revenez à l'état précédent en cas d'échec"
       },
-      "exportReport": {
-        "title": "Exporter des rapports",
-        "desc": "Générer des rapports d'inventaire de logiciels pour l'audit et la conformité"
+      "complianceAudit": {
+        "title": "Audit de conformité",
+        "desc": "Inventoriez les logiciels installés et exportez des rapports Markdown/Word pour revue, archivage et rapprochement des changements"
       },
-      "logCleanup": {
-        "title": "Nettoyage du journal",
-        "desc": "Effacez ou filtrez les journaux d'activité en masse pour garder les enregistrements bien rangés"
+      "teamCollab": {
+        "title": "Partager",
+        "desc": "Exportez des recettes pour d'autres ou importez des fichiers partagés (fonctions organisation à venir)"
       },
-      "themes": {
-        "title": "Thèmes premium",
-        "desc": "8 thèmes de codage sélectionnés avec des couleurs personnalisées et importation/exportation"
+      "envHealth": {
+        "title": "Santé de l'environnement",
+        "desc": "Tableau de bord et suggestions à partir du dernier diagnostic, des échecs récents et des mises à jour disponibles"
+      },
+      "recipe": {
+        "title": "Recettes",
+        "desc": "Déclarez l'environnement cible d'un rôle (ex. front/data) et alignez cette machine en un clic"
       }
     },
     "later": "Peut-être plus tard",
     "locked": "Fonctionnalité professionnelle",
-    "lockedTitle": "Fonctionnalité Pro : nettoyage groupé du journal d'activité",
+    "lockedTitle": "Fonctionnalité Pro : nettoyage groupé du journal d'activité",
     "clearLogsTitle": "Nettoyage en masse par filtre",
     "themeExclusive": "{{name}} (exclusivité Pro)",
-    "themeMenuSuffix": "[Pro]"
+    "themeMenuSuffix": "[Pro]",
+    "trialDev": "Essayer Pro (mode développement)"
   },
   "theme": {
     "preview": "Aperçu",
@@ -884,12 +889,12 @@
     "updateBucketsFailed": "Échec de la mise à jour du bucket : {{error}}",
     "exportInventoryFailed": "Échec de l'exportation de l'inventaire : {{error}}",
     "exportInventoryOk": "Inventaire exporté : {{path}}",
-    "exportTemplateDefinitionsFailed": "Échec de l'exportation des définitions de modèle : {{error}}",
-    "exportTemplateDefinitionsOk": "Définitions de modèles exportées : {{path}}",
-    "importTemplateDefinitionsOk": "{{applied}} modèles importés ({{packages}} paquets){{skipped}}",
-    "importTemplateDefinitionsFailed": "Échec de l'importation des définitions de modèle : {{error}}",
-    "importTemplateDefinitionsNone": "Aucun modèle n'a pu être importé (ignorés : {{skipped}})",
-    "importTemplateDefinitionsSkipped": " ; modèles inconnus ignorés : {{ids}}",
+    "exportRecipeDefinitionsFailed": "Échec de l'exportation des définitions de modèle : {{error}}",
+    "exportRecipeDefinitionsOk": "Définitions de modèles exportées : {{path}}",
+    "importRecipeDefinitionsOk": "{{applied}} modèles importés ({{packages}} paquets){{skipped}}",
+    "importRecipeDefinitionsFailed": "Échec de l'importation des définitions de modèle : {{error}}",
+    "importRecipeDefinitionsNone": "Aucun modèle n'a pu être importé (ignorés : {{skipped}})",
+    "importRecipeDefinitionsSkipped": " ; modèles inconnus ignorés : {{ids}}",
     "installFailed": "Échec de l'installation : {{error}}",
     "installSuccess": "{{label}} installé avec succès",
     "planInstallFailed": "Impossible de résoudre le plan d'installation : {{error}}",
@@ -950,7 +955,10 @@
     "bootstrapSevenZipTaskTitle": "Préparation de 7-Zip",
     "bootstrapWixTaskTitle": "Préparation du jeu d'outils WiX",
     "bootstrapTaskTitle": "Préparation de {{tool}}",
-    "bootstrapFailed": "Échec de la préparation de {{tool}} : {{error}}"
+    "bootstrapFailed": "Échec de la préparation de {{tool}} : {{error}}",
+    "exportRecipeDefinitionsDialogTitle": "Exporter les définitions de modèles",
+    "importRecipeDefinitionsDialogTitle": "Importer les définitions de modèles",
+    "recipeDefinitionsFilterJson": "Définition de modèle JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "Ajouter aux favoris",
@@ -1041,7 +1049,7 @@
     "cleared": "{{count}} entrées d'activité effacées",
     "nothingToClear": "Aucune entrée d'activité à effacer"
   },
-  "templateLibrary": {
+  "officialRecipes": {
     "title": "Catalogue",
     "subtitle": "Modèles d'environnement de développement : modifiez les listes de packages et installez-les en un clic",
     "indexPendingSubtitle": "L’index des packages se construit en arrière-plan…",
@@ -1073,9 +1081,9 @@
     "repairEnterQuery": "Saisissez un mot-clé pour rechercher",
     "repairConfirm": "Confirmer le mapping",
     "repairOk": "« {{label}} » mappé vers {{ref}}",
-    "repairAlreadyInTemplate": "Ce paquet est déjà dans le modèle",
-    "removeFromTemplate": "Supprimer du modèle",
-    "removeFromTemplateAria": "Supprimer {{name}} du modèle",
+    "repairAlreadyInRecipe": "Ce paquet est déjà dans le modèle",
+    "removeFromRecipe": "Supprimer du modèle",
+    "removeFromRecipeAria": "Supprimer {{name}} du modèle",
     "addPackage": "Ajouter un paquet",
     "addPackagePlaceholder": "Nom du package, par ex. git, nodejs-lts",
     "autoMatch": "Correspondance automatique",
@@ -1084,11 +1092,11 @@
     "loadFailed": "Échec du chargement des packages de modèles : {{error}}",
     "enterPackageName": "Entrez un nom de package",
     "packageNotFound": "Package introuvable dans l'index : vérifiez le nom et le bucket",
-    "alreadyInTemplate": "Le package est déjà dans le modèle",
-    "addedToTemplate": "Ajout de {{name}} à « {{title}} »",
+    "alreadyInRecipe": "Le package est déjà dans le modèle",
+    "addedToRecipe": "Ajout de {{name}} à « {{title}} »",
     "addFailed": "Échec de l'ajout du package : {{error}}",
-    "removedFromTemplate": "{{name}} supprimé du modèle",
-    "resetTemplateOk": "Réinitialiser au modèle par défaut",
+    "removedFromRecipe": "{{name}} supprimé du modèle",
+    "resetRecipeOk": "Réinitialiser au modèle par défaut",
     "export": "Exporter JSON",
     "exportOk": "Exporté « {{title}} » au format JSON",
     "exportFailed": "Échec de l'exportation du modèle : {{error}}",
@@ -1103,7 +1111,7 @@
       "programming": "Programmation",
       "editor": "Édition de texte"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "Popular essentials",
         "summary": "Incontournables multi-écosystèmes pour une nouvelle configuration Windows",

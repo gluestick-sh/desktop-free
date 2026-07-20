@@ -23,6 +23,7 @@ import {
   removePackageFromTemplate,
   resetTemplateOverride,
 } from './templateStore'
+import { exportTemplate } from './templates/io'
 import TemplateRepairDialog, { type TemplateRepairTarget } from './TemplateRepairDialog'
 import './TemplatePanel.css'
 
@@ -42,7 +43,6 @@ interface TemplatePanelProps {
   operationBusy: boolean
   isPackageInstalling: (ref: string) => boolean
   onInstall: (ref: string, intent?: 'install' | 'upgrade') => void
-  onProRequired?: () => void
   onInspectManifest: (ref: string) => void
   manifestPreview?: { packageRef: string; manifest: main.InstallManifestInfo } | null
   onCloseManifest?: () => void
@@ -62,7 +62,6 @@ export default function TemplatePanel({
   operationBusy,
   isPackageInstalling,
   onInstall,
-  onProRequired,
   onInspectManifest,
   manifestPreview,
   onCloseManifest,
@@ -84,9 +83,9 @@ export default function TemplatePanel({
     )
   }
 
-  const templateTitle = useCallback((id: string) => t(`templateLibrary.templates.${id}.title`), [t])
-  const templateSummary = useCallback((id: string) => t(`templateLibrary.templates.${id}.summary`), [t])
-  const templateDescription = useCallback((id: string) => t(`templateLibrary.templates.${id}.description`), [t])
+  const templateTitle = useCallback((id: string) => t(`officialRecipes.items.${id}.title`), [t])
+  const templateSummary = useCallback((id: string) => t(`officialRecipes.items.${id}.summary`), [t])
+  const templateDescription = useCallback((id: string) => t(`officialRecipes.items.${id}.description`), [t])
 
   const renderTemplateDescription = useCallback((template: EffectiveTemplate) => {
     const base = templateDescription(template.id)
@@ -94,12 +93,12 @@ export default function TemplatePanel({
       return base
     }
     if (template.packages.length === 0) {
-      return t('templateLibrary.packagesEmpty')
+      return t('officialRecipes.packagesEmpty')
     }
-    return t('templateLibrary.customizedHint', { description: base, count: template.packages.length })
+    return t('officialRecipes.customizedHint', { description: base, count: template.packages.length })
   }, [templateDescription, t])
   const categoryLabel = useCallback(
-    (category: TemplateCategory | 'all') => t(`templateLibrary.categories.${category}`),
+    (category: TemplateCategory | 'all') => t(`officialRecipes.categories.${category}`),
     [t],
   )
 
@@ -145,7 +144,7 @@ export default function TemplatePanel({
 
   const categoryFilterLabel = useCallback(
     (id: TemplateCategory | 'all') =>
-      t('templateLibrary.categoryWithCount', {
+      t('officialRecipes.categoryWithCount', {
         label: categoryLabel(id),
         count: categoryPackageCounts[id],
       }),
@@ -215,7 +214,7 @@ export default function TemplatePanel({
           return {
             name: pkg.name,
             version: '',
-            description: t('templateLibrary.missingDescription'),
+            description: t('officialRecipes.missingDescription'),
             bucket: pkg.bucket ?? '',
             homepage: '',
             deprecated: false,
@@ -231,7 +230,7 @@ export default function TemplatePanel({
       })
       setTemplatePackages((prev) => ({ ...prev, [templateId]: items }))
     } catch (err) {
-      onError(t('templateLibrary.loadFailed', { error: String(err) }))
+      onError(t('officialRecipes.loadFailed', { error: String(err) }))
     }
   }, [onError, t, templatePackageKey])
 
@@ -300,17 +299,22 @@ export default function TemplatePanel({
       return { ...prev, [templateId]: items }
     })
     bumpTemplates()
-    onInfo?.(t('templateLibrary.removedFromTemplate', { name: packageName }))
+    onInfo?.(t('officialRecipes.removedFromRecipe', { name: packageName }))
   }
 
   const handleResetTemplate = (templateId: string) => {
     resetTemplateOverride(templateId)
     bumpTemplates()
-    onInfo?.(t('templateLibrary.resetTemplateOk'))
+    onInfo?.(t('officialRecipes.resetRecipeOk'))
   }
 
-  const handleExportTemplate = (_template: EffectiveTemplate) => {
-    onProRequired?.()
+  const handleExportTemplate = (template: EffectiveTemplate) => {
+    try {
+      exportTemplate(template.id, templateTitle(template.id))
+      onInfo?.(t('officialRecipes.exportOk', { title: templateTitle(template.id) }))
+    } catch (err) {
+      onError(t('officialRecipes.exportFailed', { error: String(err) }))
+    }
   }
 
   const handleRepairPackage = (templateId: string, pkg: ResolvedTemplatePackage) => {
@@ -333,12 +337,12 @@ export default function TemplatePanel({
     )
     setRepairTarget(null)
     if (!ok) {
-      onError(t('templateLibrary.repairAlreadyInTemplate'))
+      onError(t('officialRecipes.repairAlreadyInRecipe'))
       return
     }
     bumpTemplates()
     onInfo?.(
-      t('templateLibrary.repairOk', {
+      t('officialRecipes.repairOk', {
         label: target.label,
         ref: packageInstallRef(replacement.name, replacement.bucket),
       }),
@@ -348,7 +352,7 @@ export default function TemplatePanel({
   const handleAddPackage = async (template: EffectiveTemplate) => {
     const name = addForm.name.trim()
     if (!name) {
-      onError(t('templateLibrary.enterPackageName'))
+      onError(t('officialRecipes.enterPackageName'))
       return
     }
     setAddingPackage(true)
@@ -358,7 +362,7 @@ export default function TemplatePanel({
       ])
       const hit = resolved?.[0]
       if (!hit?.name) {
-        onError(t('templateLibrary.packageNotFound'))
+        onError(t('officialRecipes.packageNotFound'))
         return
       }
       const pkg: TemplatePackage = {
@@ -368,14 +372,14 @@ export default function TemplatePanel({
       }
       const added = addPackageToTemplate(template.id, pkg)
       if (!added) {
-        onError(t('templateLibrary.alreadyInTemplate'))
+        onError(t('officialRecipes.alreadyInRecipe'))
         return
       }
       bumpTemplates()
       setAddForm((prev) => ({ ...prev, name: '' }))
-      onInfo?.(t('templateLibrary.addedToTemplate', { name: hit.name, title: templateTitle(template.id) }))
+      onInfo?.(t('officialRecipes.addedToRecipe', { name: hit.name, title: templateTitle(template.id) }))
     } catch (err) {
-      onError(t('templateLibrary.addFailed', { error: String(err) }))
+      onError(t('officialRecipes.addFailed', { error: String(err) }))
     } finally {
       setAddingPackage(false)
     }
@@ -386,11 +390,9 @@ export default function TemplatePanel({
     const pending = items.filter((pkg) => !pkg.missing && !isPackageInstalled(pkg.name))
     if (pending.length === 0 || operationBusy) return
     const refs = pending.map((pkg) => packageInstallRefFromInfo(pkg))
-    if (refs.length > 1) {
-      onProRequired?.()
-      return
+    for (const ref of refs) {
+      onInstall(ref)
     }
-    onInstall(refs[0])
   }
 
   const renderTemplateSummary = (template: EffectiveTemplate) => {
@@ -403,9 +405,9 @@ export default function TemplatePanel({
   }
 
   const installButtonLabel = (pendingCount: number, installedCount: number) => {
-    if (pendingCount > 0) return t('templateLibrary.installPending', { count: pendingCount })
-    if (installedCount > 0) return t('templateLibrary.allInstalled')
-    return t('templateLibrary.unavailable')
+    if (pendingCount > 0) return t('officialRecipes.installPending', { count: pendingCount })
+    if (installedCount > 0) return t('officialRecipes.allInstalled')
+    return t('officialRecipes.unavailable')
   }
 
   const installButtonDisabled = (pendingCount: number) => pendingCount <= 0 || operationBusy
@@ -417,7 +419,7 @@ export default function TemplatePanel({
   ) => (
     <div className="template-packages">
       {items.length === 0 && template.packages.length === 0 ? (
-        <span className="template-package is-empty">{t('templateLibrary.packagesEmpty')}</span>
+        <span className="template-package is-empty">{t('officialRecipes.packagesEmpty')}</span>
       ) : (
         items.map((pkg) => (
           <span
@@ -430,8 +432,8 @@ export default function TemplatePanel({
               <button
                 type="button"
                 className="template-package-remove"
-                aria-label={t('templateLibrary.removeFromTemplateAria', { name: pkg.templateLabel })}
-                title={t('templateLibrary.removeFromTemplate')}
+                aria-label={t('officialRecipes.removeFromRecipeAria', { name: pkg.templateLabel })}
+                title={t('officialRecipes.removeFromRecipe')}
                 onClick={() => handleRemovePackage(template.id, pkg.name)}
               >
                 ?
@@ -446,7 +448,7 @@ export default function TemplatePanel({
   const renderDetailList = (template: EffectiveTemplate, items: ResolvedTemplatePackage[], editing: boolean) => (
     <div className="template-detail">
       {items.length === 0 ? (
-        <p className="template-detail-empty">{t('templateLibrary.detailEmpty')}</p>
+        <p className="template-detail-empty">{t('officialRecipes.detailEmpty')}</p>
       ) : (
         items.map((pkg) => (
           <div key={`${template.id}-detail-${pkg.name}`} className="template-detail-item">
@@ -503,13 +505,13 @@ export default function TemplatePanel({
                 )
               ) : (
                 <>
-                  <span className="pill">{t('templateLibrary.notIndexed')}</span>
+                  <span className="pill">{t('officialRecipes.notIndexed')}</span>
                   <button
                     type="button"
                     className="secondary"
                     onClick={() => handleRepairPackage(template.id, pkg)}
                   >
-                    {t('templateLibrary.repair')}
+                    {t('officialRecipes.repair')}
                   </button>
                 </>
               )}
@@ -519,11 +521,11 @@ export default function TemplatePanel({
       )}
       {editing ? (
         <div className="template-add-form">
-          <p className="template-add-label">{t('templateLibrary.addPackage')}</p>
+          <p className="template-add-label">{t('officialRecipes.addPackage')}</p>
           <div className="template-add-row">
             <input
               type="text"
-              placeholder={t('templateLibrary.addPackagePlaceholder')}
+              placeholder={t('officialRecipes.addPackagePlaceholder')}
               value={addForm.name}
               onChange={(e) => setAddForm((prev) => ({ ...prev, name: e.target.value }))}
               onKeyDown={(e) => {
@@ -537,7 +539,7 @@ export default function TemplatePanel({
               onChange={(e) => setAddForm((prev) => ({ ...prev, bucket: e.target.value }))}
               aria-label={t('common.bucket')}
             >
-              <option value="">{t('templateLibrary.autoMatch')}</option>
+              <option value="">{t('officialRecipes.autoMatch')}</option>
               {buckets.map((bucket) => (
                 <option key={bucket.name} value={bucket.name}>
                   {bucket.name}
@@ -550,10 +552,10 @@ export default function TemplatePanel({
               disabled={addingPackage || !addForm.name.trim()}
               onClick={() => void handleAddPackage(template)}
             >
-              {addingPackage ? t('common.adding') : t('templateLibrary.addPackage')}
+              {addingPackage ? t('common.adding') : t('officialRecipes.addPackage')}
             </button>
           </div>
-          <p className="template-add-hint">{t('templateLibrary.addHint')}</p>
+          <p className="template-add-hint">{t('officialRecipes.addHint')}</p>
         </div>
       ) : null}
     </div>
@@ -564,12 +566,12 @@ export default function TemplatePanel({
       <div className="template-section">
         <div className="section-header">
           <div className="section-heading">
-            <h2>{t('templateLibrary.title')}</h2>
-            <p className="section-subtitle">{t('templateLibrary.indexPendingSubtitle')}</p>
+            <h2>{t('officialRecipes.title')}</h2>
+            <p className="section-subtitle">{t('officialRecipes.indexPendingSubtitle')}</p>
           </div>
         </div>
         <div className="template-scroll-body">
-          <p className="template-index-pending">{t('templateLibrary.indexPending')}</p>
+          <p className="template-index-pending">{t('officialRecipes.indexPending')}</p>
         </div>
       </div>
     )
@@ -583,13 +585,13 @@ export default function TemplatePanel({
       <div className="template-section template-detail-view">
         <div className="template-detail-toolbar">
           <button type="button" className="secondary template-back-btn" onClick={closeDetail}>
-            {t('templateLibrary.back')}
+            {t('officialRecipes.back')}
           </button>
           <div className="template-detail-toolbar-actions">
             {editing ? (
               <>
                 <button type="button" className="primary" onClick={stopEditing}>
-                  {t('templateLibrary.finishEdit')}
+                  {t('officialRecipes.finishEdit')}
                 </button>
                 {activeTemplate.customized ? (
                   <button
@@ -597,22 +599,21 @@ export default function TemplatePanel({
                     className="secondary"
                     onClick={() => handleResetTemplate(activeTemplate.id)}
                   >
-                    {t('templateLibrary.resetDefault')}
+                    {t('officialRecipes.resetDefault')}
                   </button>
                 ) : null}
               </>
             ) : (
               <>
                 <button type="button" className="secondary" onClick={() => startEditing(activeTemplate)}>
-                  {t('templateLibrary.edit')}
+                  {t('officialRecipes.edit')}
                 </button>
                 <button
                   type="button"
-                  className="secondary is-pro-locked"
+                  className="secondary"
                   onClick={() => handleExportTemplate(activeTemplate)}
-                  title={t('pro.locked')}
                 >
-                  {t('templateLibrary.export')}
+                  {t('officialRecipes.export')}
                 </button>
                 <button
                   type="button"
@@ -638,7 +639,7 @@ export default function TemplatePanel({
                   <h4 className="template-title">{templateTitle(activeTemplate.id)}</h4>
                   <span className="template-category">{categoryLabel(activeTemplate.category)}</span>
                   {activeTemplate.customized ? (
-                    <span className="template-customized">{t('templateLibrary.customized')}</span>
+                    <span className="template-customized">{t('officialRecipes.customized')}</span>
                   ) : null}
                 </div>
                 <p className="template-summary">{templateSummary(activeTemplate.id)}</p>
@@ -666,10 +667,10 @@ export default function TemplatePanel({
     <div className="template-section">
       <div className="section-header">
         <div className="section-heading">
-          <h2>{t('templateLibrary.title')}</h2>
-          <p className="section-subtitle">{t('templateLibrary.subtitle')}</p>
+          <h2>{t('officialRecipes.title')}</h2>
+          <p className="section-subtitle">{t('officialRecipes.subtitle')}</p>
         </div>
-        <div className="template-filter-group" role="group" aria-label={t('templateLibrary.filterAria')}>
+        <div className="template-filter-group" role="group" aria-label={t('officialRecipes.filterAria')}>
           {TEMPLATE_CATEGORY_IDS.map((id) => (
             <button
               key={id}
@@ -686,7 +687,7 @@ export default function TemplatePanel({
 
       <div className="template-scroll-body">
         {visibleTemplates.length === 0 ? (
-          <p className="empty-state">{t('templateLibrary.emptyCategory')}</p>
+          <p className="empty-state">{t('officialRecipes.emptyCategory')}</p>
         ) : (
           <div className="template-grid">
             {visibleTemplates.map((template) => {
@@ -700,7 +701,7 @@ export default function TemplatePanel({
                         <h4 className="template-title">{templateTitle(template.id)}</h4>
                         <span className="template-category">{categoryLabel(template.category)}</span>
                         {template.customized ? (
-                          <span className="template-customized">{t('templateLibrary.customized')}</span>
+                          <span className="template-customized">{t('officialRecipes.customized')}</span>
                         ) : null}
                       </div>
                       <p className="template-summary">{templateSummary(template.id)}</p>
@@ -710,10 +711,10 @@ export default function TemplatePanel({
                   {renderPackageChips(template, items, false)}
                   <div className="template-actions">
                     <button type="button" className="secondary" onClick={() => openDetail(template, false)}>
-                      {t('templateLibrary.viewDetails')}
+                      {t('officialRecipes.viewDetails')}
                     </button>
                     <button type="button" className="secondary" onClick={() => openDetail(template, true)}>
-                      {t('templateLibrary.edit')}
+                      {t('officialRecipes.edit')}
                     </button>
                     <button
                       type="button"

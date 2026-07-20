@@ -95,8 +95,6 @@ interface InstalledPackageSectionProps {
   onUninstall: (pkg: main.InstalledPackage) => void
   onUninstallVersion: (packageName: string, version: string) => void
   onError: (message: string) => void
-  isPro: boolean
-  onProRequired: () => void
   onPackageChanged: () => void
   onMessage: (message: string) => void
   bumpActivityLog: () => void
@@ -130,8 +128,6 @@ export default function InstalledPackageSection({
   onUninstall,
   onUninstallVersion,
   onError,
-  isPro,
-  onProRequired,
   onPackageChanged,
   onMessage,
   bumpActivityLog,
@@ -413,11 +409,9 @@ export default function InstalledPackageSection({
                             <InstalledVersionPanel
                               packageName={pkg.name}
                               bucket={pkg.bucket}
-                              isPro={isPro}
                               operationBusy={operationBusy}
                               isPackageInstalling={isPackageInstalling}
                               currentUninstallName={currentUninstallName}
-                              onProRequired={onProRequired}
                               onUninstallVersion={onUninstallVersion}
                               onInspectManifest={onInspectInstalledManifest}
                               onChanged={() => {

@@ -46,6 +46,7 @@ export type MenuAction =
   | 'check-updates'
   | 'docs'
   | 'check-desktop-update'
+  | 'environment'
   | 'doctor'
   | 'github-proxy'
   | 'download-workers'
@@ -71,8 +72,8 @@ type MenuGroup = {
   items: MenuEntry[]
 }
 
-function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[], isPro: boolean): MenuGroup[] {
-  const themeSubmenu: MenuEntry[] = buildThemeMenuEntries(t, customThemes, isPro).map((entry) => {
+function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[]): MenuGroup[] {
+  const themeSubmenu: MenuEntry[] = buildThemeMenuEntries(t, customThemes).map((entry) => {
     if (entry.action === 'separator') return { type: 'separator' as const }
     return {
       label: entry.label,
@@ -105,19 +106,15 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[], isPro: b
     { label: t('menu.bucketSyncManual'), action: 'bucket-sync-mode:manual' },
   ]
 
-  const templateDefinitionsSubmenu: MenuEntry[] = [
+  const recipeDefinitionsSubmenu: MenuEntry[] = [
     {
-      label: t('menu.templateDefinitionsExport'),
+      label: t('menu.recipeDefinitionsExport'),
       action: 'template-definitions:export',
       shortcut: 'Ctrl+Shift+T',
-      icon: 'pro',
-      locked: !isPro,
     },
     {
-      label: t('menu.templateDefinitionsImport'),
+      label: t('menu.recipeDefinitionsImport'),
       action: 'template-definitions:import',
-      icon: 'pro',
-      locked: !isPro,
     },
   ]
 
@@ -131,12 +128,10 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[], isPro: b
           label: t('menu.exportInventory'),
           action: 'export-inventory',
           shortcut: 'Ctrl+Shift+E',
-          icon: 'pro',
-          locked: !isPro,
         },
         {
-          label: t('menu.templateDefinitions'),
-          submenu: templateDefinitionsSubmenu,
+          label: t('menu.recipeDefinitions'),
+          submenu: recipeDefinitionsSubmenu,
         },
         { type: 'separator' },
         { label: t('menu.openRootDir'), action: 'open-root-dir' },
@@ -151,7 +146,7 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[], isPro: b
       items: [
         { label: t('nav.buckets'), action: 'tab:buckets', shortcut: 'Ctrl+1', icon: 'bucket' },
         { label: t('nav.browse'), action: 'tab:browse', shortcut: 'Ctrl+2', icon: 'browse' },
-        { label: t('nav.templates'), action: 'tab:templates', shortcut: 'Ctrl+3', icon: 'templates' },
+        { label: t('nav.recipes'), action: 'tab:templates', shortcut: 'Ctrl+3', icon: 'templates' },
         { label: t('nav.installed'), action: 'tab:installed', shortcut: 'Ctrl+4', icon: 'installed' },
         { label: t('nav.updates'), action: 'tab:updates', shortcut: 'Ctrl+5', icon: 'updates' },
         { label: t('nav.storage'), action: 'tab:storage', shortcut: 'Ctrl+6', icon: 'storage' },
@@ -185,7 +180,7 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[], isPro: b
       label: t('menu.tools'),
       accessKey: 'T',
       items: [
-        { label: t('menu.doctor'), action: 'doctor' },
+        { label: t('menu.environment'), action: 'environment' },
         { label: t('menu.githubProxy'), action: 'github-proxy' },
         { label: t('menu.downloadWorkers'), action: 'download-workers' },
         { label: t('menu.bucketSync'), submenu: bucketSyncSubmenu },
@@ -205,9 +200,8 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[], isPro: b
       accessKey: 'H',
       items: [
         { label: t('menu.docs'), action: 'docs', shortcut: 'F1' },
+        { label: t('menu.upgradePro'), action: 'pro' },
         { label: t('menu.checkDesktopUpdate'), action: 'check-desktop-update' },
-        { type: 'separator' },
-        { label: t('menu.upgradePro'), action: 'pro', shortcut: 'Ctrl+Shift+P', icon: 'pro' },
         { type: 'separator' },
         { label: t('menu.about'), action: 'about' },
       ],
@@ -324,7 +318,13 @@ function submenuUsesCheckMarks(submenu: MenuEntry[]): boolean {
 
 function leafMenuEntry(
   entry: MenuEntry,
-): entry is { label: string; action: MenuAction; shortcut?: string; icon?: NavIconName; locked?: boolean } {
+): entry is {
+  label: string
+  action: MenuAction
+  shortcut?: string
+  icon?: NavIconName
+  locked?: boolean
+} {
   return !hasSubmenu(entry) && !isSeparator(entry)
 }
 
@@ -511,7 +511,6 @@ function DropdownItems({
 interface AppMenuBarProps {
   onAction: (action: MenuAction) => void
   themeId: ThemeId
-  isPro: boolean
   customThemes: ThemeDefinition[]
   pageSizeMode: PageSizeMode
   pageSize: number
@@ -525,7 +524,6 @@ interface AppMenuBarProps {
 export default function AppMenuBar({
   onAction,
   themeId,
-  isPro,
   customThemes,
   pageSizeMode,
   pageSize,
@@ -539,8 +537,8 @@ export default function AppMenuBar({
   const [openMenu, setOpenMenu] = useState<MenuGroupId | null>(null)
   const barRef = useRef<HTMLElement>(null)
   const menuGroups = useMemo(
-    () => buildMenuGroups(t, customThemes, isPro),
-    [t, customThemes, isPro],
+    () => buildMenuGroups(t, customThemes),
+    [t, customThemes],
   )
 
   const closeMenu = () => {

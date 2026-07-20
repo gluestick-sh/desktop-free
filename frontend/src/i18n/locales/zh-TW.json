@@ -20,7 +20,7 @@
     "updates": "更新中心",
     "activity": "活動日誌",
     "storage": "佔用空間",
-    "templates": "軟件庫"
+    "recipes": "配方"
   },
   "stats": {
     "buckets": "Bucket",
@@ -39,8 +39,8 @@
     "noUpdates": "沒有可更新的軟件包",
     "browsePackages": "瀏覽軟件包與 Bucket 分類",
     "storageHint": "已安裝文件佔用總計，不含無引用緩存。",
-    "templates": "模板庫",
-    "templatesHint": "打開模板庫"
+    "recipes": "配方",
+    "recipesHint": "打開配方"
   },
   "progress": {
     "phase": {
@@ -252,6 +252,11 @@
       "github_mirror": "檢查代理地址是否正確，或更換鏡像後重試"
     }
   },
+  "environment": {
+    "title": "環境診斷",
+    "diagnosisIntro": "逐項檢查 Git、7-Zip、Shim 目錄與 GitHub 連通性。",
+    "rerunDiagnosis": "重新診斷"
+  },
   "activity": {
     "title": "活動日誌",
     "timeAll": "全部",
@@ -325,9 +330,9 @@
     "help": "幫助",
     "quit": "退出",
     "exportInventory": "導出軟件清單…",
-    "templateDefinitions": "模板定義",
-    "templateDefinitionsExport": "導出…",
-    "templateDefinitionsImport": "導入…",
+    "recipeDefinitions": "配方定義",
+    "recipeDefinitionsExport": "導出…",
+    "recipeDefinitionsImport": "導入…",
     "zoomIn": "放大",
     "zoomOut": "縮小",
     "zoomReset": "重置縮放",
@@ -348,8 +353,8 @@
     "updateAllBuckets": "同步更新…",
     "searchPackages": "搜索包…",
     "checkUpdates": "檢查可更新包…",
-    "checkDesktopUpdate": "檢測程式更新…",
-    "doctor": "環境診斷…",
+    "checkDesktopUpdate": "檢查更新…",
+    "environment": "環境診斷…",
     "githubProxy": "GitHub 代理設置…",
     "downloadWorkers": "檔案下載",
     "bucketSync": "Bucket 同步",
@@ -360,10 +365,11 @@
     "localeEn": "English",
     "localeZh": "簡體中文",
     "docs": "使用文檔",
-    "upgradePro": "升級到 Pro…",
+    "upgradePro": "進階功能…",
     "about": "關於",
     "ariaLabel": "應用菜單",
-    "openRootDir": "打開根目錄…"
+    "openRootDir": "打開根目錄…",
+    "snapshots": "Snapshots & rollback…"
   },
   "table": {
     "sortColumn": "按{{column}}排序",
@@ -513,13 +519,13 @@
     "noResults": "未找到匹配的軟件包，請嘗試其他關鍵詞",
     "emptyBucket": "該 Bucket 暫無軟件包",
     "resultSummary": "共 {{total}} 個匹配包",
-    "addToTemplate": "加入模板",
-    "addToTemplateAria": "將 {{name}} 加入開發模板",
+    "addToRecipe": "加入官方配方",
+    "addToRecipeAria": "將 {{name}} 加入官方配方",
     "installed": "已安裝",
     "loadBucketsFailed": "加載 Bucket 分類失敗: {{error}}",
     "loadPackagesFailed": "加載軟件包列表失敗: {{error}}",
-    "addedToTemplate": "已添加 {{name}} 到「{{title}}」",
-    "alreadyInTemplate": "該包已在模板中",
+    "addedToRecipe": "已添加 {{name}} 到「{{title}}」",
+    "alreadyInRecipe": "該包已在模板中",
     "hideDeprecated": "隱藏廢棄包",
     "hideDeprecatedHint": "不顯示位於 deprecated/ 目錄的包，以及 manifest 中帶 deprecated 字段的包",
     "deprecatedBadge": "廢棄",
@@ -687,7 +693,10 @@
     "attributionLink": "Glue bottle icons created by andinur - Flaticon",
     "attributionTitle": "glue bottle icons",
     "ok": "確定",
-    "rootDir": "根目錄"
+    "rootDir": "根目錄",
+    "device": "裝置",
+    "deviceId": "裝置 ID",
+    "platform": "平台"
   },
   "desktopUpdate": {
     "title": "發現新版本",
@@ -734,7 +743,7 @@
       {
         "heading": "工具",
         "items": [
-          "執行「環境檢測」可檢查 Git、7-Zip、Shim 及 GitHub 連線狀態。",
+          "「環境…」可逐項檢查 Git、7-Zip、Shim 及 GitHub 連通性。",
           "可在「工具」選單中設定 GitHub 鏡像與下載並行數。",
           "「開啟根目錄」會在檔案總管中開啟 ~/.glue 資料目錄。"
         ]
@@ -743,32 +752,36 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "升級到 Pro 版本，解鎖更多強大功能：",
+    "intro": "Pro 依六條獨立能力管理環境：同步、配方、快照回滾、合規稽核、分享與環境健康。",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "環境模板",
-        "desc": "保存和共享開發環境配置，一鍵部署完整工具鏈"
+      "deviceSync": {
+        "title": "多裝置同步",
+        "desc": "登入後對齊各裝置的已裝清單與偏好；換機一鍵還原目前環境，離線仍可完整使用"
       },
-      "batchQueue": {
-        "title": "批量隊列",
-        "desc": "同時安裝多個軟件包，智能依賴解析與並行下載"
+      "workspace": {
+        "title": "配方",
+        "desc": "用宣告式配方定義角色環境（如前端/資料），一鍵把本機對齊到目標清單"
       },
-      "versionRollback": {
-        "title": "版本回滾",
-        "desc": "升級保留歷史版本，一鍵切換回滾；版本鎖定避免意外升級"
+      "snapshot": {
+        "title": "快照與回滾",
+        "desc": "裝卸/升級前自動快照；失敗或裝壞時可退回上一狀態"
       },
-      "exportReport": {
-        "title": "導出報告",
-        "desc": "生成軟件清單報告，便於審計和合規管理"
+      "complianceAudit": {
+        "title": "合規稽核",
+        "desc": "盤點已裝軟體，匯出 Markdown/Word 合規報告，供合規審查、資產歸檔與變更對帳"
       },
-      "logCleanup": {
-        "title": "日誌清理",
-        "desc": "一鍵清空或按條件清理活動日誌，保持記錄整潔"
+      "teamCollab": {
+        "title": "分享",
+        "desc": "匯出配方給他人，或匯入他人分享的配方（組織協作能力後續完善）"
       },
-      "themes": {
-        "title": "專屬主題",
-        "desc": "8 款精選編程主題，支持自定義配色與導入導出"
+      "envHealth": {
+        "title": "環境健康",
+        "desc": "基於最近一次環境診斷、近 7 日失敗與可更新包的儀表板與建議"
+      },
+      "recipe": {
+        "title": "配方",
+        "desc": "用宣告式配方定義角色環境（如前端/資料），一鍵把本機對齊到目標清單"
       }
     },
     "later": "稍後再說",
@@ -776,7 +789,8 @@
     "lockedTitle": "Pro 功能：按條件批量清理活動日誌",
     "clearLogsTitle": "按條件批量清理活動日誌",
     "themeExclusive": "{{name}}（Pro 專屬）",
-    "themeMenuSuffix": " [Pro]"
+    "themeMenuSuffix": " [Pro]",
+    "trialDev": "試用 Pro（開發模式）"
   },
   "theme": {
     "preview": "預覽",
@@ -844,10 +858,7 @@
       "forest": "森林綠",
       "dracula": "Dracula",
       "nord": "Nord",
-      "rose": "玫瑰粉",
-      "solarized": "Solarized",
-      "high-contrast": "高對比",
-      "retro": "終端綠"
+      "solarized": "Solarized"
     }
   },
   "footer": {
@@ -884,12 +895,12 @@
     "updateBucketsFailed": "更新 Bucket 失敗: {{error}}",
     "exportInventoryFailed": "導出軟件清單失敗: {{error}}",
     "exportInventoryOk": "軟件清單已導出：{{path}}",
-    "exportTemplateDefinitionsFailed": "導出模板定義失敗：{{error}}",
-    "exportTemplateDefinitionsOk": "模板定義已導出：{{path}}",
-    "importTemplateDefinitionsOk": "已導入 {{applied}} 個模板（{{packages}} 個包）{{skipped}}",
-    "importTemplateDefinitionsFailed": "導入模板定義失敗：{{error}}",
-    "importTemplateDefinitionsNone": "沒有可導入的模板（跳過：{{skipped}}）",
-    "importTemplateDefinitionsSkipped": "；跳過未知模板：{{ids}}",
+    "exportRecipeDefinitionsFailed": "導出模板定義失敗：{{error}}",
+    "exportRecipeDefinitionsOk": "模板定義已導出：{{path}}",
+    "importRecipeDefinitionsOk": "已導入 {{applied}} 個模板（{{packages}} 個包）{{skipped}}",
+    "importRecipeDefinitionsFailed": "導入模板定義失敗：{{error}}",
+    "importRecipeDefinitionsNone": "沒有可導入的模板（跳過：{{skipped}}）",
+    "importRecipeDefinitionsSkipped": "；跳過未知模板：{{ids}}",
     "installFailed": "安裝失敗: {{error}}",
     "installSuccess": "{{label}} 安裝成功",
     "planInstallFailed": "無法解析安裝計劃: {{error}}",
@@ -950,7 +961,13 @@
     "bootstrapSevenZipTaskTitle": "準備 7-Zip",
     "bootstrapWixTaskTitle": "準備 WiX 工具集",
     "bootstrapTaskTitle": "準備 {{tool}}",
-    "bootstrapFailed": "準備 {{tool}} 失敗: {{error}}"
+    "bootstrapFailed": "準備 {{tool}} 失敗: {{error}}",
+    "exportInventoryDialogTitle": "匯出軟體清單",
+    "exportInventoryFilterJson": "JSON 報告 (*.json)",
+    "exportInventoryFilterCsv": "CSV 表格 (*.csv)",
+    "exportRecipeDefinitionsDialogTitle": "導出模板定義",
+    "importRecipeDefinitionsDialogTitle": "導入模板定義",
+    "recipeDefinitionsFilterJson": "配方定義 JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "加入收藏",
@@ -1041,9 +1058,9 @@
     "cleared": "已清理 {{count}} 條活動日誌",
     "nothingToClear": "沒有可清理的活動日誌"
   },
-  "templateLibrary": {
-    "title": "軟件庫",
-    "subtitle": "開發模板組合，可編輯軟件包列表後一鍵安裝",
+  "officialRecipes": {
+    "title": "官方配方",
+    "subtitle": "官方精選組合，可編輯套件清單後一鍵安裝，或另存為我的配方",
     "indexPendingSubtitle": "包索引正在後臺構建，請稍候…",
     "indexPending": "索引完成後將展示開發模板。",
     "filterAria": "模板分類",
@@ -1073,9 +1090,9 @@
     "repairEnterQuery": "輸入關鍵字開始搜尋",
     "repairConfirm": "確認對應",
     "repairOk": "已將「{{label}}」對應到 {{ref}}",
-    "repairAlreadyInTemplate": "所選包已在模板中",
-    "removeFromTemplate": "從模板移除",
-    "removeFromTemplateAria": "從模板移除 {{name}}",
+    "repairAlreadyInRecipe": "所選包已在模板中",
+    "removeFromRecipe": "從模板移除",
+    "removeFromRecipeAria": "從模板移除 {{name}}",
     "addPackage": "添加軟件包",
     "addPackagePlaceholder": "包名，如 git、nodejs-lts",
     "autoMatch": "自動匹配",
@@ -1084,11 +1101,11 @@
     "loadFailed": "加載模板包信息失敗: {{error}}",
     "enterPackageName": "請輸入軟件包名稱",
     "packageNotFound": "索引中未找到該包，請檢查名稱與 Bucket 是否正確",
-    "alreadyInTemplate": "該包已在模板中",
-    "addedToTemplate": "已添加 {{name}} 到「{{title}}」",
+    "alreadyInRecipe": "該包已在模板中",
+    "addedToRecipe": "已添加 {{name}} 到「{{title}}」",
     "addFailed": "添加軟件包失敗: {{error}}",
-    "removedFromTemplate": "已從模板中移除 {{name}}",
-    "resetTemplateOk": "已恢復為默認模板",
+    "removedFromRecipe": "已從模板中移除 {{name}}",
+    "resetRecipeOk": "已恢復為默認模板",
     "export": "導出 JSON",
     "exportOk": "已導出「{{title}}」為 JSON",
     "exportFailed": "導出模板失敗：{{error}}",
@@ -1103,7 +1120,7 @@
       "programming": "編程開發",
       "editor": "文字編輯"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "裝機必備",
         "summary": "跨生態裝機必備組合",
@@ -1155,5 +1172,51 @@
         "description": "MariaDB、MySQL、Redis、MongoDB、PostgreSQL 與 SQLite，均來自 main 倉庫，可按技術棧選擇安裝用於本地開發。"
       }
     }
+  },
+  "snapshot": {
+    "title": "Snapshots & rollback",
+    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
+    "create": "Create snapshot",
+    "import": "Import snapshot…",
+    "localList": "Local snapshots",
+    "loading": "Loading…",
+    "empty": "No local snapshots yet",
+    "detail": "Details",
+    "selectHint": "Select a snapshot to view details",
+    "fieldId": "Snapshot ID",
+    "fieldDevice": "Device",
+    "fieldSource": "Source",
+    "fieldCreated": "Created",
+    "preview": "Preview changes",
+    "apply": "Apply snapshot",
+    "export": "Export…",
+    "delete": "Delete",
+    "planTitle": "Apply plan",
+    "planHint": "點擊「預覽變更」查看將執行的操作。",
+    "planEmpty": "Already up to date — nothing to apply",
+    "planPackages": "Will install {{count}} packages",
+    "planActivate": "將切換 {{count}} 個套件的目前版本",
+    "planBuckets": "Will add {{count}} buckets",
+    "planConfig": "Will update {{count}} config values",
+    "planMore": "…and {{count}} more",
+    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
+    "createOk": "Created snapshot {{id}}",
+    "createFailed": "Failed to create snapshot: {{error}}",
+    "exportDialogTitle": "Export environment snapshot",
+    "importDialogTitle": "Import environment snapshot",
+    "filterJson": "Environment snapshot (*.json)",
+    "exportOk": "Snapshot exported: {{path}}",
+    "exportFailed": "Failed to export snapshot: {{error}}",
+    "importFailed": "Failed to import snapshot: {{error}}",
+    "importInvalidFormat": "不是有效的環境快照檔案，請選擇由 GlueStick 匯出的快照 JSON。",
+    "previewFailed": "Failed to preview: {{error}}",
+    "applyOk": "Snapshot applied",
+    "applyFailed": "Failed to apply snapshot: {{error}}",
+    "deleteOk": "Snapshot deleted",
+    "deleteFailed": "Failed to delete snapshot: {{error}}",
+    "loadFailed": "Failed to load snapshots: {{error}}",
+    "applying": "Applying snapshot…",
+    "applyProgress": "Processing {{name}}…",
+    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

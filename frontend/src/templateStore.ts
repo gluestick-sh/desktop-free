@@ -155,9 +155,48 @@ export interface TemplateImportApplyResult {
   packageCount: number
 }
 
-/** Apply an imported bundle (Pro-only). Free edition keeps the UI entry only. */
+/** Apply an imported bundle by storing per-template overrides against official defaults. */
 export function applyImportedTemplateBundle(
-  _templates: Array<{ id: string; packages: TemplatePackage[] }>,
+  templates: Array<{ id: string; packages: TemplatePackage[] }>,
 ): TemplateImportApplyResult {
-  throw new Error('requires Gluestick Desktop Pro')
+  const overrides = loadTemplateOverrides()
+  let applied = 0
+  let packageCount = 0
+  const skipped: string[] = []
+
+  for (const imported of templates) {
+    const official = getDefaultTemplate(imported.id)
+    if (!official) {
+      skipped.push(imported.id)
+      continue
+    }
+
+    const officialNames = new Set(official.packages.map((pkg) => pkg.name.toLowerCase()))
+    const importedNames = new Set(imported.packages.map((pkg) => pkg.name.toLowerCase()))
+
+    const removed = official.packages
+      .filter((pkg) => !importedNames.has(pkg.name.toLowerCase()))
+      .map((pkg) => pkg.name)
+
+    const added = imported.packages
+      .filter((pkg) => !officialNames.has(pkg.name.toLowerCase()))
+      .map((pkg) => ({
+        name: pkg.name,
+        ...(pkg.bucket ? { bucket: pkg.bucket } : {}),
+        ...(pkg.label ? { label: pkg.label } : {}),
+        ...(pkg.ref ? { ref: pkg.ref } : {}),
+      }))
+
+    packageCount += imported.packages.length
+
+    if (removed.length === 0 && added.length === 0) {
+      delete overrides[imported.id]
+    } else {
+      overrides[imported.id] = { removed, added }
+    }
+    applied++
+  }
+
+  saveTemplateOverrides(overrides)
+  return { applied, skipped, packageCount }
 }

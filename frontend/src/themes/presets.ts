@@ -35,46 +35,96 @@ const lightTokens: ThemeTokens = {
   'border-light': '#94a3b8',
 }
 
-/** Neutral placeholder for locked Pro theme cards — real Pro palettes are not shipped. */
-const proLockedPlaceholder: ThemeTokens = {
-  'bg-primary': '#1e1e1e',
-  'bg-secondary': '#2a2a2a',
-  'bg-tertiary': '#333333',
-  'bg-card': '#2a2a2a',
-  'text-primary': '#e5e5e5',
-  'text-secondary': '#a3a3a3',
-  'text-tertiary': '#737373',
-  'accent': '#737373',
-  'accent-hover': '#525252',
-  'success': '#737373',
-  'warning': '#737373',
-  'danger': '#737373',
-  'border': '#404040',
-  'border-light': '#525252',
-}
-
-const FREE_THEMES: ThemeDefinition[] = [
+export const BUILTIN_THEMES: ThemeDefinition[] = [
   createThemeFromTokens('dark', 'Dark', 'free', darkTokens),
   createThemeFromTokens('light', 'Light', 'free', lightTokens),
+  createThemeFromTokens('midnight', 'Midnight blue', 'pro', {
+    'bg-primary': '#0d1117',
+    'bg-secondary': '#161b22',
+    'bg-tertiary': '#1c2333',
+    'bg-card': '#1a2030',
+    'text-primary': '#e6edf3',
+    'text-secondary': '#8b949e',
+    'text-tertiary': '#6e7681',
+    'accent': '#58a6ff',
+    'accent-hover': '#388bfd',
+    'success': '#3fb950',
+    'warning': '#d29922',
+    'danger': '#f85149',
+    'border': '#30363d',
+    'border-light': '#484f58',
+  }),
+  createThemeFromTokens('forest', 'Forest green', 'pro', {
+    'bg-primary': '#0f1a14',
+    'bg-secondary': '#152620',
+    'bg-tertiary': '#1a3328',
+    'bg-card': '#1a2e24',
+    'text-primary': '#e8f5e9',
+    'text-secondary': '#a5d6a7',
+    'text-tertiary': '#81c784',
+    'accent': '#4caf50',
+    'accent-hover': '#43a047',
+    'success': '#66bb6a',
+    'warning': '#ffb74d',
+    'danger': '#ef5350',
+    'border': '#2e4a3a',
+    'border-light': '#3d5c4a',
+  }),
+  createThemeFromTokens('dracula', 'Dracula', 'pro', {
+    'bg-primary': '#282a36',
+    'bg-secondary': '#313443',
+    'bg-tertiary': '#3a3d4e',
+    'bg-card': '#343746',
+    'text-primary': '#f8f8f2',
+    'text-secondary': '#bd93f9',
+    'text-tertiary': '#6272a4',
+    'accent': '#ff79c6',
+    'accent-hover': '#ff92d0',
+    'success': '#50fa7b',
+    'warning': '#ffb86c',
+    'danger': '#ff5555',
+    'border': '#44475a',
+    'border-light': '#6272a4',
+  }),
+  createThemeFromTokens('nord', 'Nord', 'pro', {
+    'bg-primary': '#2e3440',
+    'bg-secondary': '#3b4252',
+    'bg-tertiary': '#434c5e',
+    'bg-card': '#3b4252',
+    'text-primary': '#eceff4',
+    'text-secondary': '#d8dee9',
+    'text-tertiary': '#81a1c1',
+    'accent': '#88c0d0',
+    'accent-hover': '#81a1c1',
+    'success': '#a3be8c',
+    'warning': '#ebcb8b',
+    'danger': '#bf616a',
+    'border': '#4c566a',
+    'border-light': '#5e81ac',
+  }),
+  createThemeFromTokens('solarized', 'Solarized', 'pro', {
+    'bg-primary': '#002b36',
+    'bg-secondary': '#073642',
+    'bg-tertiary': '#0a4452',
+    'bg-card': '#073642',
+    'text-primary': '#fdf6e3',
+    'text-secondary': '#93a1a1',
+    'text-tertiary': '#839496',
+    'accent': '#268bd2',
+    'accent-hover': '#2aa198',
+    'success': '#859900',
+    'warning': '#b58900',
+    'danger': '#dc322f',
+    'border': '#586e75',
+    'border-light': '#657b83',
+  }),
 ]
-
-/** Pro theme menu/picker entries (UI upsell only; no curated palettes). */
-export const PRO_PRESET_THEMES: ThemeDefinition[] = [
-  createThemeFromTokens('midnight', 'Midnight blue', 'pro', proLockedPlaceholder),
-  createThemeFromTokens('forest', 'Forest green', 'pro', proLockedPlaceholder),
-  createThemeFromTokens('dracula', 'Dracula', 'pro', proLockedPlaceholder),
-  createThemeFromTokens('nord', 'Nord', 'pro', proLockedPlaceholder),
-  createThemeFromTokens('rose', 'Rose pink', 'pro', proLockedPlaceholder),
-  createThemeFromTokens('solarized', 'Solarized', 'pro', proLockedPlaceholder),
-  createThemeFromTokens('high-contrast', 'High contrast', 'pro', proLockedPlaceholder),
-  createThemeFromTokens('retro', 'Terminal green', 'pro', proLockedPlaceholder),
-]
-
-export const BUILTIN_THEMES: ThemeDefinition[] = [...FREE_THEMES, ...PRO_PRESET_THEMES]
 
 export const BUILTIN_THEME_MAP = new Map(
   BUILTIN_THEMES.map((theme) => [theme.id as BuiltinThemeId, theme]),
 )
+
+export const PRO_PRESET_THEMES = BUILTIN_THEMES.filter((t) => t.tier === 'pro')
 
 export function getBuiltinTheme(id: BuiltinThemeId): ThemeDefinition {
   return BUILTIN_THEME_MAP.get(id) ?? BUILTIN_THEME_MAP.get('dark')!

@@ -2,7 +2,7 @@
 
 Gluestick Desktop is the GUI for the [Glue](https://github.com/gluestick-sh/core) package manager, built with [Wails](https://wails.io/).
 
-This repository is the **free open-source edition** (MIT license). The UI may show upgrade entry points for a separate Pro product; those features are not implemented in this codebase.
+This repository is the **free open-source edition** (MIT license). Pro environment features are being built out; the upgrade dialog reflects the planned Pro value proposition, and existing Pro gates are temporarily unlocked for development.
 
 ## Tech stack
 

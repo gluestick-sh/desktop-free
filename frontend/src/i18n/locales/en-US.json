@@ -20,7 +20,7 @@
     "updates": "Updates",
     "activity": "Activity log",
     "storage": "Storage",
-    "templates": "Templates"
+    "recipes": "Recipes"
   },
   "stats": {
     "buckets": "Buckets",
@@ -39,8 +39,8 @@
     "noUpdates": "All packages are up to date",
     "browsePackages": "Browse packages and bucket categories",
     "storageHint": "Total installed size; excludes unreferenced cache.",
-    "templates": "Templates",
-    "templatesHint": "Open template library"
+    "recipes": "Recipes",
+    "recipesHint": "Open recipes"
   },
   "progress": {
     "phase": {
@@ -252,6 +252,11 @@
       "github_mirror": "Verify mirror URLs or try a different mirror"
     }
   },
+  "environment": {
+    "title": "Environment check",
+    "diagnosisIntro": "Step-by-step checks for Git, 7-Zip, shim directory, and GitHub connectivity.",
+    "rerunDiagnosis": "Run again"
+  },
   "activity": {
     "title": "Activity log",
     "timeAll": "All",
@@ -325,9 +330,9 @@
     "help": "Help",
     "quit": "Quit",
     "exportInventory": "Export software inventory…",
-    "templateDefinitions": "Template definitions",
-    "templateDefinitionsExport": "Export…",
-    "templateDefinitionsImport": "Import…",
+    "recipeDefinitions": "Recipe definitions",
+    "recipeDefinitionsExport": "Export…",
+    "recipeDefinitionsImport": "Import…",
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
     "zoomReset": "Reset zoom",
@@ -348,8 +353,8 @@
     "updateAllBuckets": "Sync updates…",
     "searchPackages": "Search packages…",
     "checkUpdates": "Check for updates…",
-    "checkDesktopUpdate": "Check for app updates…",
-    "doctor": "Environment check…",
+    "checkDesktopUpdate": "Check for updates…",
+    "environment": "Environment check…",
     "githubProxy": "GitHub proxy settings…",
     "downloadWorkers": "File downloads",
     "bucketSync": "Bucket sync",
@@ -360,10 +365,11 @@
     "localeEn": "English",
     "localeZh": "简体中文",
     "docs": "Documentation",
-    "upgradePro": "Upgrade to Pro…",
+    "upgradePro": "Advanced features…",
     "about": "About",
     "ariaLabel": "Application menu",
-    "openRootDir": "Open root directory…"
+    "openRootDir": "Open root directory…",
+    "snapshots": "Snapshots & rollback…"
   },
   "table": {
     "sortColumn": "Sort by {{column}}",
@@ -513,13 +519,13 @@
     "noResults": "No matching packages. Try different keywords.",
     "emptyBucket": "This bucket has no packages",
     "resultSummary": "{{total}} matching packages",
-    "addToTemplate": "Add to template",
-    "addToTemplateAria": "Add {{name}} to a dev template",
+    "addToRecipe": "Add to official recipe",
+    "addToRecipeAria": "Add {{name}} to an official recipe",
     "installed": "Installed",
     "loadBucketsFailed": "Failed to load bucket categories: {{error}}",
     "loadPackagesFailed": "Failed to load package list: {{error}}",
-    "addedToTemplate": "Added {{name}} to “{{title}}”",
-    "alreadyInTemplate": "Package is already in the template",
+    "addedToRecipe": "Added {{name}} to “{{title}}”",
+    "alreadyInRecipe": "Already in this recipe",
     "hideDeprecated": "Hide deprecated",
     "hideDeprecatedHint": "Hide packages under deprecated/ and manifests with a deprecated field",
     "deprecatedBadge": "Deprecated",
@@ -687,7 +693,10 @@
     "attributionLink": "Glue bottle icons created by andinur - Flaticon",
     "attributionTitle": "glue bottle icons",
     "ok": "OK",
-    "rootDir": "Root directory"
+    "rootDir": "Root directory",
+    "device": "Device",
+    "deviceId": "Device ID",
+    "platform": "Platform"
   },
   "desktopUpdate": {
     "title": "Update available",
@@ -734,7 +743,7 @@
       {
         "heading": "Tools",
         "items": [
-          "Run the environment check (Doctor) to verify Git, 7-Zip, shims, and GitHub connectivity.",
+          "Use Environment… in the Tools menu for step-by-step Git, 7-Zip, shim, and GitHub checks.",
           "Configure a GitHub mirror and download concurrency from the Tools menu.",
           "Open root directory reveals the ~/.glue data folder in File Explorer."
         ]
@@ -743,32 +752,36 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "Upgrade to Pro for full template deploy, software management, and inventory export:",
+    "intro": "Pro manages your environment across six capabilities: sync, recipes, snapshots, compliance audit, sharing, and environment health.",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "Template deploy",
-        "desc": "Deploy official or custom environment templates—install full toolchains in one click with parallel downloads"
+      "deviceSync": {
+        "title": "Device Sync",
+        "desc": "After sign-in, align installed inventory and preferences across your devices; restore current state on a new machine, with full offline use"
       },
-      "batchQueue": {
-        "title": "Batch install & queue",
-        "desc": "Install multiple packages at once with smart queuing and parallel downloads; free tier installs one at a time"
+      "workspace": {
+        "title": "Recipes",
+        "desc": "Declare a role environment (e.g. frontend / data) and align this machine to the target list in one click"
       },
-      "versionRollback": {
-        "title": "Version management",
-        "desc": "Pin installs (name@version), switch between kept versions, and lock versions to block surprise upgrades"
+      "snapshot": {
+        "title": "Snapshots & rollback",
+        "desc": "Auto-snapshot before install/uninstall/upgrade; roll back if something fails or breaks"
       },
-      "exportReport": {
-        "title": "Export software inventory",
-        "desc": "Export installed packages as JSON or CSV (File → Export software inventory) for audits and compliance"
+      "complianceAudit": {
+        "title": "Compliance audit",
+        "desc": "Inventory installed software and export Markdown/Word compliance reports for review, asset records, and change reconciliation"
       },
-      "logCleanup": {
-        "title": "Activity log cleanup",
-        "desc": "Bulk-clear activity logs by time range to keep records tidy"
+      "teamCollab": {
+        "title": "Share",
+        "desc": "Export recipes for others or import shared recipe files (org features coming later)"
       },
-      "themes": {
-        "title": "Premium themes",
-        "desc": "8 curated coding themes plus custom palettes with import, export, and editing"
+      "envHealth": {
+        "title": "Environment health",
+        "desc": "Dashboard and suggestions from the latest env check, recent failures, and available updates"
+      },
+      "recipe": {
+        "title": "Recipes",
+        "desc": "Declare a role environment (e.g. frontend / data) and align this machine to the target list in one click"
       }
     },
     "later": "Maybe later",
@@ -776,7 +789,8 @@
     "lockedTitle": "Pro feature: bulk activity log cleanup",
     "clearLogsTitle": "Bulk cleanup by filter",
     "themeExclusive": "{{name}} (Pro exclusive)",
-    "themeMenuSuffix": " [Pro]"
+    "themeMenuSuffix": " [Pro]",
+    "trialDev": "Try Pro (dev mode)"
   },
   "theme": {
     "preview": "Preview",
@@ -844,10 +858,7 @@
       "forest": "Forest green",
       "dracula": "Dracula",
       "nord": "Nord",
-      "rose": "Rose pink",
-      "solarized": "Solarized",
-      "high-contrast": "High contrast",
-      "retro": "Terminal green"
+      "solarized": "Solarized"
     }
   },
   "footer": {
@@ -884,12 +895,12 @@
     "updateBucketsFailed": "Bucket update failed: {{error}}",
     "exportInventoryFailed": "Export inventory failed: {{error}}",
     "exportInventoryOk": "Inventory exported: {{path}}",
-    "exportTemplateDefinitionsFailed": "Export template definitions failed: {{error}}",
-    "exportTemplateDefinitionsOk": "Template definitions exported: {{path}}",
-    "importTemplateDefinitionsOk": "Imported {{applied}} templates ({{packages}} packages){{skipped}}",
-    "importTemplateDefinitionsFailed": "Import template definitions failed: {{error}}",
-    "importTemplateDefinitionsNone": "No templates could be imported (skipped: {{skipped}})",
-    "importTemplateDefinitionsSkipped": "; skipped unknown templates: {{ids}}",
+    "exportRecipeDefinitionsFailed": "Export template definitions failed: {{error}}",
+    "exportRecipeDefinitionsOk": "Template definitions exported: {{path}}",
+    "importRecipeDefinitionsOk": "Imported {{applied}} templates ({{packages}} packages){{skipped}}",
+    "importRecipeDefinitionsFailed": "Import template definitions failed: {{error}}",
+    "importRecipeDefinitionsNone": "No templates could be imported (skipped: {{skipped}})",
+    "importRecipeDefinitionsSkipped": "; skipped unknown templates: {{ids}}",
     "installFailed": "Install failed: {{error}}",
     "installSuccess": "{{label}} installed successfully",
     "planInstallFailed": "Cannot resolve install plan: {{error}}",
@@ -950,7 +961,13 @@
     "bootstrapSevenZipTaskTitle": "Preparing 7-Zip",
     "bootstrapWixTaskTitle": "Preparing WiX toolset",
     "bootstrapTaskTitle": "Preparing {{tool}}",
-    "bootstrapFailed": "Failed to prepare {{tool}}: {{error}}"
+    "bootstrapFailed": "Failed to prepare {{tool}}: {{error}}",
+    "exportInventoryDialogTitle": "Export software inventory",
+    "exportInventoryFilterJson": "JSON report (*.json)",
+    "exportInventoryFilterCsv": "CSV table (*.csv)",
+    "exportRecipeDefinitionsDialogTitle": "Export template definitions",
+    "importRecipeDefinitionsDialogTitle": "Import template definitions",
+    "recipeDefinitionsFilterJson": "Recipe definition JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "Add to favorites",
@@ -1041,13 +1058,13 @@
     "cleared": "Cleared {{count}} activity entries",
     "nothingToClear": "No activity entries to clear"
   },
-  "templateLibrary": {
-    "title": "Template library",
-    "subtitle": "Dev environment templates — edit package lists and install in one click",
+  "officialRecipes": {
+    "title": "Official recipes",
+    "subtitle": "Curated stacks you can edit, install, or save as your own recipe",
     "indexPendingSubtitle": "Package index is building in the background…",
-    "indexPending": "Templates will appear when the index is ready.",
-    "filterAria": "Template category",
-    "emptyCategory": "No templates in this category",
+    "indexPending": "Official recipes will appear when the index is ready.",
+    "filterAria": "Recipe categories",
+    "emptyCategory": "No recipes in this category",
     "viewDetails": "View details",
     "edit": "Edit",
     "installPending": "Install pending ({{count}})",
@@ -1060,7 +1077,7 @@
     "customizedHint": "{{description}} (Edited · {{count}} packages)",
     "packagesEmpty": "No packages yet — click Edit to add",
     "packagesLoading": "Loading…",
-    "detailEmpty": "No packages in this template",
+    "detailEmpty": "No packages in this recipe",
     "notIndexed": "Not indexed",
     "repair": "Repair mapping",
     "repairTitle": "Repair template entry",
@@ -1073,9 +1090,9 @@
     "repairEnterQuery": "Enter a keyword to search",
     "repairConfirm": "Confirm mapping",
     "repairOk": "Mapped \"{{label}}\" to {{ref}}",
-    "repairAlreadyInTemplate": "That package is already in the template",
-    "removeFromTemplate": "Remove from template",
-    "removeFromTemplateAria": "Remove {{name}} from template",
+    "repairAlreadyInRecipe": "That package is already in the template",
+    "removeFromRecipe": "Remove from template",
+    "removeFromRecipeAria": "Remove {{name}} from template",
     "addPackage": "Add package",
     "addPackagePlaceholder": "Package name, e.g. git, nodejs-lts",
     "autoMatch": "Auto match",
@@ -1084,11 +1101,11 @@
     "loadFailed": "Failed to load template packages: {{error}}",
     "enterPackageName": "Enter a package name",
     "packageNotFound": "Package not found in index — check name and bucket",
-    "alreadyInTemplate": "Package is already in the template",
-    "addedToTemplate": "Added {{name}} to “{{title}}”",
+    "alreadyInRecipe": "Package is already in the template",
+    "addedToRecipe": "Added {{name}} to “{{title}}”",
     "addFailed": "Failed to add package: {{error}}",
-    "removedFromTemplate": "Removed {{name}} from template",
-    "resetTemplateOk": "Reset to default template",
+    "removedFromRecipe": "Removed {{name}} from template",
+    "resetRecipeOk": "Reset to default template",
     "export": "Export JSON",
     "exportOk": "Exported “{{title}}” as JSON",
     "exportFailed": "Failed to export template: {{error}}",
@@ -1103,7 +1120,7 @@
       "programming": "Programming",
       "editor": "Text editing"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "Setup essentials",
         "summary": "Cross-ecosystem must-haves for a new Windows setup",
@@ -1155,5 +1172,51 @@
         "description": "Common relational, in-memory, and document databases for local development."
       }
     }
+  },
+  "snapshot": {
+    "title": "Snapshots & rollback",
+    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
+    "create": "Create snapshot",
+    "import": "Import snapshot…",
+    "localList": "Local snapshots",
+    "loading": "Loading…",
+    "empty": "No local snapshots yet",
+    "detail": "Details",
+    "selectHint": "Select a snapshot to view details",
+    "fieldId": "Snapshot ID",
+    "fieldDevice": "Device",
+    "fieldSource": "Source",
+    "fieldCreated": "Created",
+    "preview": "Preview changes",
+    "apply": "Apply snapshot",
+    "export": "Export…",
+    "delete": "Delete",
+    "planTitle": "Apply plan",
+    "planHint": "Click Preview changes to see what will be applied.",
+    "planEmpty": "Already up to date — nothing to apply",
+    "planPackages": "Will install {{count}} packages",
+    "planActivate": "Will switch current version for {{count}} packages",
+    "planBuckets": "Will add {{count}} buckets",
+    "planConfig": "Will update {{count}} config values",
+    "planMore": "…and {{count}} more",
+    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
+    "createOk": "Created snapshot {{id}}",
+    "createFailed": "Failed to create snapshot: {{error}}",
+    "exportDialogTitle": "Export environment snapshot",
+    "importDialogTitle": "Import environment snapshot",
+    "filterJson": "Environment snapshot (*.json)",
+    "exportOk": "Snapshot exported: {{path}}",
+    "exportFailed": "Failed to export snapshot: {{error}}",
+    "importFailed": "Failed to import snapshot: {{error}}",
+    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
+    "previewFailed": "Failed to preview: {{error}}",
+    "applyOk": "Snapshot applied",
+    "applyFailed": "Failed to apply snapshot: {{error}}",
+    "deleteOk": "Snapshot deleted",
+    "deleteFailed": "Failed to delete snapshot: {{error}}",
+    "loadFailed": "Failed to load snapshots: {{error}}",
+    "applying": "Applying snapshot…",
+    "applyProgress": "Processing {{name}}…",
+    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

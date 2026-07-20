@@ -20,7 +20,7 @@
     "updates": "Aktualisierungen",
     "activity": "Aktivitätsprotokoll",
     "storage": "Lagerung",
-    "templates": "Katalog"
+    "recipes": "Katalog"
   },
   "stats": {
     "buckets": "Eimer",
@@ -39,8 +39,8 @@
     "noUpdates": "Alle Pakete sind auf dem neuesten Stand",
     "browsePackages": "Durchsuchen Sie Pakete und Bucket-Kategorien",
     "storageHint": "Gesamte installierte Größe; schließt nicht referenzierten Cache aus.",
-    "templates": "Vorlagen",
-    "templatesHint": "Öffnen Sie die Vorlagenbibliothek"
+    "recipes": "Vorlagen",
+    "recipesHint": "Öffnen Sie die Vorlagenbibliothek"
   },
   "progress": {
     "phase": {
@@ -325,9 +325,9 @@
     "help": "Helfen",
     "quit": "Aufhören",
     "exportInventory": "Softwareinventar exportieren…",
-    "templateDefinitions": "Vorlagendefinitionen",
-    "templateDefinitionsExport": "Exportieren…",
-    "templateDefinitionsImport": "Importieren…",
+    "recipeDefinitions": "Vorlagendefinitionen",
+    "recipeDefinitionsExport": "Exportieren…",
+    "recipeDefinitionsImport": "Importieren…",
     "zoomIn": "Vergrößern",
     "zoomOut": "Herauszoomen",
     "zoomReset": "Zoom zurücksetzen",
@@ -363,7 +363,8 @@
     "upgradePro": "Upgrade auf Pro…",
     "about": "Um",
     "ariaLabel": "Anwendungsmenü",
-    "openRootDir": "Stammverzeichnis öffnen…"
+    "openRootDir": "Stammverzeichnis öffnen…",
+    "snapshots": "Snapshots & rollback…"
   },
   "table": {
     "sortColumn": "Sortieren nach {{column}}",
@@ -513,13 +514,13 @@
     "noResults": "Keine passenden Pakete. Probieren Sie verschiedene Schlüsselwörter aus.",
     "emptyBucket": "Dieser Bucket enthält keine Pakete",
     "resultSummary": "{{total}} passende Pakete",
-    "addToTemplate": "Zur Vorlage hinzufügen",
-    "addToTemplateAria": "Fügen Sie {{name}} zu einer Entwicklungsvorlage hinzu",
+    "addToRecipe": "Zur Vorlage hinzufügen",
+    "addToRecipeAria": "Fügen Sie {{name}} zu einer Entwicklungsvorlage hinzu",
     "installed": "Installiert",
     "loadBucketsFailed": "Bucket-Kategorien konnten nicht geladen werden: {{error}}",
     "loadPackagesFailed": "Paketliste konnte nicht geladen werden: {{error}}",
-    "addedToTemplate": "{{name}} zu „{{title}}“ hinzugefügt",
-    "alreadyInTemplate": "Das Paket ist bereits in der Vorlage enthalten",
+    "addedToRecipe": "{{name}} zu „{{title}}“ hinzugefügt",
+    "alreadyInRecipe": "Das Paket ist bereits in der Vorlage enthalten",
     "hideDeprecated": "Ausblenden veraltet",
     "hideDeprecatedHint": "Verstecken Sie Pakete unter „deprecated/“ und Manifeste mit einem „deprecated“-Feld",
     "deprecatedBadge": "Veraltet",
@@ -687,7 +688,10 @@
     "attributionLink": "Klebeflaschen-Icons erstellt von andinur – Flaticon",
     "attributionTitle": "Symbole für Leimflaschen",
     "ok": "OK",
-    "rootDir": "Stammverzeichnis"
+    "rootDir": "Stammverzeichnis",
+    "device": "Gerät",
+    "deviceId": "Geräte-ID",
+    "platform": "Plattform"
   },
   "desktopUpdate": {
     "title": "Update verfügbar",
@@ -743,32 +747,36 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "Upgraden Sie auf Pro und schalten Sie leistungsstärkere Funktionen frei:",
+    "intro": "Pro verwaltet Ihre Umgebung über sechs Fähigkeiten: Sync, Rezepte, Snapshots, Compliance-Audit, Teilen und Umgebungsgesundheit.",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "Umgebungsvorlagen",
-        "desc": "Speichern und teilen Sie Entwicklungsumgebungskonfigurationen; Stellen Sie vollständige Toolchains mit einem Klick bereit"
+      "deviceSync": {
+        "title": "Geräte-Sync",
+        "desc": "Nach Anmeldung Inventar und Einstellungen über Geräte abgleichen; neuen Rechner mit einem Klick auf den Ist-Zustand bringen, offline voll nutzbar"
       },
-      "batchQueue": {
-        "title": "Batch-Warteschlange",
-        "desc": "Installieren Sie mehrere Pakete mit intelligenter Abhängigkeitsauflösung und parallelen Downloads"
+      "workspace": {
+        "title": "Rezepte",
+        "desc": "Soll-Umgebung einer Rolle deklarieren (z. B. Frontend/Daten) und die Maschine mit einem Klick darauf ausrichten"
       },
-      "versionRollback": {
-        "title": "Versions-Rollback",
-        "desc": "Behalten Sie ältere Versionen nach Upgrades; mit einem Klick zurückwechseln; Sperren Sie Versionen, um überraschende Upgrades zu vermeiden"
+      "snapshot": {
+        "title": "Snapshots & Rollback",
+        "desc": "Automatische Snapshots vor Install/Deinstall/Upgrade; bei Fehlern zum vorherigen Zustand zurück"
       },
-      "exportReport": {
-        "title": "Berichte exportieren",
-        "desc": "Erstellen Sie Software-Inventarberichte für Audit und Compliance"
+      "complianceAudit": {
+        "title": "Compliance-Audit",
+        "desc": "Installierte Software inventarisieren und Markdown/Word-Compliance-Berichte für Prüfung, Asset-Archiv und Änderungsabgleich exportieren"
       },
-      "logCleanup": {
-        "title": "Protokollbereinigung",
-        "desc": "Löschen oder filtern Sie Aktivitätsprotokolle in großen Mengen, um die Aufzeichnungen übersichtlich zu halten"
+      "teamCollab": {
+        "title": "Teilen",
+        "desc": "Rezepte für andere exportieren oder geteilte Rezeptdateien importieren (Organisationsfunktionen folgen später)"
       },
-      "themes": {
-        "title": "Premium-Themen",
-        "desc": "8 kuratierte Codierungsthemen mit benutzerdefinierten Farben und Import/Export"
+      "envHealth": {
+        "title": "Umgebungsgesundheit",
+        "desc": "Dashboard und Empfehlungen aus dem letzten Umgebungscheck, jüngsten Fehlern und verfügbaren Updates"
+      },
+      "recipe": {
+        "title": "Rezepte",
+        "desc": "Soll-Umgebung einer Rolle deklarieren (z. B. Frontend/Daten) und die Maschine mit einem Klick darauf ausrichten"
       }
     },
     "later": "Vielleicht später",
@@ -776,7 +784,8 @@
     "lockedTitle": "Pro-Funktion: Massenbereinigung des Aktivitätsprotokolls",
     "clearLogsTitle": "Massenbereinigung durch Filter",
     "themeExclusive": "{{name}} (Pro exklusiv)",
-    "themeMenuSuffix": "[Profi]"
+    "themeMenuSuffix": "[Profi]",
+    "trialDev": "Pro testen (Entwicklermodus)"
   },
   "theme": {
     "preview": "Vorschau",
@@ -844,10 +853,7 @@
       "forest": "Waldgrün",
       "dracula": "Dracula",
       "nord": "Nord",
-      "rose": "Rosenrosa",
-      "solarized": "Solarized",
-      "high-contrast": "Hoher Kontrast",
-      "retro": "Terminal grün"
+      "solarized": "Solarized"
     }
   },
   "footer": {
@@ -884,12 +890,12 @@
     "updateBucketsFailed": "Bucket-Update fehlgeschlagen: {{error}}",
     "exportInventoryFailed": "Der Export des Inventars ist fehlgeschlagen: {{error}}",
     "exportInventoryOk": "Exportiertes Inventar: {{path}}",
-    "exportTemplateDefinitionsFailed": "Fehler beim Exportieren der Vorlagendefinitionen: {{error}}",
-    "exportTemplateDefinitionsOk": "Exportierte Vorlagendefinitionen: {{path}}",
-    "importTemplateDefinitionsOk": "{{applied}} Vorlagen importiert ({{packages}} Pakete){{skipped}}",
-    "importTemplateDefinitionsFailed": "Import der Vorlagendefinitionen fehlgeschlagen: {{error}}",
-    "importTemplateDefinitionsNone": "Keine Vorlagen konnten importiert werden (übersprungen: {{skipped}})",
-    "importTemplateDefinitionsSkipped": "; unbekannte Vorlagen übersprungen: {{ids}}",
+    "exportRecipeDefinitionsFailed": "Fehler beim Exportieren der Vorlagendefinitionen: {{error}}",
+    "exportRecipeDefinitionsOk": "Exportierte Vorlagendefinitionen: {{path}}",
+    "importRecipeDefinitionsOk": "{{applied}} Vorlagen importiert ({{packages}} Pakete){{skipped}}",
+    "importRecipeDefinitionsFailed": "Import der Vorlagendefinitionen fehlgeschlagen: {{error}}",
+    "importRecipeDefinitionsNone": "Keine Vorlagen konnten importiert werden (übersprungen: {{skipped}})",
+    "importRecipeDefinitionsSkipped": "; unbekannte Vorlagen übersprungen: {{ids}}",
     "installFailed": "Installation fehlgeschlagen: {{error}}",
     "installSuccess": "{{label}} erfolgreich installiert",
     "planInstallFailed": "Installationsplan kann nicht aufgelöst werden: {{error}}",
@@ -950,7 +956,13 @@
     "bootstrapSevenZipTaskTitle": "7-Zip vorbereiten",
     "bootstrapWixTaskTitle": "Vorbereiten des WiX-Toolsets",
     "bootstrapTaskTitle": "Vorbereiten von {{tool}}",
-    "bootstrapFailed": "{{tool}} konnte nicht vorbereitet werden: {{error}}"
+    "bootstrapFailed": "{{tool}} konnte nicht vorbereitet werden: {{error}}",
+    "exportInventoryDialogTitle": "Software-Inventar exportieren",
+    "exportInventoryFilterJson": "JSON-Bericht (*.json)",
+    "exportInventoryFilterCsv": "CSV-Tabelle (*.csv)",
+    "exportRecipeDefinitionsDialogTitle": "Vorlagendefinitionen exportieren",
+    "importRecipeDefinitionsDialogTitle": "Vorlagendefinitionen importieren",
+    "recipeDefinitionsFilterJson": "Vorlagendefinition JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "Zu Favoriten hinzufügen",
@@ -1041,7 +1053,7 @@
     "cleared": "{{count}} Aktivitätseinträge gelöscht",
     "nothingToClear": "Keine Aktivitätseinträge zum Löschen vorhanden"
   },
-  "templateLibrary": {
+  "officialRecipes": {
     "title": "Katalog",
     "subtitle": "Vorlagen für Entwicklungsumgebungen – Paketlisten bearbeiten und mit einem Klick installieren",
     "indexPendingSubtitle": "Der Paketindex wird im Hintergrund erstellt …",
@@ -1073,9 +1085,9 @@
     "repairEnterQuery": "Stichwort eingeben, um zu suchen",
     "repairConfirm": "Zuordnung bestätigen",
     "repairOk": "„{{label}}“ wurde {{ref}} zugeordnet",
-    "repairAlreadyInTemplate": "Dieses Paket ist bereits in der Vorlage",
-    "removeFromTemplate": "Aus Vorlage entfernen",
-    "removeFromTemplateAria": "Entfernen Sie {{name}} aus der Vorlage",
+    "repairAlreadyInRecipe": "Dieses Paket ist bereits in der Vorlage",
+    "removeFromRecipe": "Aus Vorlage entfernen",
+    "removeFromRecipeAria": "Entfernen Sie {{name}} aus der Vorlage",
     "addPackage": "Paket hinzufügen",
     "addPackagePlaceholder": "Paketname, z.B. git, nodejs-lts",
     "autoMatch": "Automatische Übereinstimmung",
@@ -1084,11 +1096,11 @@
     "loadFailed": "Vorlagenpakete konnten nicht geladen werden: {{error}}",
     "enterPackageName": "Geben Sie einen Paketnamen ein",
     "packageNotFound": "Paket nicht im Index gefunden – überprüfen Sie Name und Bucket",
-    "alreadyInTemplate": "Das Paket ist bereits in der Vorlage enthalten",
-    "addedToTemplate": "{{name}} zu „{{title}}“ hinzugefügt",
+    "alreadyInRecipe": "Das Paket ist bereits in der Vorlage enthalten",
+    "addedToRecipe": "{{name}} zu „{{title}}“ hinzugefügt",
     "addFailed": "Paket konnte nicht hinzugefügt werden: {{error}}",
-    "removedFromTemplate": "{{name}} aus der Vorlage entfernt",
-    "resetTemplateOk": "Auf Standardvorlage zurücksetzen",
+    "removedFromRecipe": "{{name}} aus der Vorlage entfernt",
+    "resetRecipeOk": "Auf Standardvorlage zurücksetzen",
     "export": "JSON exportieren",
     "exportOk": "„{{title}}“ als JSON exportiert",
     "exportFailed": "Vorlage konnte nicht exportiert werden: {{error}}",
@@ -1103,7 +1115,7 @@
       "programming": "Programmierung",
       "editor": "Textbearbeitung"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "Popular essentials",
         "summary": "Ökosystemübergreifende Must-haves für ein neues Windows-Setup",
@@ -1155,5 +1167,51 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
+  },
+  "snapshot": {
+    "title": "Snapshots & rollback",
+    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
+    "create": "Create snapshot",
+    "import": "Import snapshot…",
+    "localList": "Local snapshots",
+    "loading": "Loading…",
+    "empty": "No local snapshots yet",
+    "detail": "Details",
+    "selectHint": "Select a snapshot to view details",
+    "fieldId": "Snapshot ID",
+    "fieldDevice": "Device",
+    "fieldSource": "Source",
+    "fieldCreated": "Created",
+    "preview": "Preview changes",
+    "apply": "Apply snapshot",
+    "export": "Export…",
+    "delete": "Delete",
+    "planTitle": "Apply plan",
+    "planHint": "Click Preview changes to see what will be applied.",
+    "planEmpty": "Already up to date — nothing to apply",
+    "planPackages": "Will install {{count}} packages",
+    "planActivate": "Will switch current version for {{count}} packages",
+    "planBuckets": "Will add {{count}} buckets",
+    "planConfig": "Will update {{count}} config values",
+    "planMore": "…and {{count}} more",
+    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
+    "createOk": "Created snapshot {{id}}",
+    "createFailed": "Failed to create snapshot: {{error}}",
+    "exportDialogTitle": "Export environment snapshot",
+    "importDialogTitle": "Import environment snapshot",
+    "filterJson": "Environment snapshot (*.json)",
+    "exportOk": "Snapshot exported: {{path}}",
+    "exportFailed": "Failed to export snapshot: {{error}}",
+    "importFailed": "Failed to import snapshot: {{error}}",
+    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
+    "previewFailed": "Failed to preview: {{error}}",
+    "applyOk": "Snapshot applied",
+    "applyFailed": "Failed to apply snapshot: {{error}}",
+    "deleteOk": "Snapshot deleted",
+    "deleteFailed": "Failed to delete snapshot: {{error}}",
+    "loadFailed": "Failed to load snapshots: {{error}}",
+    "applying": "Applying snapshot…",
+    "applyProgress": "Processing {{name}}…",
+    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

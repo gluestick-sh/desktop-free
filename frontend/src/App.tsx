@@ -25,6 +25,9 @@ import {
   SetBucketSyncMode,
   RecordCheckUpdatesResult,
   RunDoctor,
+  ExportInventoryReport,
+  ExportTemplateDefinitions,
+  ImportTemplateDefinitions,
 } from '../wailsjs/go/main/App'
 import InstalledPackageSection, { type SelectedPackage } from './InstalledPackageSection'
 import ActivityLogPanel from './ActivityLogPanel'
@@ -40,12 +43,14 @@ import DesktopUpdateDialog from './DesktopUpdateDialog'
 import HelpDialog from './HelpDialog'
 import GitHubProxyDialog from './GitHubProxyDialog'
 import DownloadWorkersDialog from './DownloadWorkersDialog'
+import EnvironmentDialog, { type DoctorCheckItem } from './EnvironmentDialog'
 import ModalCloseButton from './ModalCloseButton'
 import ModalOverlay from './ModalOverlay'
 import InstallPackageDialog, { type PendingInstallPlan } from './InstallPackageDialog'
 import SwitchVersionDialog from './SwitchVersionDialog'
 import PackageManifestDialog from './PackageManifestDialog'
-import { countTemplates } from './templateStore'
+import { countTemplates, applyImportedTemplateBundle } from './templateStore'
+import { buildExportableTemplateBundle, parseImportedTemplateBundle } from './templates/io'
 import { loadHideDeprecated, saveHideDeprecated } from './browsePreferences'
 import { packageInstallRef, packageNameFromInstallRef } from './templateLibrary'
 import ThemePicker from './ThemePicker'
@@ -68,11 +73,6 @@ import { GLUESTICK_HOME_URL, openExternalUrl } from './openExternalUrl'
 import { Trans, useTranslation } from 'react-i18next'
 import { formatKeyedMessage, formatPhaseLabel, localeDateString } from './i18n/formatMessage'
 import i18n, { setAppLocale, getAppLocale, isAppLocale } from './i18n'
-import {
-  formatDoctorCheckLabel,
-  formatDoctorDetail,
-  formatDoctorHint,
-} from './i18n/activityLog'
 import {
   type InstallProgress,
   mergeInstallProgress,
@@ -118,11 +118,9 @@ interface DoctorCheckResult {
   hint?: string
 }
 
-type DoctorCheckItem = DoctorCheckResult & {
-  status: 'pending' | 'running' | 'done'
-}
+type DoctorCheckItemLocal = DoctorCheckItem
 
-function makeInitialDoctorChecks(checkingLabel: string): DoctorCheckItem[] {
+function makeInitialDoctorChecks(checkingLabel: string): DoctorCheckItemLocal[] {
   return DOCTOR_STEP_IDS.map((id) => ({
     id,
     ok: false,
@@ -318,7 +316,7 @@ function App() {
       ([
         { id: 'buckets' as TabType, label: t('nav.buckets'), icon: 'bucket' as NavIconName },
         { id: 'browse' as TabType, label: t('nav.browse'), icon: 'browse' as NavIconName },
-        { id: 'templates' as TabType, label: t('nav.templates'), icon: 'templates' as NavIconName },
+        { id: 'templates' as TabType, label: t('nav.recipes'), icon: 'templates' as NavIconName },
         { id: 'installed' as TabType, label: t('nav.installed'), icon: 'installed' as NavIconName },
         { id: 'updates' as TabType, label: t('nav.updates'), icon: 'updates' as NavIconName },
         { id: 'storage' as TabType, label: t('nav.storage'), icon: 'storage' as NavIconName },
@@ -378,12 +376,12 @@ function App() {
   const [showProModal, setShowProModal] = useState(false)
   const [showAboutModal, setShowAboutModal] = useState(false)
   const [showHelpModal, setShowHelpModal] = useState(false)
-  const [showDoctorModal, setShowDoctorModal] = useState(false)
+  const [showEnvironmentModal, setShowEnvironmentModal] = useState(false)
   const [showGitHubProxyModal, setShowGitHubProxyModal] = useState(false)
   const [showDownloadWorkersModal, setShowDownloadWorkersModal] = useState(false)
   const [bucketCheckIntervalMinutes, setBucketCheckIntervalMinutes] = useState(15)
   const [bucketSyncMode, setBucketSyncMode] = useState<'auto' | 'manual'>('manual')
-  const [doctorChecks, setDoctorChecks] = useState<DoctorCheckItem[]>([])
+  const [doctorChecks, setDoctorChecks] = useState<DoctorCheckItemLocal[]>([])
   const [doctorOK, setDoctorOK] = useState<boolean | null>(null)
   const [doctorLoading, setDoctorLoading] = useState(false)
   const [aboutInfo, setAboutInfo] = useState<main.AboutInfo | null>(null)
@@ -410,10 +408,10 @@ function App() {
   const [installedListRefreshing, setInstalledListRefreshing] = useState(false)
   const [showQuitConfirm, setShowQuitConfirm] = useState(false)
   const listScrollRef = useRef<HTMLDivElement | null>(null)
-  const [isPro] = useState(false)
+  const [isPro] = useState(true)
   const [customThemes, setCustomThemes] = useState<ThemeDefinition[]>(loadCustomThemes)
   const [themeId, setThemeId] = useState<ThemeId>(() =>
-    sanitizeThemeIdOnLoad(loadStoredThemeId(), loadCustomThemes(), false),
+    sanitizeThemeIdOnLoad(loadStoredThemeId(), loadCustomThemes(), true),
   )
   const [showThemePicker, setShowThemePicker] = useState(false)
   const [zoom, setZoom] = useState(loadStoredZoom)
@@ -1160,6 +1158,29 @@ function App() {
     }
   }, [])
 
+  const openEnvironment = useCallback((runDoctor = false) => {
+    setShowEnvironmentModal(true)
+    if (runDoctor) {
+      setDoctorChecks(makeInitialDoctorChecks(t('doctor.checking')))
+      setDoctorOK(null)
+      setDoctorLoading(true)
+      void RunDoctor().catch((err) => {
+        setDoctorLoading(false)
+        setError(t('doctor.failed', { error: String(err) }))
+      })
+    }
+  }, [t])
+
+  const rerunDoctor = useCallback(() => {
+    setDoctorChecks(makeInitialDoctorChecks(t('doctor.checking')))
+    setDoctorOK(null)
+    setDoctorLoading(true)
+    void RunDoctor().catch((err) => {
+      setDoctorLoading(false)
+      setError(t('doctor.failed', { error: String(err) }))
+    })
+  }, [t])
+
   const handleMenuAction = useCallback((action: MenuAction) => {
     if (
       action.startsWith('theme:') &&
@@ -1290,9 +1311,80 @@ function App() {
         saveHideDeprecated(false)
         break
       case 'export-inventory':
+        void (async () => {
+          dismissInfoMessage()
+          try {
+            const path = await ExportInventoryReport(
+              t('appExt.exportInventoryDialogTitle'),
+              t('appExt.exportInventoryFilterJson'),
+              t('appExt.exportInventoryFilterCsv'),
+            )
+            if (path) {
+              showInfoMessage(t('appExt.exportInventoryOk', { path }), {
+                centered: true,
+                autoHideMs: INFO_BANNER_AUTO_HIDE_MS,
+              })
+            }
+          } catch (err) {
+            setError(t('appExt.exportInventoryFailed', { error: String(err) }))
+          }
+        })()
+        break
       case 'template-definitions:export':
+        void (async () => {
+          dismissInfoMessage()
+          try {
+            const bundle = buildExportableTemplateBundle()
+            const path = await ExportTemplateDefinitions(
+              JSON.stringify(bundle, null, 2),
+              t('appExt.exportRecipeDefinitionsDialogTitle'),
+              t('appExt.recipeDefinitionsFilterJson'),
+            )
+            if (path) {
+              showInfoMessage(t('appExt.exportRecipeDefinitionsOk', { path }), {
+                centered: true,
+                autoHideMs: INFO_BANNER_AUTO_HIDE_MS,
+              })
+            }
+          } catch (err) {
+            setError(t('appExt.exportRecipeDefinitionsFailed', { error: String(err) }))
+          }
+        })()
+        break
       case 'template-definitions:import':
-        setShowProModal(true)
+        void (async () => {
+          dismissInfoMessage()
+          try {
+            const content = await ImportTemplateDefinitions(
+              t('appExt.importRecipeDefinitionsDialogTitle'),
+              t('appExt.recipeDefinitionsFilterJson'),
+            )
+            if (!content?.trim()) return
+            const parsed = parseImportedTemplateBundle(content)
+            const result = applyImportedTemplateBundle(parsed.bundle.templates)
+            if (result.applied === 0) {
+              setError(t('appExt.importRecipeDefinitionsNone', {
+                skipped: result.skipped.join(', ') || t('common.dash'),
+              }))
+              return
+            }
+            setTemplateRefreshKey((k) => k + 1)
+            refreshTemplateStat()
+            const skippedSuffix = result.skipped.length > 0
+              ? t('appExt.importRecipeDefinitionsSkipped', { ids: result.skipped.join(', ') })
+              : ''
+            showInfoMessage(t('appExt.importRecipeDefinitionsOk', {
+              applied: result.applied,
+              packages: result.packageCount,
+              skipped: skippedSuffix,
+            }), {
+              centered: true,
+              autoHideMs: INFO_BANNER_AUTO_HIDE_MS,
+            })
+          } catch (err) {
+            setError(t('appExt.importRecipeDefinitionsFailed', { error: String(err) }))
+          }
+        })()
         break
       case 'open-root-dir':
         OpenGlueDataDir()
@@ -1309,15 +1401,9 @@ function App() {
       case 'check-desktop-update':
         void handleDesktopUpdateCheck(true)
         break
+      case 'environment':
       case 'doctor':
-        setDoctorChecks(makeInitialDoctorChecks(t('doctor.checking')))
-        setDoctorOK(null)
-        setDoctorLoading(true)
-        setShowDoctorModal(true)
-        void RunDoctor().catch((err) => {
-          setDoctorLoading(false)
-          setError(t('doctor.failed', { error: String(err) }))
-        })
+        openEnvironment(true)
         break
       case 'github-proxy':
         setShowGitHubProxyModal(true)
@@ -1366,7 +1452,7 @@ function App() {
         }
         break
     }
-  }, [loadInstalled, loadStats, handleDesktopUpdateCheck, setAutoMode, setPageSize, isPro, customThemes, themeId, selectTheme, openThemeEditor, dismissInfoMessage, showInfoMessage, bumpActivityLog, bucketCheckInProgress, bucketSyncInProgress, clearStatAttention, t])
+  }, [loadInstalled, loadStats, handleDesktopUpdateCheck, setAutoMode, setPageSize, isPro, customThemes, themeId, selectTheme, openThemeEditor, dismissInfoMessage, showInfoMessage, bumpActivityLog, bucketCheckInProgress, bucketSyncInProgress, clearStatAttention, refreshTemplateStat, openEnvironment, t])
 
   useEffect(() => {
     const mod = (e: KeyboardEvent) => e.ctrlKey || e.metaKey
@@ -1886,7 +1972,6 @@ function App() {
       <AppMenuBar
         onAction={handleMenuAction}
         themeId={themeId}
-        isPro={isPro}
         customThemes={customThemes}
         pageSizeMode={pageSizeMode}
         pageSize={pageSize}
@@ -1932,12 +2017,12 @@ function App() {
           type="button"
           className={`stat stat-clickable${activeTab === 'templates' ? ' active' : ''}`}
           onClick={() => handleTabChange('templates')}
-          title={t('stats.templatesHint')}
+          title={t('stats.recipesHint')}
         >
           <span className={`stat-value ${statsPending ? 'stat-value-pending' : ''}`}>
             {formatStatCount(stats.templateCount)}
           </span>
-          <span className="stat-label">{t('stats.templates')}</span>
+          <span className="stat-label">{t('stats.recipes')}</span>
         </button>
         <button
           type="button"
@@ -2031,7 +2116,6 @@ function App() {
             isPackageInstalling={isPackageInstalling}
             operationBusy={operationBusy}
             onInstall={(ref, intent) => void beginInstall(ref, intent ?? 'install')}
-            onProRequired={() => setShowProModal(true)}
             onInspectManifest={(ref) => void handleInspectManifest(ref)}
             manifestPreview={browseManifestPreview}
             onCloseManifest={() => setBrowseManifestPreview(null)}
@@ -2091,8 +2175,6 @@ function App() {
             onUninstall={handleUninstallRequest}
             onUninstallVersion={handleUninstallVersionRequest}
             onError={setError}
-            isPro={isPro}
-            onProRequired={() => setShowProModal(true)}
             onPackageChanged={() => void loadInstalled({ trace: 'version-manage' })}
             onMessage={showCenteredInfo}
             bumpActivityLog={bumpActivityLog}
@@ -2130,8 +2212,6 @@ function App() {
             onUninstall={handleUninstallRequest}
             onUninstallVersion={handleUninstallVersionRequest}
             onError={setError}
-            isPro={isPro}
-            onProRequired={() => setShowProModal(true)}
             onPackageChanged={() => void loadInstalled({ trace: 'version-manage' })}
             onMessage={showCenteredInfo}
             bumpActivityLog={bumpActivityLog}
@@ -2169,8 +2249,6 @@ function App() {
             onPageSizeChange={handlePageSizeChange}
             onPageSizeAuto={handlePageSizeAuto}
             listScrollRef={listScrollRef}
-            isPro={isPro}
-            onProRequired={() => setShowProModal(true)}
             onCleared={(deleted) => {
               showInfoMessage(
                 deleted > 0
@@ -2550,72 +2628,19 @@ function App() {
         />
       )}
 
-      {showDoctorModal && (
-        <ModalOverlay
-          onClose={() => setShowDoctorModal(false)}
-          disabled={doctorLoading}
-        >
-          <div className="modal doctor-dialog" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
-            <div className="modal-header">
-              <h2>{t('doctor.title')}</h2>
-              <ModalCloseButton
-                disabled={doctorLoading}
-                onClick={() => setShowDoctorModal(false)}
-                ariaLabel={t('app.close')}
-              />
-            </div>
-            <div className="modal-body">
-              {doctorLoading && doctorOK === null && (
-                <p className="doctor-running-hint">{t('doctor.running')}</p>
-              )}
-              {!doctorLoading && doctorOK !== null && (
-                <p className={`doctor-summary ${doctorOK ? 'is-ok' : 'is-warn'}`}>
-                  {doctorOK ? t('doctor.summaryOk') : t('doctor.summaryFail')}
-                </p>
-              )}
-              {doctorChecks.length > 0 && (
-                <ul className="doctor-check-list">
-                  {doctorChecks.map((check) => (
-                    <li
-                      key={check.id}
-                      className={
-                        check.status === 'pending'
-                          ? 'doctor-check-pending'
-                          : check.status === 'running'
-                            ? 'doctor-check-running'
-                            : check.ok
-                              ? 'doctor-check-ok'
-                              : 'doctor-check-fail'
-                      }
-                    >
-                      <div className="doctor-check-head">
-                        <span className="doctor-check-mark">
-                          {check.status === 'pending' ? '○' : check.status === 'running' ? '…' : check.ok ? '✓' : '✗'}
-                        </span>
-                        <strong>{formatDoctorCheckLabel(check.id, t)}</strong>
-                        <span className="doctor-check-detail">{formatDoctorDetail(check, t)}</span>
-                      </div>
-                      {check.status === 'done' && !check.ok && (check.hint || check.hintKey) && (
-                        <p className="doctor-check-hint">→ {formatDoctorHint(check, t)}</p>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="primary" disabled={doctorLoading} onClick={() => setShowDoctorModal(false)}>
-                {t('app.close')}
-              </button>
-            </div>
-          </div>
-        </ModalOverlay>
+      {showEnvironmentModal && (
+        <EnvironmentDialog
+          onClose={() => setShowEnvironmentModal(false)}
+          doctorChecks={doctorChecks}
+          doctorOK={doctorOK}
+          doctorLoading={doctorLoading}
+          onRunDoctor={rerunDoctor}
+        />
       )}
 
       {showThemePicker && (
         <ThemePicker
           themeId={themeId}
-          isPro={isPro}
           customThemes={customThemes}
           onSelect={(id) => {
             selectTheme(id)
@@ -2624,17 +2649,13 @@ function App() {
           onEditCustom={() => openThemeEditor(null)}
           onDeleteCustom={handleDeleteCustomTheme}
           onCreateCustom={() => openThemeEditor(null)}
-          onUpgrade={() => {
-            setShowThemePicker(false)
-            setShowProModal(true)
-          }}
           onClose={() => setShowThemePicker(false)}
         />
       )}
 
       {showProModal && (
         <ModalOverlay onClose={() => setShowProModal(false)}>
-          <div className="modal modal-pro" onClick={(e) => e.stopPropagation()}>
+          <div className="modal modal-pro" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
             <div className="modal-header">
               <h2>{t('pro.title')}</h2>
               <ModalCloseButton onClick={() => setShowProModal(false)} ariaLabel={t('app.close')} />
@@ -2642,54 +2663,51 @@ function App() {
             <div className="modal-body">
               <p className="modal-intro">{t('pro.intro')}</p>
               <div className="pro-features">
-                <div className="pro-feature">
-                  <div className="pro-feature-icon">📦</div>
+                <button type="button" className="pro-feature pro-feature-action" onClick={() => setShowProModal(false)}>
+                  <div className="pro-feature-icon" aria-hidden="true">🔄</div>
                   <div className="pro-feature-content">
-                    <h4>{t('pro.feature.envTemplate.title')}</h4>
-                    <p>{t('pro.feature.envTemplate.desc')}</p>
+                    <h4>{t('pro.feature.deviceSync.title')}</h4>
+                    <p>{t('pro.feature.deviceSync.desc')}</p>
                   </div>
-                </div>
-                <div className="pro-feature">
-                  <div className="pro-feature-icon">🚀</div>
+                </button>
+                <button type="button" className="pro-feature pro-feature-action" onClick={() => { setShowProModal(false); setActiveTab('templates') }}>
+                  <div className="pro-feature-icon" aria-hidden="true">🧰</div>
                   <div className="pro-feature-content">
-                    <h4>{t('pro.feature.batchQueue.title')}</h4>
-                    <p>{t('pro.feature.batchQueue.desc')}</p>
+                    <h4>{t('pro.feature.recipe.title')}</h4>
+                    <p>{t('pro.feature.recipe.desc')}</p>
                   </div>
-                </div>
-                <div className="pro-feature">
-                  <div className="pro-feature-icon">⏪</div>
+                </button>
+                <button type="button" className="pro-feature pro-feature-action" onClick={() => setShowProModal(false)}>
+                  <div className="pro-feature-icon" aria-hidden="true">💾</div>
                   <div className="pro-feature-content">
-                    <h4>{t('pro.feature.versionRollback.title')}</h4>
-                    <p>{t('pro.feature.versionRollback.desc')}</p>
+                    <h4>{t('pro.feature.snapshot.title')}</h4>
+                    <p>{t('pro.feature.snapshot.desc')}</p>
                   </div>
-                </div>
-                <div className="pro-feature">
-                  <div className="pro-feature-icon">📊</div>
+                </button>
+                <button type="button" className="pro-feature pro-feature-action" onClick={() => { setShowProModal(false); handleMenuAction('export-inventory') }}>
+                  <div className="pro-feature-icon" aria-hidden="true">🛡️</div>
                   <div className="pro-feature-content">
-                    <h4>{t('pro.feature.exportReport.title')}</h4>
-                    <p>{t('pro.feature.exportReport.desc')}</p>
+                    <h4>{t('pro.feature.complianceAudit.title')}</h4>
+                    <p>{t('pro.feature.complianceAudit.desc')}</p>
                   </div>
-                </div>
-                <div className="pro-feature">
-                  <div className="pro-feature-icon">🧹</div>
+                </button>
+                <button type="button" className="pro-feature pro-feature-action" onClick={() => { setShowProModal(false); setActiveTab('templates') }}>
+                  <div className="pro-feature-icon" aria-hidden="true">👥</div>
                   <div className="pro-feature-content">
-                    <h4>{t('pro.feature.logCleanup.title')}</h4>
-                    <p>{t('pro.feature.logCleanup.desc')}</p>
+                    <h4>{t('pro.feature.teamCollab.title')}</h4>
+                    <p>{t('pro.feature.teamCollab.desc')}</p>
                   </div>
-                </div>
-                <div className="pro-feature">
-                  <div className="pro-feature-icon">🎨</div>
+                </button>
+                <button type="button" className="pro-feature pro-feature-action" onClick={() => { setShowProModal(false); openEnvironment() }}>
+                  <div className="pro-feature-icon" aria-hidden="true">📊</div>
                   <div className="pro-feature-content">
-                    <h4>{t('pro.feature.themes.title')}</h4>
-                    <p>{t('pro.feature.themes.desc')}</p>
+                    <h4>{t('pro.feature.envHealth.title')}</h4>
+                    <p>{t('pro.feature.envHealth.desc')}</p>
                   </div>
-                </div>
+                </button>
               </div>
               <div className="modal-footer">
-                <button
-                  className="primary"
-                  onClick={() => setShowProModal(false)}
-                >
+                <button type="button" className="primary" onClick={() => setShowProModal(false)}>
                   {t('pro.later')}
                 </button>
               </div>

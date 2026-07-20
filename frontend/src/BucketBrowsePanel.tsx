@@ -255,9 +255,9 @@ export default function BucketBrowsePanel({
     })
     setTemplateMenuFor(null)
     if (added) {
-      onInfo?.(t('browse.addedToTemplate', { name: pkg.name, title: t(`templateLibrary.templates.${template.id}.title`) }))
+      onInfo?.(t('browse.addedToRecipe', { name: pkg.name, title: t(`officialRecipes.items.${template.id}.title`) }))
     } else {
-      onError(t('browse.alreadyInTemplate'))
+      onError(t('browse.alreadyInRecipe'))
     }
   }
 
@@ -348,8 +348,8 @@ export default function BucketBrowsePanel({
                   icon="template"
                   variant="accent"
                   hasMenu
-                  title={t('browse.addToTemplate')}
-                  ariaLabel={t('browse.addToTemplateAria', { name: pkg.name })}
+                  title={t('browse.addToRecipe')}
+                  ariaLabel={t('browse.addToRecipeAria', { name: pkg.name })}
                   onClick={(e) => {
                     e.stopPropagation()
                     setTemplateMenuFor((prev) => (prev === menuKey ? null : menuKey))
@@ -372,7 +372,7 @@ export default function BucketBrowsePanel({
                         role="menuitem"
                         onClick={() => handleAddToTemplate(template.id, pkg)}
                       >
-                        {template.icon} {t(`templateLibrary.templates.${template.id}.title`)}
+                        {template.icon} {t(`officialRecipes.items.${template.id}.title`)}
                       </button>
                     ))}
                   </AnchoredFlipMenu>

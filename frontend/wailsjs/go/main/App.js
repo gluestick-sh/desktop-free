@@ -10,6 +10,10 @@ export function AddBucket(arg1, arg2) {
   return window['go']['main']['App']['AddBucket'](arg1, arg2);
 }
 
+export function ApplyLocalSnapshot(arg1) {
+  return window['go']['main']['App']['ApplyLocalSnapshot'](arg1);
+}
+
 export function CancelInstall(arg1) {
   return window['go']['main']['App']['CancelInstall'](arg1);
 }
@@ -38,8 +42,16 @@ export function ClearManifestJSONOverride(arg1) {
   return window['go']['main']['App']['ClearManifestJSONOverride'](arg1);
 }
 
+export function CreateLocalSnapshot(arg1) {
+  return window['go']['main']['App']['CreateLocalSnapshot'](arg1);
+}
+
 export function DeleteActivityLog(arg1) {
   return window['go']['main']['App']['DeleteActivityLog'](arg1);
+}
+
+export function DeleteLocalSnapshot(arg1) {
+  return window['go']['main']['App']['DeleteLocalSnapshot'](arg1);
 }
 
 export function DismissDesktopUpdate(arg1, arg2) {
@@ -50,12 +62,16 @@ export function DownloadAndRunDesktopUpdate(arg1) {
   return window['go']['main']['App']['DownloadAndRunDesktopUpdate'](arg1);
 }
 
-export function ExportInventoryReport() {
-  return window['go']['main']['App']['ExportInventoryReport']();
+export function ExportInventoryReport(arg1, arg2, arg3) {
+  return window['go']['main']['App']['ExportInventoryReport'](arg1, arg2, arg3);
 }
 
-export function ExportTemplateDefinitions(arg1) {
-  return window['go']['main']['App']['ExportTemplateDefinitions'](arg1);
+export function ExportLocalSnapshot(arg1, arg2, arg3) {
+  return window['go']['main']['App']['ExportLocalSnapshot'](arg1, arg2, arg3);
+}
+
+export function ExportTemplateDefinitions(arg1, arg2, arg3) {
+  return window['go']['main']['App']['ExportTemplateDefinitions'](arg1, arg2, arg3);
 }
 
 export function GetAboutInfo() {
@@ -76,6 +92,10 @@ export function GetCacheSummary() {
 
 export function GetCatalogBuckets(arg1) {
   return window['go']['main']['App']['GetCatalogBuckets'](arg1);
+}
+
+export function GetDeviceInfo() {
+  return window['go']['main']['App']['GetDeviceInfo']();
 }
 
 export function GetDownloadWorkers() {
@@ -110,8 +130,12 @@ export function HideCatalogPackage(arg1) {
   return window['go']['main']['App']['HideCatalogPackage'](arg1);
 }
 
-export function ImportTemplateDefinitions() {
-  return window['go']['main']['App']['ImportTemplateDefinitions']();
+export function ImportSnapshotFromFile(arg1, arg2, arg3) {
+  return window['go']['main']['App']['ImportSnapshotFromFile'](arg1, arg2, arg3);
+}
+
+export function ImportTemplateDefinitions(arg1, arg2) {
+  return window['go']['main']['App']['ImportTemplateDefinitions'](arg1, arg2);
 }
 
 export function Install(arg1, arg2, arg3, arg4, arg5) {
@@ -154,6 +178,10 @@ export function ListKnownBuckets() {
   return window['go']['main']['App']['ListKnownBuckets']();
 }
 
+export function ListLocalSnapshots() {
+  return window['go']['main']['App']['ListLocalSnapshots']();
+}
+
 export function ListPackageLaunchMenu(arg1) {
   return window['go']['main']['App']['ListPackageLaunchMenu'](arg1);
 }
@@ -184,6 +212,10 @@ export function PickAndAddPackageLaunchExecutable(arg1, arg2, arg3) {
 
 export function PlanInstall(arg1) {
   return window['go']['main']['App']['PlanInstall'](arg1);
+}
+
+export function PreviewLocalSnapshot(arg1) {
+  return window['go']['main']['App']['PreviewLocalSnapshot'](arg1);
 }
 
 export function PurgeCachePackage(arg1) {
@@ -228,6 +260,10 @@ export function SetBucketDescription(arg1, arg2) {
 
 export function SetBucketSyncMode(arg1) {
   return window['go']['main']['App']['SetBucketSyncMode'](arg1);
+}
+
+export function SetDeviceDisplayName(arg1) {
+  return window['go']['main']['App']['SetDeviceDisplayName'](arg1);
 }
 
 export function SetDownloadWorkers(arg1) {

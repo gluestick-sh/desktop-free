@@ -1,3 +1,38 @@
+export namespace device {
+	
+	export class ClientInfo {
+	    appVersion?: string;
+	    lastSeenAt?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new ClientInfo(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.appVersion = source["appVersion"];
+	        this.lastSeenAt = source["lastSeenAt"];
+	    }
+	}
+	export class Platform {
+	    os: string;
+	    arch: string;
+	    hostname?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new Platform(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.os = source["os"];
+	        this.arch = source["arch"];
+	        this.hostname = source["hostname"];
+	    }
+	}
+
+}
+
 export namespace main {
 	
 	export class AboutInfo {
@@ -332,6 +367,50 @@ export namespace main {
 	        this.error = source["error"];
 	    }
 	}
+	export class DeviceInfoDTO {
+	    schemaVersion: number;
+	    deviceId: string;
+	    createdAt: string;
+	    displayName: string;
+	    displayLabel: string;
+	    platform: device.Platform;
+	    clients?: Record<string, device.ClientInfo>;
+	    path: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new DeviceInfoDTO(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.schemaVersion = source["schemaVersion"];
+	        this.deviceId = source["deviceId"];
+	        this.createdAt = source["createdAt"];
+	        this.displayName = source["displayName"];
+	        this.displayLabel = source["displayLabel"];
+	        this.platform = this.convertValues(source["platform"], device.Platform);
+	        this.clients = this.convertValues(source["clients"], device.ClientInfo, true);
+	        this.path = source["path"];
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
 	export class DownloadWorkersConfig {
 	    workers: number;
 	    configPath: string;
@@ -651,6 +730,72 @@ export namespace main {
 		    return a;
 		}
 	}
+	export class SnapshotPlanDTO {
+	    bucketsToAdd: snapshot.Bucket[];
+	    packagesToInstall: snapshot.Package[];
+	    packagesToActivate: snapshot.Package[];
+	    configChanges: snapshot.ConfigChange[];
+	    empty: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new SnapshotPlanDTO(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.bucketsToAdd = this.convertValues(source["bucketsToAdd"], snapshot.Bucket);
+	        this.packagesToInstall = this.convertValues(source["packagesToInstall"], snapshot.Package);
+	        this.packagesToActivate = this.convertValues(source["packagesToActivate"], snapshot.Package);
+	        this.configChanges = this.convertValues(source["configChanges"], snapshot.ConfigChange);
+	        this.empty = source["empty"];
+	    }
+	
+		convertValues(a: any, classs: any, asMap: boolean = false): any {
+		    if (!a) {
+		        return a;
+		    }
+		    if (a.slice && a.map) {
+		        return (a as any[]).map(elem => this.convertValues(elem, classs));
+		    } else if ("object" === typeof a) {
+		        if (asMap) {
+		            for (const key of Object.keys(a)) {
+		                a[key] = new classs(a[key]);
+		            }
+		            return a;
+		        }
+		        return new classs(a);
+		    }
+		    return a;
+		}
+	}
+	export class SnapshotSummary {
+	    id: string;
+	    createdAt: string;
+	    source: string;
+	    notes: string;
+	    deviceId: string;
+	    displayLabel: string;
+	    packageCount: number;
+	    bucketCount: number;
+	    path: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new SnapshotSummary(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.id = source["id"];
+	        this.createdAt = source["createdAt"];
+	        this.source = source["source"];
+	        this.notes = source["notes"];
+	        this.deviceId = source["deviceId"];
+	        this.displayLabel = source["displayLabel"];
+	        this.packageCount = source["packageCount"];
+	        this.bucketCount = source["bucketCount"];
+	        this.path = source["path"];
+	    }
+	}
 	export class StatsQuery {
 	    forceRefresh: boolean;
 	    hideDeprecated: boolean;
@@ -663,6 +808,61 @@ export namespace main {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.forceRefresh = source["forceRefresh"];
 	        this.hideDeprecated = source["hideDeprecated"];
+	    }
+	}
+
+}
+
+export namespace snapshot {
+	
+	export class Bucket {
+	    name: string;
+	    url?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new Bucket(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.name = source["name"];
+	        this.url = source["url"];
+	    }
+	}
+	export class ConfigChange {
+	    key: string;
+	    from?: string;
+	    to?: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new ConfigChange(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.key = source["key"];
+	        this.from = source["from"];
+	        this.to = source["to"];
+	    }
+	}
+	export class Package {
+	    name: string;
+	    bucket?: string;
+	    version?: string;
+	    current?: boolean;
+	    versionLocked?: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new Package(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.name = source["name"];
+	        this.bucket = source["bucket"];
+	        this.version = source["version"];
+	        this.current = source["current"];
+	        this.versionLocked = source["versionLocked"];
 	    }
 	}
 

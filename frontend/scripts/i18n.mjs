@@ -50,9 +50,9 @@ const KEEP_IDENTICAL_KEYS = new Set([
   'theme.builtin.dracula',
   'theme.builtin.nord',
   'theme.builtin.solarized',
-  'templateLibrary.templates.vibe-coding.title',
-  'templateLibrary.templates.game-dev.title',
-  'templateLibrary.templates.cad-3d.title',
+  'officialRecipes.items.vibe-coding.title',
+  'officialRecipes.items.game-dev.title',
+  'officialRecipes.items.cad-3d.title',
   'common.none',
   'common.dash',
 ])

@@ -84,13 +84,13 @@ export default function TemplateRepairDialog({
         aria-labelledby="template-repair-dialog-title"
       >
         <div className="modal-header">
-          <h2 id="template-repair-dialog-title">{t('templateLibrary.repairTitle')}</h2>
+          <h2 id="template-repair-dialog-title">{t('officialRecipes.repairTitle')}</h2>
           <ModalCloseButton onClick={onClose} ariaLabel={t('app.cancel')} />
         </div>
 
         <div className="modal-body template-repair-dialog-body">
           <div className="template-repair-source">
-            <p className="template-repair-source-label">{t('templateLibrary.repairSource')}</p>
+            <p className="template-repair-source-label">{t('officialRecipes.repairSource')}</p>
             <p className="template-repair-source-name">
               {target.label}
               <span className="pill" style={{ marginLeft: 8 }}>{sourceRef}</span>
@@ -102,8 +102,8 @@ export default function TemplateRepairDialog({
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={t('templateLibrary.repairSearchPlaceholder')}
-              aria-label={t('templateLibrary.repairSearchPlaceholder')}
+              placeholder={t('officialRecipes.repairSearchPlaceholder')}
+              aria-label={t('officialRecipes.repairSearchPlaceholder')}
               autoFocus
             />
             <select
@@ -111,7 +111,7 @@ export default function TemplateRepairDialog({
               onChange={(e) => setBucket(e.target.value)}
               aria-label={t('common.bucket')}
             >
-              <option value="">{t('templateLibrary.repairAllBuckets')}</option>
+              <option value="">{t('officialRecipes.repairAllBuckets')}</option>
               {buckets.map((item) => (
                 <option key={item.name} value={item.name}>
                   {item.name}
@@ -120,14 +120,14 @@ export default function TemplateRepairDialog({
             </select>
           </div>
 
-          <p className="template-repair-hint">{t('templateLibrary.repairHint')}</p>
+          <p className="template-repair-hint">{t('officialRecipes.repairHint')}</p>
 
-          <div className="template-repair-results" role="listbox" aria-label={t('templateLibrary.repairResults')}>
+          <div className="template-repair-results" role="listbox" aria-label={t('officialRecipes.repairResults')}>
             {loading ? (
-              <p className="template-repair-loading">{t('templateLibrary.packagesLoading')}</p>
+              <p className="template-repair-loading">{t('officialRecipes.packagesLoading')}</p>
             ) : results.length === 0 ? (
               <p className="template-repair-empty">
-                {searched ? t('templateLibrary.repairNoResults') : t('templateLibrary.repairEnterQuery')}
+                {searched ? t('officialRecipes.repairNoResults') : t('officialRecipes.repairEnterQuery')}
               </p>
             ) : (
               results.map((item) => {
@@ -168,7 +168,7 @@ export default function TemplateRepairDialog({
             disabled={!selected}
             onClick={() => selected && onConfirm(selected)}
           >
-            {t('templateLibrary.repairConfirm')}
+            {t('officialRecipes.repairConfirm')}
           </button>
         </div>
       </div>

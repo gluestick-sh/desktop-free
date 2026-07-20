@@ -40,8 +40,6 @@ interface ActivityLogPanelProps {
   onPageSizeChange: (size: number) => void
   onPageSizeAuto: () => void
   listScrollRef?: RefObject<HTMLDivElement | null>
-  isPro: boolean
-  onProRequired: () => void
   onCleared?: (deleted: number) => void
 }
 
@@ -53,8 +51,6 @@ export default function ActivityLogPanel({
   onPageSizeChange,
   onPageSizeAuto,
   listScrollRef,
-  isPro,
-  onProRequired,
   onCleared,
 }: ActivityLogPanelProps) {
   const { t, i18n } = useTranslation()
@@ -153,10 +149,6 @@ export default function ActivityLogPanel({
   const canNext = data ? page < totalPages : false
 
   const handleOpenClearDialog = () => {
-    if (!isPro) {
-      onProRequired()
-      return
-    }
     setShowClearDialog(true)
   }
 
@@ -315,12 +307,12 @@ export default function ActivityLogPanel({
           </div>
           <button
             type="button"
-            className={`secondary pro-badge-btn${!isPro ? ' is-pro-locked' : ''}`}
+            className="secondary"
             onClick={handleOpenClearDialog}
             disabled={loading || clearing || deleting}
-            title={isPro ? t('pro.clearLogsTitle') : t('pro.lockedTitle')}
+            title={t('pro.clearLogsTitle')}
           >
-            {t('activityExt.clearLogs')} <span className="pill pro-pill">{t('pro.badge')}</span>
+            {t('activityExt.clearLogs')}
           </button>
         </div>
       </div>

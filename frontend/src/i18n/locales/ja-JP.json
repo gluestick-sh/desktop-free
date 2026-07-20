@@ -20,7 +20,7 @@
     "updates": "アップデート",
     "activity": "アクティビティログ",
     "storage": "ストレージ",
-    "templates": "カタログ"
+    "recipes": "カタログ"
   },
   "stats": {
     "buckets": "Bucket",
@@ -39,8 +39,8 @@
     "noUpdates": "すべてのパッケージは最新です",
     "browsePackages": "パッケージとバケットのカテゴリを参照する",
     "storageHint": "インストールされた合計サイズ。参照されていないキャッシュは除外されます。",
-    "templates": "テンプレート",
-    "templatesHint": "テンプレートライブラリを開く"
+    "recipes": "テンプレート",
+    "recipesHint": "テンプレートライブラリを開く"
   },
   "progress": {
     "phase": {
@@ -325,9 +325,9 @@
     "help": "ヘルプ",
     "quit": "やめる",
     "exportInventory": "ソフトウェアインベントリをエクスポート…",
-    "templateDefinitions": "テンプレート定義",
-    "templateDefinitionsExport": "エクスポート…",
-    "templateDefinitionsImport": "インポート…",
+    "recipeDefinitions": "テンプレート定義",
+    "recipeDefinitionsExport": "エクスポート…",
+    "recipeDefinitionsImport": "インポート…",
     "zoomIn": "ズームイン",
     "zoomOut": "ズームアウト",
     "zoomReset": "ズームをリセットする",
@@ -363,7 +363,8 @@
     "upgradePro": "プロにアップグレード…",
     "about": "について",
     "ariaLabel": "アプリケーションメニュー",
-    "openRootDir": "ルートディレクトリを開く…"
+    "openRootDir": "ルートディレクトリを開く…",
+    "snapshots": "Snapshots & rollback…"
   },
   "table": {
     "sortColumn": "{{column}} で並べ替え",
@@ -513,13 +514,13 @@
     "noResults": "一致するパッケージはありません。別のキーワードを試してください。",
     "emptyBucket": "このバケットにはパッケージがありません",
     "resultSummary": "{{total}} 個の一致するパッケージ",
-    "addToTemplate": "テンプレートに追加",
-    "addToTemplateAria": "{{name}} を開発テンプレートに追加します",
+    "addToRecipe": "テンプレートに追加",
+    "addToRecipeAria": "{{name}} を開発テンプレートに追加します",
     "installed": "インストール済み",
     "loadBucketsFailed": "バケット カテゴリの読み込みに失敗しました: {{error}}",
     "loadPackagesFailed": "パッケージリストのロードに失敗しました: {{error}}",
-    "addedToTemplate": "{{name}}を「{{title}}」に追加しました",
-    "alreadyInTemplate": "パッケージはすでにテンプレート内にあります",
+    "addedToRecipe": "{{name}}を「{{title}}」に追加しました",
+    "alreadyInRecipe": "パッケージはすでにテンプレート内にあります",
     "hideDeprecated": "非推奨の非表示",
     "hideDeprecatedHint": "deprecated/ の下のパッケージと、deprecated フィールドを持つマニフェストを非表示にします",
     "deprecatedBadge": "廃止されました",
@@ -687,7 +688,10 @@
     "attributionLink": "andinur が作成した接着剤ボトルのアイコン - Flaticon",
     "attributionTitle": "接着剤ボトルのアイコン",
     "ok": "OK",
-    "rootDir": "ルートディレクトリ"
+    "rootDir": "ルートディレクトリ",
+    "device": "デバイス",
+    "deviceId": "デバイス ID",
+    "platform": "プラットフォーム"
   },
   "desktopUpdate": {
     "title": "更新があります",
@@ -743,32 +747,36 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "Pro にアップグレードして、より強力な機能を利用しましょう:",
+    "intro": "Pro は 6 つの能力で環境を管理します：同期、レシピ、スナップショット、コンプライアンス監査、共有、環境ヘルス。",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "環境テンプレート",
-        "desc": "開発環境構成を保存して共有します。ワンクリックで完全なツールチェーンを展開"
+      "deviceSync": {
+        "title": "マルチデバイス同期",
+        "desc": "ログイン後、インストール一覧と設定を端末間で揃え、乗り換え時に現状をワンクリック復元。オフラインでもフル利用可"
       },
-      "batchQueue": {
-        "title": "バッチキュー",
-        "desc": "スマートな依存関係解決と並列ダウンロードを使用して複数のパッケージをインストールします"
+      "workspace": {
+        "title": "レシピ",
+        "desc": "役割ごとの目標環境（フロント/データなど）を宣言し、ワンクリックで本機を揃える"
       },
-      "versionRollback": {
-        "title": "バージョンのロールバック",
-        "desc": "アップグレード後も古いバージョンを保持します。ワンクリックで元に戻ります。突然のアップグレードを避けるためにバージョンをロックする"
+      "snapshot": {
+        "title": "スナップショットとロールバック",
+        "desc": "インストール等の前に自動スナップショット。失敗時は直前の状態へ戻せる"
       },
-      "exportReport": {
-        "title": "レポートのエクスポート",
-        "desc": "監査とコンプライアンスのためのソフトウェア インベントリ レポートを生成する"
+      "complianceAudit": {
+        "title": "コンプライアンス監査",
+        "desc": "インストール済みソフトを棚卸しし、Markdown/Word 形式のコンプライアンスレポートを書き出して審査・資産管理・変更照合に活用"
       },
-      "logCleanup": {
-        "title": "ログのクリーンアップ",
-        "desc": "アクティビティ ログを一括でクリアまたはフィルタリングして、記録を整理しておく"
+      "teamCollab": {
+        "title": "共有",
+        "desc": "レシピを他人向けにエクスポート、または共有ファイルをインポート（組織向け機能は今後拡充）"
       },
-      "themes": {
-        "title": "プレミアムテーマ",
-        "desc": "カスタムカラーとインポート/エクスポートを備えた 8 つの厳選されたコーディングテーマ"
+      "envHealth": {
+        "title": "環境ヘルス",
+        "desc": "直近の環境診断、7 日間の失敗、更新可能パッケージに基づくダッシュボードと提案"
+      },
+      "recipe": {
+        "title": "レシピ",
+        "desc": "役割ごとの目標環境（フロント/データなど）を宣言し、ワンクリックで本機を揃える"
       }
     },
     "later": "たぶん後で",
@@ -776,7 +784,8 @@
     "lockedTitle": "Pro 機能: アクティビティ ログの一括クリーンアップ",
     "clearLogsTitle": "フィルターによる一括クリーンアップ",
     "themeExclusive": "{{name}} (Pro 限定)",
-    "themeMenuSuffix": "[プロ]"
+    "themeMenuSuffix": "[プロ]",
+    "trialDev": "Pro (開発モード) を試す"
   },
   "theme": {
     "preview": "プレビュー",
@@ -844,10 +853,7 @@
       "forest": "フォレストグリーン",
       "dracula": "Dracula",
       "nord": "Nord",
-      "rose": "ローズピンク",
-      "solarized": "Solarized",
-      "high-contrast": "ハイコントラスト",
-      "retro": "ターミナルグリーン"
+      "solarized": "Solarized"
     }
   },
   "footer": {
@@ -884,12 +890,12 @@
     "updateBucketsFailed": "バケットの更新に失敗しました: {{error}}",
     "exportInventoryFailed": "在庫のエクスポートに失敗しました: {{error}}",
     "exportInventoryOk": "エクスポートされたインベントリ: {{path}}",
-    "exportTemplateDefinitionsFailed": "テンプレート定義のエクスポートに失敗しました: {{error}}",
-    "exportTemplateDefinitionsOk": "エクスポートされたテンプレート定義: {{path}}",
-    "importTemplateDefinitionsOk": "{{applied}} 件のテンプレートをインポートしました（{{packages}} パッケージ）{{skipped}}",
-    "importTemplateDefinitionsFailed": "テンプレート定義のインポートに失敗しました: {{error}}",
-    "importTemplateDefinitionsNone": "インポートできるテンプレートがありません（スキップ: {{skipped}}）",
-    "importTemplateDefinitionsSkipped": "；未知のテンプレートをスキップ: {{ids}}",
+    "exportRecipeDefinitionsFailed": "テンプレート定義のエクスポートに失敗しました: {{error}}",
+    "exportRecipeDefinitionsOk": "エクスポートされたテンプレート定義: {{path}}",
+    "importRecipeDefinitionsOk": "{{applied}} 件のテンプレートをインポートしました（{{packages}} パッケージ）{{skipped}}",
+    "importRecipeDefinitionsFailed": "テンプレート定義のインポートに失敗しました: {{error}}",
+    "importRecipeDefinitionsNone": "インポートできるテンプレートがありません（スキップ: {{skipped}}）",
+    "importRecipeDefinitionsSkipped": "；未知のテンプレートをスキップ: {{ids}}",
     "installFailed": "インストールに失敗しました: {{error}}",
     "installSuccess": "{{label}} のインストールが完了しました",
     "planInstallFailed": "インストール計画を解決できません: {{error}}",
@@ -950,7 +956,13 @@
     "bootstrapSevenZipTaskTitle": "7-Zip を準備しています",
     "bootstrapWixTaskTitle": "WiX ツールセットを準備しています",
     "bootstrapTaskTitle": "{{tool}}を準備しています",
-    "bootstrapFailed": "{{tool}} の準備に失敗しました: {{error}}"
+    "bootstrapFailed": "{{tool}} の準備に失敗しました: {{error}}",
+    "exportInventoryDialogTitle": "ソフトウェア一覧をエクスポート",
+    "exportInventoryFilterJson": "JSON レポート (*.json)",
+    "exportInventoryFilterCsv": "CSV テーブル (*.csv)",
+    "exportRecipeDefinitionsDialogTitle": "テンプレート定義をエクスポート",
+    "importRecipeDefinitionsDialogTitle": "テンプレート定義をインポート",
+    "recipeDefinitionsFilterJson": "テンプレート定義 JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "お気に入りに追加",
@@ -1041,7 +1053,7 @@
     "cleared": "{{count}} 個のアクティビティ エントリをクリアしました",
     "nothingToClear": "クリアするアクティビティエントリはありません"
   },
-  "templateLibrary": {
+  "officialRecipes": {
     "title": "カタログ",
     "subtitle": "開発環境テンプレート — パッケージ リストを編集し、ワンクリックでインストールします",
     "indexPendingSubtitle": "パッケージインデックスがバックグラウンドで構築中です…",
@@ -1073,9 +1085,9 @@
     "repairEnterQuery": "キーワードを入力して検索",
     "repairConfirm": "マッピングを確定",
     "repairOk": "「{{label}}」を {{ref}} にマッピングしました",
-    "repairAlreadyInTemplate": "選択したパッケージは既にテンプレートに含まれています",
-    "removeFromTemplate": "テンプレートから削除",
-    "removeFromTemplateAria": "テンプレートから {{name}} を削除します",
+    "repairAlreadyInRecipe": "選択したパッケージは既にテンプレートに含まれています",
+    "removeFromRecipe": "テンプレートから削除",
+    "removeFromRecipeAria": "テンプレートから {{name}} を削除します",
     "addPackage": "パッケージの追加",
     "addPackagePlaceholder": "パッケージ名、例: git、nodejs-lts",
     "autoMatch": "自動一致",
@@ -1084,11 +1096,11 @@
     "loadFailed": "テンプレート パッケージの読み込みに失敗しました: {{error}}",
     "enterPackageName": "パッケージ名を入力してください",
     "packageNotFound": "インデックス内にパッケージが見つかりません - 名前とバケットを確認してください",
-    "alreadyInTemplate": "パッケージはすでにテンプレート内にあります",
-    "addedToTemplate": "{{name}}を「{{title}}」に追加しました",
+    "alreadyInRecipe": "パッケージはすでにテンプレート内にあります",
+    "addedToRecipe": "{{name}}を「{{title}}」に追加しました",
     "addFailed": "パッケージを追加できませんでした: {{error}}",
-    "removedFromTemplate": "テンプレートから {{name}} を削除しました",
-    "resetTemplateOk": "デフォルトのテンプレートにリセット",
+    "removedFromRecipe": "テンプレートから {{name}} を削除しました",
+    "resetRecipeOk": "デフォルトのテンプレートにリセット",
     "export": "JSONのエクスポート",
     "exportOk": "「{{title}}」をJSONとしてエクスポートしました",
     "exportFailed": "テンプレートのエクスポートに失敗しました: {{error}}",
@@ -1103,7 +1115,7 @@
       "programming": "プログラミング",
       "editor": "テキスト編集"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "Popular essentials",
         "summary": "新しい Windows セットアップに必要なクロスエコシステムの必需品",
@@ -1155,5 +1167,51 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
+  },
+  "snapshot": {
+    "title": "Snapshots & rollback",
+    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
+    "create": "Create snapshot",
+    "import": "Import snapshot…",
+    "localList": "Local snapshots",
+    "loading": "Loading…",
+    "empty": "No local snapshots yet",
+    "detail": "Details",
+    "selectHint": "Select a snapshot to view details",
+    "fieldId": "Snapshot ID",
+    "fieldDevice": "Device",
+    "fieldSource": "Source",
+    "fieldCreated": "Created",
+    "preview": "Preview changes",
+    "apply": "Apply snapshot",
+    "export": "Export…",
+    "delete": "Delete",
+    "planTitle": "Apply plan",
+    "planHint": "Click Preview changes to see what will be applied.",
+    "planEmpty": "Already up to date — nothing to apply",
+    "planPackages": "Will install {{count}} packages",
+    "planActivate": "Will switch current version for {{count}} packages",
+    "planBuckets": "Will add {{count}} buckets",
+    "planConfig": "Will update {{count}} config values",
+    "planMore": "…and {{count}} more",
+    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
+    "createOk": "Created snapshot {{id}}",
+    "createFailed": "Failed to create snapshot: {{error}}",
+    "exportDialogTitle": "Export environment snapshot",
+    "importDialogTitle": "Import environment snapshot",
+    "filterJson": "Environment snapshot (*.json)",
+    "exportOk": "Snapshot exported: {{path}}",
+    "exportFailed": "Failed to export snapshot: {{error}}",
+    "importFailed": "Failed to import snapshot: {{error}}",
+    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
+    "previewFailed": "Failed to preview: {{error}}",
+    "applyOk": "Snapshot applied",
+    "applyFailed": "Failed to apply snapshot: {{error}}",
+    "deleteOk": "Snapshot deleted",
+    "deleteFailed": "Failed to delete snapshot: {{error}}",
+    "loadFailed": "Failed to load snapshots: {{error}}",
+    "applying": "Applying snapshot…",
+    "applyProgress": "Processing {{name}}…",
+    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

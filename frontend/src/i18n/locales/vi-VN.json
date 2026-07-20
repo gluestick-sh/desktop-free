@@ -20,7 +20,7 @@
     "updates": "Cập nhật",
     "activity": "Nhật ký hoạt động",
     "storage": "Kho",
-    "templates": "Danh mục"
+    "recipes": "Danh mục"
   },
   "stats": {
     "buckets": "Xô",
@@ -39,8 +39,8 @@
     "noUpdates": "Tất cả các gói đều được cập nhật",
     "browsePackages": "Duyệt các gói và danh mục nhóm",
     "storageHint": "Tổng kích thước cài đặt; loại trừ bộ đệm không được tham chiếu.",
-    "templates": "Mẫu",
-    "templatesHint": "Mở thư viện mẫu"
+    "recipes": "Mẫu",
+    "recipesHint": "Mở thư viện mẫu"
   },
   "progress": {
     "phase": {
@@ -325,9 +325,9 @@
     "help": "Giúp đỡ",
     "quit": "Từ bỏ",
     "exportInventory": "Xuất kho phần mềm…",
-    "templateDefinitions": "Định nghĩa mẫu",
-    "templateDefinitionsExport": "Xuất…",
-    "templateDefinitionsImport": "Nhập…",
+    "recipeDefinitions": "Định nghĩa mẫu",
+    "recipeDefinitionsExport": "Xuất…",
+    "recipeDefinitionsImport": "Nhập…",
     "zoomIn": "Phóng to",
     "zoomOut": "Thu nhỏ",
     "zoomReset": "Đặt lại thu phóng",
@@ -363,7 +363,8 @@
     "upgradePro": "Nâng cấp lên Pro…",
     "about": "Về",
     "ariaLabel": "Trình đơn ứng dụng",
-    "openRootDir": "Mở thư mục gốc…"
+    "openRootDir": "Mở thư mục gốc…",
+    "snapshots": "Snapshots & rollback…"
   },
   "table": {
     "sortColumn": "Sắp xếp theo {{column}}",
@@ -513,13 +514,13 @@
     "noResults": "Không có gói phù hợp. Hãy thử các từ khóa khác nhau.",
     "emptyBucket": "Nhóm này không có gói nào",
     "resultSummary": "{{total}} gói phù hợp",
-    "addToTemplate": "Thêm vào mẫu",
-    "addToTemplateAria": "Thêm {{name}} vào mẫu nhà phát triển",
+    "addToRecipe": "Thêm vào mẫu",
+    "addToRecipeAria": "Thêm {{name}} vào mẫu nhà phát triển",
     "installed": "Đã cài đặt",
     "loadBucketsFailed": "Không tải được danh mục nhóm: {{error}}",
     "loadPackagesFailed": "Không tải được danh sách gói: {{error}}",
-    "addedToTemplate": "Đã thêm {{name}} vào “{{title}}”",
-    "alreadyInTemplate": "Gói đã có trong mẫu",
+    "addedToRecipe": "Đã thêm {{name}} vào “{{title}}”",
+    "alreadyInRecipe": "Gói đã có trong mẫu",
     "hideDeprecated": "Ẩn không được dùng nữa",
     "hideDeprecatedHint": "Ẩn các gói không được dùng nữa/ và các bảng kê khai có trường không được dùng nữa",
     "deprecatedBadge": "Không được dùng nữa",
@@ -687,7 +688,10 @@
     "attributionLink": "Biểu tượng chai keo được tạo bởi andinur - Flaticon",
     "attributionTitle": "biểu tượng chai keo",
     "ok": "OK",
-    "rootDir": "Thư mục gốc"
+    "rootDir": "Thư mục gốc",
+    "device": "Thiết bị",
+    "deviceId": "ID thiết bị",
+    "platform": "Nền tảng"
   },
   "desktopUpdate": {
     "title": "Có bản cập nhật mới",
@@ -743,32 +747,36 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "Nâng cấp lên Pro và mở khóa các tính năng mạnh mẽ hơn:",
+    "intro": "Pro quản lý môi trường qua sáu năng lực: đồng bộ, công thức, snapshot, kiểm toán tuân thủ, chia sẻ và sức khỏe môi trường.",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "Mẫu môi trường",
-        "desc": "Lưu và chia sẻ cấu hình môi trường nhà phát triển; triển khai toàn bộ chuỗi công cụ chỉ bằng một cú nhấp chuột"
+      "deviceSync": {
+        "title": "Đồng bộ đa thiết bị",
+        "desc": "Sau đăng nhập, căn chỉnh danh sách đã cài và tùy chọn giữa các thiết bị; khôi phục trạng thái hiện tại trên máy mới, vẫn dùng đầy đủ khi offline"
       },
-      "batchQueue": {
-        "title": "Hàng đợi hàng loạt",
-        "desc": "Cài đặt nhiều gói với độ phân giải phụ thuộc thông minh và tải xuống song song"
+      "workspace": {
+        "title": "Công thức",
+        "desc": "Khai báo môi trường mục tiêu theo vai trò (ví dụ frontend/data) và căn chỉnh máy này chỉ với một cú nhấp"
       },
-      "versionRollback": {
-        "title": "Khôi phục phiên bản",
-        "desc": "Giữ các phiên bản cũ hơn sau khi nâng cấp; chuyển trở lại chỉ bằng một cú nhấp chuột; khóa phiên bản để tránh nâng cấp bất ngờ"
+      "snapshot": {
+        "title": "Snapshot & rollback",
+        "desc": "Tự snapshot trước khi cài/gỡ/nâng cấp; lỗi hoặc hỏng thì quay lại trạng thái trước"
       },
-      "exportReport": {
-        "title": "Xuất báo cáo",
-        "desc": "Tạo báo cáo kiểm kê phần mềm để kiểm tra và tuân thủ"
+      "complianceAudit": {
+        "title": "Kiểm toán tuân thủ",
+        "desc": "Kiểm kê phần mềm đã cài và xuất báo cáo Markdown/Word phục vụ rà soát, lưu trữ tài sản và đối chiếu thay đổi"
       },
-      "logCleanup": {
-        "title": "Dọn dẹp nhật ký",
-        "desc": "Xóa hoặc lọc hàng loạt nhật ký hoạt động để giữ hồ sơ gọn gàng"
+      "teamCollab": {
+        "title": "Chia sẻ",
+        "desc": "Xuất công thức cho người khác hoặc nhập file công thức được chia sẻ (tính năng tổ chức sẽ bổ sung sau)"
       },
-      "themes": {
-        "title": "Chủ đề cao cấp",
-        "desc": "8 chủ đề mã hóa được tuyển chọn với màu sắc tùy chỉnh và nhập/xuất"
+      "envHealth": {
+        "title": "Sức khỏe môi trường",
+        "desc": "Bảng điều khiển và gợi ý từ lần chẩn đoán gần nhất, lỗi 7 ngày qua và gói có thể cập nhật"
+      },
+      "recipe": {
+        "title": "Công thức",
+        "desc": "Khai báo môi trường mục tiêu theo vai trò (ví dụ frontend/data) và căn chỉnh máy này chỉ với một cú nhấp"
       }
     },
     "later": "Có lẽ sau này",
@@ -776,7 +784,8 @@
     "lockedTitle": "Tính năng chuyên nghiệp: dọn dẹp nhật ký hoạt động hàng loạt",
     "clearLogsTitle": "Dọn dẹp hàng loạt bằng bộ lọc",
     "themeExclusive": "{{name}} (Độc quyền của Pro)",
-    "themeMenuSuffix": "[Chuyên nghiệp]"
+    "themeMenuSuffix": "[Chuyên nghiệp]",
+    "trialDev": "Dùng thử Pro (chế độ dev)"
   },
   "theme": {
     "preview": "Xem trước",
@@ -844,10 +853,7 @@
       "forest": "Rừng xanh",
       "dracula": "Dracula",
       "nord": "Nord",
-      "rose": "Hoa hồng màu hồng",
-      "solarized": "Solarized",
-      "high-contrast": "Độ tương phản cao",
-      "retro": "Nhà ga màu xanh lá cây"
+      "solarized": "Solarized"
     }
   },
   "footer": {
@@ -884,12 +890,12 @@
     "updateBucketsFailed": "Cập nhật nhóm không thành công: {{error}}",
     "exportInventoryFailed": "Xuất khoảng không quảng cáo không thành công: {{error}}",
     "exportInventoryOk": "Khoảng không quảng cáo đã xuất: {{path}}",
-    "exportTemplateDefinitionsFailed": "Xuất định nghĩa mẫu không thành công: {{error}}",
-    "exportTemplateDefinitionsOk": "Đã xuất định nghĩa mẫu: {{path}}",
-    "importTemplateDefinitionsOk": "Đã nhập {{applied}} mẫu ({{packages}} gói){{skipped}}",
-    "importTemplateDefinitionsFailed": "Nhập định nghĩa mẫu không thành công: {{error}}",
-    "importTemplateDefinitionsNone": "Không có mẫu nào được nhập (bỏ qua: {{skipped}})",
-    "importTemplateDefinitionsSkipped": "; bỏ qua mẫu không xác định: {{ids}}",
+    "exportRecipeDefinitionsFailed": "Xuất định nghĩa mẫu không thành công: {{error}}",
+    "exportRecipeDefinitionsOk": "Đã xuất định nghĩa mẫu: {{path}}",
+    "importRecipeDefinitionsOk": "Đã nhập {{applied}} mẫu ({{packages}} gói){{skipped}}",
+    "importRecipeDefinitionsFailed": "Nhập định nghĩa mẫu không thành công: {{error}}",
+    "importRecipeDefinitionsNone": "Không có mẫu nào được nhập (bỏ qua: {{skipped}})",
+    "importRecipeDefinitionsSkipped": "; bỏ qua mẫu không xác định: {{ids}}",
     "installFailed": "Cài đặt không thành công: {{error}}",
     "installSuccess": "Đã cài đặt {{label}} thành công",
     "planInstallFailed": "Không thể giải quyết kế hoạch cài đặt: {{error}}",
@@ -950,7 +956,13 @@
     "bootstrapSevenZipTaskTitle": "Đang chuẩn bị 7-Zip",
     "bootstrapWixTaskTitle": "Đang chuẩn bị bộ công cụ WiX",
     "bootstrapTaskTitle": "Đang chuẩn bị {{tool}}",
-    "bootstrapFailed": "Không chuẩn bị được {{tool}}: {{error}}"
+    "bootstrapFailed": "Không chuẩn bị được {{tool}}: {{error}}",
+    "exportInventoryDialogTitle": "Xuất danh mục phần mềm",
+    "exportInventoryFilterJson": "Báo cáo JSON (*.json)",
+    "exportInventoryFilterCsv": "Bảng CSV (*.csv)",
+    "exportRecipeDefinitionsDialogTitle": "Xuất định nghĩa mẫu",
+    "importRecipeDefinitionsDialogTitle": "Nhập định nghĩa mẫu",
+    "recipeDefinitionsFilterJson": "Định nghĩa mẫu JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "Thêm vào mục yêu thích",
@@ -1041,7 +1053,7 @@
     "cleared": "Đã xóa mục nhập hoạt động {{count}}",
     "nothingToClear": "Không có mục hoạt động nào để xóa"
   },
-  "templateLibrary": {
+  "officialRecipes": {
     "title": "Danh mục",
     "subtitle": "Mẫu môi trường Dev - chỉnh sửa danh sách gói và cài đặt chỉ bằng một cú nhấp chuột",
     "indexPendingSubtitle": "Chỉ mục gói đang được xây dựng ở chế độ nền…",
@@ -1073,9 +1085,9 @@
     "repairEnterQuery": "Nhập từ khóa để tìm",
     "repairConfirm": "Xác nhận ánh xạ",
     "repairOk": "Đã ánh xạ \"{{label}}\" tới {{ref}}",
-    "repairAlreadyInTemplate": "Gói đã có trong mẫu",
-    "removeFromTemplate": "Xóa khỏi mẫu",
-    "removeFromTemplateAria": "Xóa {{name}} khỏi mẫu",
+    "repairAlreadyInRecipe": "Gói đã có trong mẫu",
+    "removeFromRecipe": "Xóa khỏi mẫu",
+    "removeFromRecipeAria": "Xóa {{name}} khỏi mẫu",
     "addPackage": "Thêm gói",
     "addPackagePlaceholder": "Tên gói, ví dụ: git, nodejs-lts",
     "autoMatch": "Tự động khớp",
@@ -1084,11 +1096,11 @@
     "loadFailed": "Không tải được gói mẫu: {{error}}",
     "enterPackageName": "Nhập tên gói",
     "packageNotFound": "Không tìm thấy gói trong chỉ mục - kiểm tra tên và nhóm",
-    "alreadyInTemplate": "Gói đã có trong mẫu",
-    "addedToTemplate": "Đã thêm {{name}} vào “{{title}}”",
+    "alreadyInRecipe": "Gói đã có trong mẫu",
+    "addedToRecipe": "Đã thêm {{name}} vào “{{title}}”",
     "addFailed": "Không thêm được gói: {{error}}",
-    "removedFromTemplate": "Đã xóa {{name}} khỏi mẫu",
-    "resetTemplateOk": "Đặt lại về mẫu mặc định",
+    "removedFromRecipe": "Đã xóa {{name}} khỏi mẫu",
+    "resetRecipeOk": "Đặt lại về mẫu mặc định",
     "export": "Xuất JSON",
     "exportOk": "Đã xuất “{{title}}” dưới dạng JSON",
     "exportFailed": "Không xuất được mẫu: {{error}}",
@@ -1103,7 +1115,7 @@
       "programming": "Lập trình",
       "editor": "Chỉnh sửa văn bản"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "Popular essentials",
         "summary": "Những điều cần phải có trong hệ sinh thái chéo để thiết lập Windows mới",
@@ -1155,5 +1167,51 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
+  },
+  "snapshot": {
+    "title": "Snapshots & rollback",
+    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
+    "create": "Create snapshot",
+    "import": "Import snapshot…",
+    "localList": "Local snapshots",
+    "loading": "Loading…",
+    "empty": "No local snapshots yet",
+    "detail": "Details",
+    "selectHint": "Select a snapshot to view details",
+    "fieldId": "Snapshot ID",
+    "fieldDevice": "Device",
+    "fieldSource": "Source",
+    "fieldCreated": "Created",
+    "preview": "Preview changes",
+    "apply": "Apply snapshot",
+    "export": "Export…",
+    "delete": "Delete",
+    "planTitle": "Apply plan",
+    "planHint": "Click Preview changes to see what will be applied.",
+    "planEmpty": "Already up to date — nothing to apply",
+    "planPackages": "Will install {{count}} packages",
+    "planActivate": "Will switch current version for {{count}} packages",
+    "planBuckets": "Will add {{count}} buckets",
+    "planConfig": "Will update {{count}} config values",
+    "planMore": "…and {{count}} more",
+    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
+    "createOk": "Created snapshot {{id}}",
+    "createFailed": "Failed to create snapshot: {{error}}",
+    "exportDialogTitle": "Export environment snapshot",
+    "importDialogTitle": "Import environment snapshot",
+    "filterJson": "Environment snapshot (*.json)",
+    "exportOk": "Snapshot exported: {{path}}",
+    "exportFailed": "Failed to export snapshot: {{error}}",
+    "importFailed": "Failed to import snapshot: {{error}}",
+    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
+    "previewFailed": "Failed to preview: {{error}}",
+    "applyOk": "Snapshot applied",
+    "applyFailed": "Failed to apply snapshot: {{error}}",
+    "deleteOk": "Snapshot deleted",
+    "deleteFailed": "Failed to delete snapshot: {{error}}",
+    "loadFailed": "Failed to load snapshots: {{error}}",
+    "applying": "Applying snapshot…",
+    "applyProgress": "Processing {{name}}…",
+    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

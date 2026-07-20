@@ -26,10 +26,7 @@ export type BuiltinThemeId =
   | 'forest'
   | 'dracula'
   | 'nord'
-  | 'rose'
   | 'solarized'
-  | 'high-contrast'
-  | 'retro'
 
 export type ThemeId = BuiltinThemeId | `custom:${string}`
 

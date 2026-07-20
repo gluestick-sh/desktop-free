@@ -27,7 +27,7 @@ export interface Template {
   icon: string
   /** Package list — labels shown as chips; authoritative for install contents. */
   packages: TemplatePackage[]
-  /** Display title/summary/description live in i18n: templateLibrary.templates.{id}.* */
+  /** Display title/summary/description live in i18n: officialRecipes.items.{id}.* */
 }
 
 export interface TemplateBundle {

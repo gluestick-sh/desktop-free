@@ -20,7 +20,7 @@
     "updates": "更新中心",
     "activity": "活动日志",
     "storage": "占用空间",
-    "templates": "模板库"
+    "recipes": "配方"
   },
   "stats": {
     "buckets": "仓库",
@@ -39,8 +39,8 @@
     "noUpdates": "没有可更新的软件包",
     "browsePackages": "浏览软件包与仓库分类",
     "storageHint": "已安装文件占用总计，不含无引用缓存。",
-    "templates": "模板库",
-    "templatesHint": "打开模板库"
+    "recipes": "配方",
+    "recipesHint": "打开配方"
   },
   "progress": {
     "phase": {
@@ -252,6 +252,11 @@
       "github_mirror": "检查代理地址是否正确，或更换镜像后重试"
     }
   },
+  "environment": {
+    "title": "环境诊断",
+    "diagnosisIntro": "逐项检查 Git、7-Zip、Shim 目录与 GitHub 连通性。",
+    "rerunDiagnosis": "重新诊断"
+  },
   "activity": {
     "title": "活动日志",
     "timeAll": "全部",
@@ -325,9 +330,9 @@
     "help": "帮助",
     "quit": "退出",
     "exportInventory": "导出软件清单…",
-    "templateDefinitions": "模板定义",
-    "templateDefinitionsExport": "导出…",
-    "templateDefinitionsImport": "导入…",
+    "recipeDefinitions": "配方定义",
+    "recipeDefinitionsExport": "导出…",
+    "recipeDefinitionsImport": "导入…",
     "zoomIn": "放大",
     "zoomOut": "缩小",
     "zoomReset": "重置缩放",
@@ -348,8 +353,8 @@
     "updateAllBuckets": "同步更新…",
     "searchPackages": "搜索包…",
     "checkUpdates": "检查可更新包…",
-    "checkDesktopUpdate": "检测程序更新…",
-    "doctor": "环境诊断…",
+    "checkDesktopUpdate": "检查更新…",
+    "environment": "环境诊断…",
     "githubProxy": "GitHub 代理设置…",
     "downloadWorkers": "文件下载",
     "bucketSync": "仓库同步",
@@ -360,10 +365,11 @@
     "localeEn": "English",
     "localeZh": "简体中文",
     "docs": "使用文档",
-    "upgradePro": "升级到 Pro…",
+    "upgradePro": "高级功能…",
     "about": "关于",
     "ariaLabel": "应用菜单",
-    "openRootDir": "打开根目录…"
+    "openRootDir": "打开根目录…",
+    "snapshots": "快照与回滚…"
   },
   "table": {
     "sortColumn": "按{{column}}排序",
@@ -513,13 +519,13 @@
     "noResults": "未找到匹配的软件包，请尝试其他关键词",
     "emptyBucket": "该仓库暂无软件包",
     "resultSummary": "共 {{total}} 个匹配包",
-    "addToTemplate": "加入模板",
-    "addToTemplateAria": "将 {{name}} 加入开发模板",
+    "addToRecipe": "加入官方配方",
+    "addToRecipeAria": "将 {{name}} 加入官方配方",
     "installed": "已安装",
     "loadBucketsFailed": "加载仓库分类失败: {{error}}",
     "loadPackagesFailed": "加载软件包列表失败: {{error}}",
-    "addedToTemplate": "已添加 {{name}} 到「{{title}}」",
-    "alreadyInTemplate": "该包已在模板中",
+    "addedToRecipe": "已添加 {{name}} 到「{{title}}」",
+    "alreadyInRecipe": "该软件已在此配方中",
     "hideDeprecated": "隐藏废弃包",
     "hideDeprecatedHint": "不显示位于 deprecated/ 目录的包，以及 manifest 中带 deprecated 字段的包",
     "deprecatedBadge": "废弃",
@@ -687,7 +693,10 @@
     "attributionLink": "Glue bottle icons created by andinur - Flaticon",
     "attributionTitle": "glue bottle icons",
     "ok": "确定",
-    "rootDir": "根目录"
+    "rootDir": "根目录",
+    "device": "设备",
+    "deviceId": "设备 ID",
+    "platform": "平台"
   },
   "desktopUpdate": {
     "title": "发现新版本",
@@ -734,7 +743,7 @@
       {
         "heading": "工具",
         "items": [
-          "运行“环境检测”可校验 Git、7-Zip、Shim 及 GitHub 连通性。",
+          "「环境…」可逐项检查 Git、7-Zip、Shim 及 GitHub 连通性。",
           "可在“工具”菜单中配置 GitHub 镜像与下载并发数。",
           "“打开根目录”会在资源管理器中打开 ~/.glue 数据目录。"
         ]
@@ -743,32 +752,36 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "升级到 Pro，解锁模板部署、软件管理与清单导出等完整能力：",
+    "intro": "Pro 按六条独立能力管理环境：同步、配方、快照回滚、合规审计、分享与环境健康。",
     "badge": "Pro",
     "feature": {
-      "envTemplate": {
-        "title": "模板一键部署",
-        "desc": "使用官方或自定义环境模板，一次安装整套开发工具；支持并行下载与依赖解析"
+      "deviceSync": {
+        "title": "多设备同步",
+        "desc": "登录后对齐各设备的已装清单与偏好；换机一键恢复当前环境，离线仍可完整使用"
       },
-      "batchQueue": {
-        "title": "批量安装与任务队列",
-        "desc": "同时安装多个软件包，智能排队并行处理；非 Pro 仅支持逐个安装"
+      "workspace": {
+        "title": "配方",
+        "desc": "用声明式配方定义角色环境（如前端/数据），一键把本机对齐到目标清单"
       },
-      "versionRollback": {
-        "title": "版本管理与回滚",
-        "desc": "指定版本安装（包名@版本）、切换历史版本、锁定版本避免意外升级"
+      "snapshot": {
+        "title": "快照与回滚",
+        "desc": "装卸/升级前自动快照；失败或装坏时可退回上一状态"
       },
-      "exportReport": {
-        "title": "导出软件清单",
-        "desc": "将已安装软件导出为 JSON 或 CSV 报告（文件 → 导出软件清单），便于盘点、审计与合规"
+      "complianceAudit": {
+        "title": "合规审计",
+        "desc": "盘点已装软件，导出 Markdown/Word 合规报告，供合规审查、资产归档与变更对账"
       },
-      "logCleanup": {
-        "title": "活动日志清理",
-        "desc": "按时间范围批量清理活动日志，保持记录整洁"
+      "teamCollab": {
+        "title": "分享",
+        "desc": "导出配方给他人，或导入他人分享的配方（组织协作能力后续完善）"
       },
-      "themes": {
-        "title": "专属主题",
-        "desc": "8 款精选编程主题，支持自定义配色、导入导出与编辑"
+      "envHealth": {
+        "title": "环境健康",
+        "desc": "基于最近一次环境诊断、近 7 日失败与可更新包的仪表盘与建议"
+      },
+      "recipe": {
+        "title": "配方",
+        "desc": "用声明式配方定义角色环境（如前端/数据），一键把本机对齐到目标清单"
       }
     },
     "later": "稍后再说",
@@ -776,7 +789,8 @@
     "lockedTitle": "Pro 功能：按条件批量清理活动日志",
     "clearLogsTitle": "按条件批量清理活动日志",
     "themeExclusive": "{{name}}（Pro 专属）",
-    "themeMenuSuffix": " [Pro]"
+    "themeMenuSuffix": " [Pro]",
+    "trialDev": "试用 Pro（开发模式）"
   },
   "theme": {
     "preview": "预览",
@@ -844,10 +858,7 @@
       "forest": "森林绿",
       "dracula": "Dracula",
       "nord": "Nord",
-      "rose": "玫瑰粉",
-      "solarized": "Solarized",
-      "high-contrast": "高对比",
-      "retro": "终端绿"
+      "solarized": "Solarized"
     }
   },
   "footer": {
@@ -884,12 +895,12 @@
     "updateBucketsFailed": "更新仓库失败: {{error}}",
     "exportInventoryFailed": "导出软件清单失败: {{error}}",
     "exportInventoryOk": "软件清单已导出：{{path}}",
-    "exportTemplateDefinitionsFailed": "导出模板定义失败：{{error}}",
-    "exportTemplateDefinitionsOk": "模板定义已导出：{{path}}",
-    "importTemplateDefinitionsOk": "已导入 {{applied}} 个模板（{{packages}} 个包）{{skipped}}",
-    "importTemplateDefinitionsFailed": "导入模板定义失败：{{error}}",
-    "importTemplateDefinitionsNone": "没有可导入的模板（跳过：{{skipped}}）",
-    "importTemplateDefinitionsSkipped": "；跳过未知模板：{{ids}}",
+    "exportRecipeDefinitionsFailed": "导出配方定义失败：{{error}}",
+    "exportRecipeDefinitionsOk": "配方定义已导出：{{path}}",
+    "importRecipeDefinitionsOk": "已导入 {{applied}} 个配方（{{packages}} 个包）{{skipped}}",
+    "importRecipeDefinitionsFailed": "导入配方定义失败：{{error}}",
+    "importRecipeDefinitionsNone": "没有可导入的配方（跳过：{{skipped}}）",
+    "importRecipeDefinitionsSkipped": "；跳过未知配方：{{ids}}",
     "installFailed": "安装失败: {{error}}",
     "installSuccess": "{{label}} 安装成功",
     "planInstallFailed": "无法解析安装计划: {{error}}",
@@ -950,7 +961,13 @@
     "bootstrapSevenZipTaskTitle": "准备 7-Zip",
     "bootstrapWixTaskTitle": "准备 WiX 工具集",
     "bootstrapTaskTitle": "准备 {{tool}}",
-    "bootstrapFailed": "准备 {{tool}} 失败: {{error}}"
+    "bootstrapFailed": "准备 {{tool}} 失败: {{error}}",
+    "exportInventoryDialogTitle": "导出软件清单",
+    "exportInventoryFilterJson": "JSON 报告 (*.json)",
+    "exportInventoryFilterCsv": "CSV 表格 (*.csv)",
+    "exportRecipeDefinitionsDialogTitle": "导出配方定义",
+    "importRecipeDefinitionsDialogTitle": "导入配方定义",
+    "recipeDefinitionsFilterJson": "配方定义 JSON (*.json)"
   },
   "installedExt": {
     "favoriteAdd": "加入收藏",
@@ -1041,13 +1058,13 @@
     "cleared": "已清理 {{count}} 条活动日志",
     "nothingToClear": "没有可清理的活动日志"
   },
-  "templateLibrary": {
-    "title": "模板库",
-    "subtitle": "开发模板组合，可编辑软件包列表后一键安装",
+  "officialRecipes": {
+    "title": "官方配方",
+    "subtitle": "官方精选组合，可编辑软件包列表后一键安装，或另存为我的配方",
     "indexPendingSubtitle": "包索引正在后台构建，请稍候…",
-    "indexPending": "索引完成后将展示开发模板。",
-    "filterAria": "模板分类",
-    "emptyCategory": "该分类下暂无模板",
+    "indexPending": "索引完成后将展示官方配方。",
+    "filterAria": "配方分类",
+    "emptyCategory": "该分类下暂无配方",
     "viewDetails": "查看详情",
     "edit": "编辑",
     "installPending": "待安装 ({{count}})",
@@ -1060,38 +1077,38 @@
     "customizedHint": "{{description}}（已编辑，共 {{count}} 个软件）",
     "packagesEmpty": "暂无软件包，点击编辑添加",
     "packagesLoading": "加载中…",
-    "detailEmpty": "模板中暂无软件包",
+    "detailEmpty": "配方中暂无软件包",
     "notIndexed": "未索引",
     "repair": "修复映射",
-    "repairTitle": "修复模板条目",
-    "repairSource": "模板中的条目",
+    "repairTitle": "修复配方条目",
+    "repairSource": "配方中的条目",
     "repairSearchPlaceholder": "搜索索引中的包名…",
     "repairAllBuckets": "全部仓库",
-    "repairHint": "在索引中搜索并选择对应包。映射会保存到本机，仅影响此模板。",
+    "repairHint": "在索引中搜索并选择对应包。映射会保存到本机，仅影响此配方。",
     "repairResults": "搜索结果",
     "repairNoResults": "未找到匹配的包，请换个关键词或安装对应仓库",
     "repairEnterQuery": "输入关键词开始搜索",
     "repairConfirm": "确认映射",
     "repairOk": "已将「{{label}}」映射到 {{ref}}",
-    "repairAlreadyInTemplate": "所选包已在模板中",
-    "removeFromTemplate": "从模板移除",
-    "removeFromTemplateAria": "从模板移除 {{name}}",
+    "repairAlreadyInRecipe": "所选包已在配方中",
+    "removeFromRecipe": "从配方移除",
+    "removeFromRecipeAria": "从配方移除 {{name}}",
     "addPackage": "添加软件包",
     "addPackagePlaceholder": "包名，如 git、nodejs-lts",
     "autoMatch": "自动匹配",
-    "addHint": "可在「浏览」中搜索包名，点击「加入模板」快速添加",
+    "addHint": "可在「浏览」中搜索包名，点击「加入官方配方」快速添加",
     "missingDescription": "当前索引中未找到此包，可能仓库未安装或包名有变",
-    "loadFailed": "加载模板包信息失败: {{error}}",
+    "loadFailed": "加载配方包信息失败: {{error}}",
     "enterPackageName": "请输入软件包名称",
     "packageNotFound": "索引中未找到该包，请检查名称与仓库是否正确",
-    "alreadyInTemplate": "该包已在模板中",
-    "addedToTemplate": "已添加 {{name}} 到「{{title}}」",
+    "alreadyInRecipe": "该包已在配方中",
+    "addedToRecipe": "已添加 {{name}} 到「{{title}}」",
     "addFailed": "添加软件包失败: {{error}}",
-    "removedFromTemplate": "已从模板中移除 {{name}}",
-    "resetTemplateOk": "已恢复为默认模板",
+    "removedFromRecipe": "已从配方中移除 {{name}}",
+    "resetRecipeOk": "已恢复为默认配方",
     "export": "导出 JSON",
     "exportOk": "已导出「{{title}}」为 JSON",
-    "exportFailed": "导出模板失败：{{error}}",
+    "exportFailed": "导出配方失败：{{error}}",
     "officialBadge": "官方",
     "categoryWithCount": "{{label}}({{count}})",
     "categories": {
@@ -1103,7 +1120,7 @@
       "programming": "编程开发",
       "editor": "文字编辑"
     },
-    "templates": {
+    "items": {
       "popular-essentials": {
         "title": "装机必备",
         "summary": "跨生态装机必备组合",
@@ -1155,5 +1172,51 @@
         "description": "常用关系型、内存与文档数据库，可按技术栈选择安装用于本地开发。"
       }
     }
+  },
+  "snapshot": {
+    "title": "快照与回滚",
+    "intro": "保存当前已装软件、仓库与关键配置；换机或装坏后可按快照补齐缺失项（install-missing）。",
+    "create": "创建快照",
+    "import": "导入快照…",
+    "localList": "本地快照",
+    "loading": "加载中…",
+    "empty": "还没有本地快照",
+    "detail": "详情",
+    "selectHint": "选择左侧快照查看详情",
+    "fieldId": "快照 ID",
+    "fieldDevice": "设备",
+    "fieldSource": "来源",
+    "fieldCreated": "创建时间",
+    "preview": "预览变更",
+    "apply": "应用快照",
+    "export": "导出…",
+    "delete": "删除",
+    "planTitle": "变更计划",
+    "planHint": "点击「预览变更」查看将执行的操作。",
+    "planEmpty": "已与快照一致，无需变更",
+    "planPackages": "将安装 {{count}} 个包",
+    "planActivate": "将切换 {{count}} 个包的当前版本",
+    "planBuckets": "将添加 {{count}} 个仓库",
+    "planConfig": "将更新 {{count}} 项配置",
+    "planMore": "…另有 {{count}} 项",
+    "itemMeta": "{{packages}} 个包 · {{buckets}} 个仓库",
+    "createOk": "已创建快照 {{id}}",
+    "createFailed": "创建快照失败：{{error}}",
+    "exportDialogTitle": "导出环境快照",
+    "importDialogTitle": "导入环境快照",
+    "filterJson": "环境快照 (*.json)",
+    "exportOk": "快照已导出：{{path}}",
+    "exportFailed": "导出快照失败：{{error}}",
+    "importFailed": "导入快照失败：{{error}}",
+    "importInvalidFormat": "不是有效的环境快照文件，请选择由 GlueStick 导出的快照 JSON。",
+    "previewFailed": "预览失败：{{error}}",
+    "applyOk": "快照已应用",
+    "applyFailed": "应用快照失败：{{error}}",
+    "deleteOk": "已删除快照",
+    "deleteFailed": "删除快照失败：{{error}}",
+    "loadFailed": "加载快照列表失败：{{error}}",
+    "applying": "正在应用快照…",
+    "applyProgress": "正在处理 {{name}}…",
+    "applyProgressNamed": "正在处理 {{name}}（{{percent}}%）"
   }
 }

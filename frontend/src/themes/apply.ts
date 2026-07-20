@@ -113,12 +113,18 @@ export function isValidThemeTokens(value: unknown): value is ThemeTokens {
   return THEME_TOKEN_KEYS.every((key) => typeof record[key] === 'string' && record[key].length > 0)
 }
 
-export function parseImportedTheme(_json: string): { name: string; tokens: ThemeTokens } | null {
-  return null
+export function parseImportedTheme(json: string): { name: string; tokens: ThemeTokens } | null {
+  try {
+    const data = JSON.parse(json) as { name?: string; tokens?: unknown }
+    if (!data.name || !isValidThemeTokens(data.tokens)) return null
+    return { name: data.name, tokens: data.tokens }
+  } catch {
+    return null
+  }
 }
 
-export function exportThemeJson(_name: string, _tokens: ThemeTokens): string {
-  throw new Error('requires Gluestick Desktop Pro')
+export function exportThemeJson(name: string, tokens: ThemeTokens): string {
+  return JSON.stringify({ version: 1, name, tokens }, null, 2)
 }
 
 export function generateCustomThemeId(): `custom:${string}` {

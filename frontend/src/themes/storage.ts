@@ -7,17 +7,15 @@ export const THEME_STORAGE_KEY = 'gluestick-desktop-theme'
 export const CUSTOM_THEMES_STORAGE_KEY = 'gluestick-desktop-custom-themes'
 
 const BUILTIN_IDS = new Set<string>([
-  'dark', 'light', 'midnight', 'forest', 'dracula', 'nord', 'rose', 'solarized',
-  'high-contrast', 'retro',
+  'dark', 'light', 'midnight', 'forest', 'dracula', 'nord', 'solarized',
 ])
 
 export function isProLicensed(): boolean {
-  return false
+  return true
 }
 
-export function canUseTheme(id: ThemeId, isPro: boolean): boolean {
-  if (id === 'dark' || id === 'light') return true
-  return isPro
+export function canUseTheme(_id: ThemeId, _isPro: boolean): boolean {
+  return true
 }
 
 export function loadCustomThemes(): ThemeDefinition[] {

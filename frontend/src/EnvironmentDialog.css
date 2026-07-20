@@ -1,0 +1,29 @@
+.environment-dialog {
+  width: min(760px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  height: min(640px, calc(100vh - 48px));
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+}
+
+.environment-dialog .modal-body {
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.environment-panel-intro {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.environment-footer {
+  flex-wrap: wrap;
+  gap: 8px;
+}
