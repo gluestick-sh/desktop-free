@@ -21,7 +21,6 @@ import {
   loadRecentSearches,
   removeRecentSearch,
 } from './searchHistory'
-import type { PageSizeMode } from './listPageSize'
 import PackageDataTable, { type PackageDataTableColumn } from './PackageDataTable'
 import './BrowsePanel.css'
 
@@ -34,10 +33,6 @@ interface BucketBrowsePanelProps {
   hideDeprecated: boolean
   indexReady: boolean
   pageSize: number
-  pageSizeMode: PageSizeMode
-  autoPageSize: number
-  onPageSizeChange: (size: number) => void
-  onPageSizeAuto: () => void
   listScrollRef?: RefObject<HTMLDivElement>
   isPackageInstalled: (name: string) => boolean
   operationBusy: boolean
@@ -58,10 +53,6 @@ export default function BucketBrowsePanel({
   hideDeprecated,
   indexReady,
   pageSize,
-  pageSizeMode,
-  autoPageSize,
-  onPageSizeChange,
-  onPageSizeAuto,
   listScrollRef,
   isPackageInstalled,
   operationBusy,
@@ -549,11 +540,6 @@ export default function BucketBrowsePanel({
                     onPrev={() => void loadBucketPackages(bucketPage - 1)}
                     onNext={() => void loadBucketPackages(bucketPage + 1)}
                     disabled={loadingPackages}
-                    pageSize={pageSize}
-                    pageSizeMode={pageSizeMode}
-                    autoPageSize={autoPageSize}
-                    onPageSizeChange={onPageSizeChange}
-                    onPageSizeAuto={onPageSizeAuto}
                   />
                 </div>
               )}

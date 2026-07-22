@@ -15,7 +15,6 @@ type PackageVersionsInfo struct {
 }
 
 // GetPackageVersions returns all installed versions of the specified package.
-// Viewing installed versions is available for free; switching/locking versions is Pro-gated.
 func (a *App) GetPackageVersions(pkgName string) (*PackageVersionsInfo, error) {
 	if err := a.requireEngine(); err != nil {
 		return nil, err
@@ -41,9 +40,6 @@ func (a *App) GetPackageVersions(pkgName string) (*PackageVersionsInfo, error) {
 
 // SwitchPackageVersion switches to a specified installed version (rollback).
 func (a *App) SwitchPackageVersion(pkgName, version string) error {
-	if err := a.requireProActive(); err != nil {
-		return err
-	}
 	if err := a.requireEngine(); err != nil {
 		return err
 	}
@@ -57,9 +53,6 @@ func (a *App) SwitchPackageVersion(pkgName, version string) error {
 // SetPackageVersionLock locks/unlocks a package version; when locked, skips upgrade checks
 // and prevents implicit upgrades.
 func (a *App) SetPackageVersionLock(pkgName string, locked bool) error {
-	if err := a.requireProActive(); err != nil {
-		return err
-	}
 	if err := a.requireEngine(); err != nil {
 		return err
 	}

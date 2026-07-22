@@ -353,10 +353,9 @@
 .list-pagination,
 .browse-pagination {
   flex-shrink: 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
   margin: 0 -24px;
   padding: 12px 24px;
   background: var(--bg-primary);
@@ -364,55 +363,11 @@
 }
 
 .list-pagination-nav {
-  grid-column: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   min-width: 0;
-}
-
-.list-pagination-size {
-  grid-column: 3;
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.list-page-size-label {
-  font-size: 12px;
-  color: var(--text-secondary);
-  white-space: nowrap;
-}
-
-.list-page-size-input {
-  width: 52px;
-  padding: 4px 6px;
-  font-size: 12px;
-  text-align: center;
-  color: var(--text-primary);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  outline: none;
-}
-
-.list-page-size-input:focus {
-  border-color: var(--accent);
-}
-
-.list-page-size-auto {
-  font-size: 12px;
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-.list-page-size-auto-btn {
-  padding: 2px 6px;
-  font-size: 12px;
-  white-space: nowrap;
 }
 
 .list-page-info,
@@ -617,13 +572,13 @@
   cursor: default;
 }
 
-/* Main content (same 24px horizontal inset as search/tabs) */
+/* Main content (same 24px inset as search/tabs; keep gap above footer) */
 .content {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 24px 24px 0;
+  padding: 24px;
   min-height: 0;
   box-sizing: border-box;
 }
@@ -1035,15 +990,7 @@ tr.package-detail-row:hover {
 .installed-version-lock-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   flex-shrink: 0;
-}
-
-.installed-version-lock-btn .pro-pill {
-  font-size: 10px;
-  padding: 2px 6px;
-  background: var(--accent);
-  color: white;
 }
 
 .installed-version-muted {

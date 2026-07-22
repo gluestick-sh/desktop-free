@@ -18,7 +18,7 @@
     "browse": "瀏覽",
     "installed": "已安裝",
     "updates": "更新中心",
-    "activity": "活動日誌",
+    "activity": "歷史記錄",
     "storage": "佔用空間",
     "recipes": "配方"
   },
@@ -28,8 +28,8 @@
     "installed": "已安裝",
     "updatable": "可更新",
     "available": "可用包數",
-    "activity": "活動日誌",
-    "activityHint": "查看活動日誌",
+    "activity": "歷史記錄",
+    "activityHint": "查看歷史記錄",
     "storage": "佔用空間",
     "manageBuckets": "管理 Bucket",
     "viewInstalled": "查看已安裝軟件包",
@@ -258,7 +258,7 @@
     "rerunDiagnosis": "重新診斷"
   },
   "activity": {
-    "title": "活動日誌",
+    "title": "歷史記錄",
     "timeAll": "全部",
     "timeToday": "今天",
     "timeWeek": "本週",
@@ -368,8 +368,7 @@
     "upgradePro": "進階功能…",
     "about": "關於",
     "ariaLabel": "應用菜單",
-    "openRootDir": "打開根目錄…",
-    "snapshots": "Snapshots & rollback…"
+    "openRootDir": "打開根目錄…"
   },
   "table": {
     "sortColumn": "按{{column}}排序",
@@ -752,12 +751,12 @@
   },
   "pro": {
     "title": "Gluestick Desktop Pro",
-    "intro": "Pro 依六條獨立能力管理環境：同步、配方、快照回滾、合規稽核、分享與環境健康。",
+    "intro": "Pro 依六條獨立能力管理環境：同步、配方、快照回滾、合規稽核、團隊協作與環境診斷。",
     "badge": "Pro",
     "feature": {
       "deviceSync": {
         "title": "多裝置同步",
-        "desc": "登入後對齊各裝置的已裝清單與偏好；換機一鍵還原目前環境，離線仍可完整使用"
+        "desc": "登入後可在各裝置間推送/拉取環境快照，換機可一鍵還原（需連網）。本機已裝軟體與日常管理不依賴雲端"
       },
       "workspace": {
         "title": "配方",
@@ -769,7 +768,7 @@
       },
       "complianceAudit": {
         "title": "合規稽核",
-        "desc": "盤點已裝軟體，匯出 Markdown/Word 合規報告，供合規審查、資產歸檔與變更對帳"
+        "desc": "盤點已裝軟體，匯出 JSON/CSV 清單，供合規審查、資產歸檔與變更對帳"
       },
       "teamCollab": {
         "title": "分享",
@@ -786,8 +785,8 @@
     },
     "later": "稍後再說",
     "locked": "Pro 功能",
-    "lockedTitle": "Pro 功能：按條件批量清理活動日誌",
-    "clearLogsTitle": "按條件批量清理活動日誌",
+    "lockedTitle": "Pro 功能：按條件批量清理歷史記錄",
+    "clearLogsTitle": "按條件批量清理歷史記錄",
     "themeExclusive": "{{name}}（Pro 專屬）",
     "themeMenuSuffix": " [Pro]",
     "trialDev": "試用 Pro（開發模式）"
@@ -1036,13 +1035,13 @@
   "activityExt": {
     "subtitle": "查看近期安裝、卸載、更新與環境診斷活動",
     "timeFilterAria": "時間篩選",
-    "clearLogs": "清理日誌",
-    "empty": "該時間範圍內暫無活動記錄",
+    "clearLogs": "清理記錄",
+    "empty": "該時間範圍內暫無歷史記錄",
     "deleteTitle": "刪除此條記錄",
-    "deleteAria": "刪除 {{name}} 的活動記錄",
-    "deleteDialogTitle": "刪除活動記錄",
+    "deleteAria": "刪除 {{name}} 的歷史記錄",
+    "deleteDialogTitle": "刪除歷史記錄",
     "deleteConfirm": "確定要刪除這條記錄嗎？",
-    "clearDialogTitle": "批量清理活動日誌",
+    "clearDialogTitle": "批量清理歷史記錄",
     "clearIntro": "選擇要清理的範圍。此操作不可撤銷。",
     "clearScopeAria": "清理範圍",
     "clearFilter": "當前篩選：{{label}}",
@@ -1052,11 +1051,11 @@
     "clearAllCounting": "統計中…",
     "clearing": "清理中…",
     "clearConfirm": "清理",
-    "loadFailed": "加載活動日誌失敗: {{error}}",
+    "loadFailed": "加載歷史記錄失敗: {{error}}",
     "clearFailed": "批量清理失敗: {{error}}",
     "deleteFailed": "刪除失敗: {{error}}",
-    "cleared": "已清理 {{count}} 條活動日誌",
-    "nothingToClear": "沒有可清理的活動日誌"
+    "cleared": "已清理 {{count}} 條歷史記錄",
+    "nothingToClear": "沒有可清理的歷史記錄"
   },
   "officialRecipes": {
     "title": "官方配方",
@@ -1172,51 +1171,5 @@
         "description": "MariaDB、MySQL、Redis、MongoDB、PostgreSQL 與 SQLite，均來自 main 倉庫，可按技術棧選擇安裝用於本地開發。"
       }
     }
-  },
-  "snapshot": {
-    "title": "Snapshots & rollback",
-    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
-    "create": "Create snapshot",
-    "import": "Import snapshot…",
-    "localList": "Local snapshots",
-    "loading": "Loading…",
-    "empty": "No local snapshots yet",
-    "detail": "Details",
-    "selectHint": "Select a snapshot to view details",
-    "fieldId": "Snapshot ID",
-    "fieldDevice": "Device",
-    "fieldSource": "Source",
-    "fieldCreated": "Created",
-    "preview": "Preview changes",
-    "apply": "Apply snapshot",
-    "export": "Export…",
-    "delete": "Delete",
-    "planTitle": "Apply plan",
-    "planHint": "點擊「預覽變更」查看將執行的操作。",
-    "planEmpty": "Already up to date — nothing to apply",
-    "planPackages": "Will install {{count}} packages",
-    "planActivate": "將切換 {{count}} 個套件的目前版本",
-    "planBuckets": "Will add {{count}} buckets",
-    "planConfig": "Will update {{count}} config values",
-    "planMore": "…and {{count}} more",
-    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
-    "createOk": "Created snapshot {{id}}",
-    "createFailed": "Failed to create snapshot: {{error}}",
-    "exportDialogTitle": "Export environment snapshot",
-    "importDialogTitle": "Import environment snapshot",
-    "filterJson": "Environment snapshot (*.json)",
-    "exportOk": "Snapshot exported: {{path}}",
-    "exportFailed": "Failed to export snapshot: {{error}}",
-    "importFailed": "Failed to import snapshot: {{error}}",
-    "importInvalidFormat": "不是有效的環境快照檔案，請選擇由 GlueStick 匯出的快照 JSON。",
-    "previewFailed": "Failed to preview: {{error}}",
-    "applyOk": "Snapshot applied",
-    "applyFailed": "Failed to apply snapshot: {{error}}",
-    "deleteOk": "Snapshot deleted",
-    "deleteFailed": "Failed to delete snapshot: {{error}}",
-    "loadFailed": "Failed to load snapshots: {{error}}",
-    "applying": "Applying snapshot…",
-    "applyProgress": "Processing {{name}}…",
-    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 // IsProActive reports whether Pro features are enabled.
-// Temporarily unlocked while Pro environment features are built out.
+// The free edition always returns false; Desktop Pro unlocks these gates.
 func (a *App) IsProActive() bool {
-	return true
+	return false
 }
 
 func (a *App) requireProActive() error {
@@ -13,10 +13,4 @@ func (a *App) requireProActive() error {
 		return fmt.Errorf("requires Gluestick Desktop Pro")
 	}
 	return nil
-}
-
-// requireSnapshotPro gates snapshot/rollback APIs. The free edition always
-// requires Pro for this feature, even while other Pro gates are temporarily open.
-func (a *App) requireSnapshotPro() error {
-	return fmt.Errorf("requires Gluestick Desktop Pro")
 }

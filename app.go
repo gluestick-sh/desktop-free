@@ -18,7 +18,7 @@ import (
 // These may be overridden at link time via:
 // -ldflags "-X gluestick.sh/desktop.Version=..." etc.
 var (
-	Version = "0.1.9"
+	Version = "0.1.10"
 	Commit  = "none"
 	Date    = "unknown"
 )
@@ -274,6 +274,9 @@ type InstalledPackage struct {
 	VersionLocked bool `json:"versionLocked"`
 }
 
+// MaxParallelInstalls is the concurrent install limit for all editions.
+const MaxParallelInstalls = 4
+
 // InstallProgress is install progress exposed to the frontend.
 type InstallProgress struct {
 	Name        string                 `json:"name"`
@@ -409,15 +412,11 @@ func (a *App) ListInstalledQuick() ([]InstalledPackage, error) {
 }
 
 // Install starts a background install (returns immediately; progress via install:* events). force matches CLI --force.
+// The second bool is kept for frontend/Wails API compatibility and is ignored.
+// Parallel installs are limited by MaxParallelInstalls for all editions.
 func (a *App) Install(name string, _ bool, force bool, architecture string, interactive bool) error {
 	if err := a.requireEngine(); err != nil {
 		return err
-	}
-
-	if _, pinVersion := engine.ParsePkgRef(name); pinVersion != "" {
-		if err := a.requireProActive(); err != nil {
-			return fmt.Errorf("installing a pinned version (name@version) requires Gluestick Desktop Pro; use glue install %s from CLI", name)
-		}
 	}
 
 	key := installTaskKey(name)

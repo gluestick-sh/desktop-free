@@ -18,7 +18,7 @@
     "browse": "Browse",
     "installed": "Installed",
     "updates": "Updates",
-    "activity": "Activity log",
+    "activity": "History",
     "storage": "Storage",
     "recipes": "Recipes"
   },
@@ -28,8 +28,8 @@
     "installed": "Installed",
     "updatable": "Updates",
     "available": "Available",
-    "activity": "Activity",
-    "activityHint": "View activity log",
+    "activity": "History",
+    "activityHint": "View history",
     "storage": "Storage",
     "manageBuckets": "Manage buckets",
     "viewInstalled": "View installed packages",
@@ -258,7 +258,7 @@
     "rerunDiagnosis": "Run again"
   },
   "activity": {
-    "title": "Activity log",
+    "title": "History",
     "timeAll": "All",
     "timeToday": "Today",
     "timeWeek": "This week",
@@ -368,8 +368,7 @@
     "upgradePro": "Advanced features…",
     "about": "About",
     "ariaLabel": "Application menu",
-    "openRootDir": "Open root directory…",
-    "snapshots": "Snapshots & rollback…"
+    "openRootDir": "Open root directory…"
   },
   "table": {
     "sortColumn": "Sort by {{column}}",
@@ -757,7 +756,7 @@
     "feature": {
       "deviceSync": {
         "title": "Device Sync",
-        "desc": "After sign-in, align installed inventory and preferences across your devices; restore current state on a new machine, with full offline use"
+        "desc": "Sign in to push/pull environment snapshots across devices and restore on a new machine (requires network). Day-to-day local installs and management don't depend on the cloud"
       },
       "workspace": {
         "title": "Recipes",
@@ -786,8 +785,8 @@
     },
     "later": "Maybe later",
     "locked": "Pro feature",
-    "lockedTitle": "Pro feature: bulk activity log cleanup",
-    "clearLogsTitle": "Bulk cleanup by filter",
+    "lockedTitle": "Pro feature: bulk history cleanup",
+    "clearLogsTitle": "Bulk clear history by filter",
     "themeExclusive": "{{name}} (Pro exclusive)",
     "themeMenuSuffix": " [Pro]",
     "trialDev": "Try Pro (dev mode)"
@@ -1036,13 +1035,13 @@
   "activityExt": {
     "subtitle": "Recent installs, uninstalls, updates, and environment checks",
     "timeFilterAria": "Time filter",
-    "clearLogs": "Clear logs",
-    "empty": "No activity in this time range",
+    "clearLogs": "Clear history",
+    "empty": "No history in this time range",
     "deleteTitle": "Delete this entry",
-    "deleteAria": "Delete activity for {{name}}",
-    "deleteDialogTitle": "Delete activity entry",
+    "deleteAria": "Delete history for {{name}}",
+    "deleteDialogTitle": "Delete history entry",
     "deleteConfirm": "Delete this entry?",
-    "clearDialogTitle": "Bulk clear activity log",
+    "clearDialogTitle": "Bulk clear history",
     "clearIntro": "Choose what to clear. This cannot be undone.",
     "clearScopeAria": "Clear scope",
     "clearFilter": "Current filter: {{label}}",
@@ -1052,11 +1051,11 @@
     "clearAllCounting": "Counting…",
     "clearing": "Clearing…",
     "clearConfirm": "Clear",
-    "loadFailed": "Failed to load activity log: {{error}}",
+    "loadFailed": "Failed to load history: {{error}}",
     "clearFailed": "Bulk clear failed: {{error}}",
     "deleteFailed": "Delete failed: {{error}}",
-    "cleared": "Cleared {{count}} activity entries",
-    "nothingToClear": "No activity entries to clear"
+    "cleared": "Cleared {{count}} history entries",
+    "nothingToClear": "No history entries to clear"
   },
   "officialRecipes": {
     "title": "Official recipes",
@@ -1172,51 +1171,5 @@
         "description": "Common relational, in-memory, and document databases for local development."
       }
     }
-  },
-  "snapshot": {
-    "title": "Snapshots & rollback",
-    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
-    "create": "Create snapshot",
-    "import": "Import snapshot…",
-    "localList": "Local snapshots",
-    "loading": "Loading…",
-    "empty": "No local snapshots yet",
-    "detail": "Details",
-    "selectHint": "Select a snapshot to view details",
-    "fieldId": "Snapshot ID",
-    "fieldDevice": "Device",
-    "fieldSource": "Source",
-    "fieldCreated": "Created",
-    "preview": "Preview changes",
-    "apply": "Apply snapshot",
-    "export": "Export…",
-    "delete": "Delete",
-    "planTitle": "Apply plan",
-    "planHint": "Click Preview changes to see what will be applied.",
-    "planEmpty": "Already up to date — nothing to apply",
-    "planPackages": "Will install {{count}} packages",
-    "planActivate": "Will switch current version for {{count}} packages",
-    "planBuckets": "Will add {{count}} buckets",
-    "planConfig": "Will update {{count}} config values",
-    "planMore": "…and {{count}} more",
-    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
-    "createOk": "Created snapshot {{id}}",
-    "createFailed": "Failed to create snapshot: {{error}}",
-    "exportDialogTitle": "Export environment snapshot",
-    "importDialogTitle": "Import environment snapshot",
-    "filterJson": "Environment snapshot (*.json)",
-    "exportOk": "Snapshot exported: {{path}}",
-    "exportFailed": "Failed to export snapshot: {{error}}",
-    "importFailed": "Failed to import snapshot: {{error}}",
-    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
-    "previewFailed": "Failed to preview: {{error}}",
-    "applyOk": "Snapshot applied",
-    "applyFailed": "Failed to apply snapshot: {{error}}",
-    "deleteOk": "Snapshot deleted",
-    "deleteFailed": "Failed to delete snapshot: {{error}}",
-    "loadFailed": "Failed to load snapshots: {{error}}",
-    "applying": "Applying snapshot…",
-    "applyProgress": "Processing {{name}}…",
-    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

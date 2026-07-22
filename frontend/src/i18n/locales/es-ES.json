@@ -18,7 +18,7 @@
     "browse": "Navegar",
     "installed": "Instalado",
     "updates": "Actualizaciones",
-    "activity": "Registro de actividad",
+    "activity": "Historial",
     "storage": "Almacenamiento",
     "recipes": "Catalogar"
   },
@@ -28,8 +28,8 @@
     "installed": "Instalado",
     "updatable": "Actualizaciones",
     "available": "Disponible",
-    "activity": "Actividad",
-    "activityHint": "Ver registro de actividad",
+    "activity": "Historial",
+    "activityHint": "Ver historial",
     "storage": "Almacenamiento",
     "manageBuckets": "Administrar depósitos",
     "viewInstalled": "Ver paquetes instalados",
@@ -253,7 +253,7 @@
     }
   },
   "activity": {
-    "title": "Registro de actividad",
+    "title": "Historial",
     "timeAll": "Todo",
     "timeToday": "Hoy",
     "timeWeek": "Esta semana",
@@ -363,8 +363,7 @@
     "upgradePro": "Actualízate a Pro...",
     "about": "Acerca de",
     "ariaLabel": "Menú de aplicaciones",
-    "openRootDir": "Abrir directorio raíz…",
-    "snapshots": "Snapshots & rollback…"
+    "openRootDir": "Abrir directorio raíz…"
   },
   "table": {
     "sortColumn": "Ordenar por {{column}}",
@@ -751,8 +750,8 @@
     "badge": "Pro",
     "feature": {
       "deviceSync": {
-        "title": "Sincronización entre dispositivos",
-        "desc": "Tras iniciar sesión, alinea inventario y preferencias entre dispositivos; restaura el estado actual en un equipo nuevo, con uso completo sin conexión"
+        "title": "Sincronización de dispositivos",
+        "desc": "Tras iniciar sesión, envía/extrae instantáneas de entorno entre dispositivos y restaura en un equipo nuevo (requiere red). Las instalaciones y la gestión local diaria no dependen de la nube"
       },
       "workspace": {
         "title": "Recetas",
@@ -781,11 +780,11 @@
     },
     "later": "tal vez más tarde",
     "locked": "Característica profesional",
-    "lockedTitle": "Característica profesional: limpieza masiva del registro de actividad",
+    "lockedTitle": "Característica profesional: limpieza masiva del historial",
     "clearLogsTitle": "Limpieza masiva por filtro",
     "themeExclusive": "{{name}} (exclusivo para Pro)",
     "themeMenuSuffix": "[Pro]",
-    "trialDev": "Prueba Pro (modo de desarrollo)"
+    "trialDev": "Pruebe Pro (modo de desarrollo)"
   },
   "theme": {
     "preview": "Avance",
@@ -1031,13 +1030,13 @@
   "activityExt": {
     "subtitle": "Instalaciones, desinstalaciones, actualizaciones y comprobaciones de entorno recientes",
     "timeFilterAria": "Filtro de tiempo",
-    "clearLogs": "Borrar registros",
-    "empty": "No hay actividad en este rango de tiempo",
+    "clearLogs": "Borrar historial",
+    "empty": "No hay historial en este rango de tiempo",
     "deleteTitle": "Eliminar esta entrada",
-    "deleteAria": "Eliminar actividad de {{name}}",
-    "deleteDialogTitle": "Eliminar entrada de actividad",
+    "deleteAria": "Eliminar historial de {{name}}",
+    "deleteDialogTitle": "Eliminar entrada del historial",
     "deleteConfirm": "¿Eliminar esta entrada?",
-    "clearDialogTitle": "Borrar registro de actividad de forma masiva",
+    "clearDialogTitle": "Borrar historial de forma masiva",
     "clearIntro": "Elija qué borrar. Esto no se puede deshacer.",
     "clearScopeAria": "Alcance claro",
     "clearFilter": "Filtro actual: {{label}}",
@@ -1047,11 +1046,11 @@
     "clearAllCounting": "Cálculo…",
     "clearing": "Claro…",
     "clearConfirm": "Claro",
-    "loadFailed": "No se pudo cargar el registro de actividad: {{error}}",
+    "loadFailed": "No se pudo cargar el historial: {{error}}",
     "clearFailed": "Error de borrado masivo: {{error}}",
     "deleteFailed": "Error al eliminar: {{error}}",
-    "cleared": "Se borraron {{count}} entradas de actividad",
-    "nothingToClear": "No hay entradas de actividad para borrar"
+    "cleared": "Se borraron {{count}} entradas del historial",
+    "nothingToClear": "No hay entradas del historial para borrar"
   },
   "officialRecipes": {
     "title": "Catalogar",
@@ -1167,51 +1166,5 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
-  },
-  "snapshot": {
-    "title": "Snapshots & rollback",
-    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
-    "create": "Create snapshot",
-    "import": "Import snapshot…",
-    "localList": "Local snapshots",
-    "loading": "Loading…",
-    "empty": "No local snapshots yet",
-    "detail": "Details",
-    "selectHint": "Select a snapshot to view details",
-    "fieldId": "Snapshot ID",
-    "fieldDevice": "Device",
-    "fieldSource": "Source",
-    "fieldCreated": "Created",
-    "preview": "Preview changes",
-    "apply": "Apply snapshot",
-    "export": "Export…",
-    "delete": "Delete",
-    "planTitle": "Apply plan",
-    "planHint": "Click Preview changes to see what will be applied.",
-    "planEmpty": "Already up to date — nothing to apply",
-    "planPackages": "Will install {{count}} packages",
-    "planActivate": "Will switch current version for {{count}} packages",
-    "planBuckets": "Will add {{count}} buckets",
-    "planConfig": "Will update {{count}} config values",
-    "planMore": "…and {{count}} more",
-    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
-    "createOk": "Created snapshot {{id}}",
-    "createFailed": "Failed to create snapshot: {{error}}",
-    "exportDialogTitle": "Export environment snapshot",
-    "importDialogTitle": "Import environment snapshot",
-    "filterJson": "Environment snapshot (*.json)",
-    "exportOk": "Snapshot exported: {{path}}",
-    "exportFailed": "Failed to export snapshot: {{error}}",
-    "importFailed": "Failed to import snapshot: {{error}}",
-    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
-    "previewFailed": "Failed to preview: {{error}}",
-    "applyOk": "Snapshot applied",
-    "applyFailed": "Failed to apply snapshot: {{error}}",
-    "deleteOk": "Snapshot deleted",
-    "deleteFailed": "Failed to delete snapshot: {{error}}",
-    "loadFailed": "Failed to load snapshots: {{error}}",
-    "applying": "Applying snapshot…",
-    "applyProgress": "Processing {{name}}…",
-    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

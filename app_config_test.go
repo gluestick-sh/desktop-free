@@ -2,22 +2,18 @@ package main
 
 import "testing"
 
-func TestProFeaturesUnlocked(t *testing.T) {
+func TestProFeaturesLockedInFree(t *testing.T) {
 	app := NewApp()
-	if !app.IsProActive() {
-		t.Fatal("expected IsProActive true while Pro features are unlocked for development")
+	if app.IsProActive() {
+		t.Fatal("expected IsProActive false in free edition")
 	}
 }
 
-func TestExportInventoryGateOpen(t *testing.T) {
+func TestExportInventoryRequiresProInFree(t *testing.T) {
 	app := NewApp()
-	if !app.IsProActive() {
-		t.Fatal("expected Pro gate open")
-	}
-	// Without app context / engine this still errors; ensure it is not the Pro gate.
 	_, err := app.ExportInventoryReport("Export", "JSON", "CSV")
-	if err != nil && err.Error() == "requires Gluestick Desktop Pro" {
-		t.Fatal("Pro gate should be open")
+	if err == nil || err.Error() != "requires Gluestick Desktop Pro" {
+		t.Fatalf("expected Pro gate in free edition, got %v", err)
 	}
 }
 
@@ -28,7 +24,7 @@ func TestSwitchPackageVersionGateOpen(t *testing.T) {
 		t.Fatal("expected error without engine")
 	}
 	if err.Error() == "requires Gluestick Desktop Pro" {
-		t.Fatal("Pro gate should be open; expected engine error instead")
+		t.Fatal("version switch should not be Pro-gated; expected engine error instead")
 	}
 }
 
@@ -39,33 +35,17 @@ func TestSetPackageVersionLockGateOpen(t *testing.T) {
 		t.Fatal("expected error without engine")
 	}
 	if err.Error() == "requires Gluestick Desktop Pro" {
-		t.Fatal("Pro gate should be open; expected engine error instead")
+		t.Fatal("version lock should not be Pro-gated; expected engine error instead")
 	}
 }
 
-func TestClearActivityLogAllowedWhenProActive(t *testing.T) {
+func TestClearActivityLogByTimeRangeGateOpen(t *testing.T) {
 	app := NewApp()
-	err := app.ClearActivityLog()
+	_, err := app.ClearActivityLogByTimeRange("all")
 	if err == nil {
 		t.Fatal("expected error without engine")
 	}
 	if err.Error() == "requires Gluestick Desktop Pro" {
-		t.Fatal("Pro gate should be open; expected engine error instead")
-	}
-}
-
-func TestListLocalSnapshotsRequiresProInFree(t *testing.T) {
-	app := NewApp()
-	_, err := app.ListLocalSnapshots()
-	if err == nil || err.Error() != "requires Gluestick Desktop Pro" {
-		t.Fatalf("expected snapshot Pro gate in free edition, got %v", err)
-	}
-}
-
-func TestCreateLocalSnapshotRequiresProInFree(t *testing.T) {
-	app := NewApp()
-	_, err := app.CreateLocalSnapshot("notes")
-	if err == nil || err.Error() != "requires Gluestick Desktop Pro" {
-		t.Fatalf("expected snapshot Pro gate in free edition, got %v", err)
+		t.Fatal("clear history should not be Pro-gated; expected engine error instead")
 	}
 }

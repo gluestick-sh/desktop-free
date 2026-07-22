@@ -10,7 +10,6 @@ import ModalCloseButton from './ModalCloseButton'
 import ModalOverlay from './ModalOverlay'
 import ListPagination from './ListPagination'
 import TableIconButton from './TableIconButton'
-import type { PageSizeMode } from './listPageSize'
 import { logStatusClassName } from './logStatus'
 import {
   formatActivityErrorDetail,
@@ -35,10 +34,6 @@ function formatLogTime(raw: string, locale: string, dash: string): string {
 interface ActivityLogPanelProps {
   refreshKey: number
   pageSize: number
-  pageSizeMode: PageSizeMode
-  autoPageSize: number
-  onPageSizeChange: (size: number) => void
-  onPageSizeAuto: () => void
   listScrollRef?: RefObject<HTMLDivElement | null>
   onCleared?: (deleted: number) => void
 }
@@ -46,10 +41,6 @@ interface ActivityLogPanelProps {
 export default function ActivityLogPanel({
   refreshKey,
   pageSize,
-  pageSizeMode,
-  autoPageSize,
-  onPageSizeChange,
-  onPageSizeAuto,
   listScrollRef,
   onCleared,
 }: ActivityLogPanelProps) {
@@ -310,7 +301,7 @@ export default function ActivityLogPanel({
             className="secondary"
             onClick={handleOpenClearDialog}
             disabled={loading || clearing || deleting}
-            title={t('pro.clearLogsTitle')}
+            title={t('activityExt.clearDialogTitle')}
           >
             {t('activityExt.clearLogs')}
           </button>
@@ -462,11 +453,6 @@ export default function ActivityLogPanel({
         onPrev={() => setPage((p) => p - 1)}
         onNext={() => setPage((p) => p + 1)}
         disabled={loading || deleting || clearing}
-        pageSize={pageSize}
-        pageSizeMode={pageSizeMode}
-        autoPageSize={autoPageSize}
-        onPageSizeChange={onPageSizeChange}
-        onPageSizeAuto={onPageSizeAuto}
       />
     </div>
   )

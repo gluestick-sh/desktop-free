@@ -11,10 +11,10 @@ const BUILTIN_IDS = new Set<string>([
 ])
 
 export function isProLicensed(): boolean {
-  return true
+  return false
 }
 
-export function canUseTheme(_id: ThemeId, _isPro: boolean): boolean {
+export function canUseTheme(_id: ThemeId, _isPro?: boolean): boolean {
   return true
 }
 
@@ -31,7 +31,7 @@ export function loadCustomThemes(): ThemeDefinition[] {
         typeof t.id === 'string' &&
         t.id.startsWith('custom:') &&
         typeof t.name === 'string' &&
-        t.tier === 'pro' &&
+        (t.tier === 'pro' || t.tier === 'free') &&
         isValidThemeTokens(t.tokens)
       )
     })
@@ -69,10 +69,9 @@ export function resolveTheme(id: ThemeId, customThemes: ThemeDefinition[]): Them
 export function sanitizeThemeIdOnLoad(
   id: ThemeId,
   customThemes: ThemeDefinition[],
-  isPro: boolean,
+  _isPro?: boolean,
 ): ThemeId {
   const theme = resolveTheme(id, customThemes)
   if (!theme) return 'dark'
-  if (!canUseTheme(id, isPro)) return 'dark'
   return id
 }

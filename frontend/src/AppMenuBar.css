@@ -280,10 +280,6 @@
   font-weight: 500;
 }
 
-.content.activity-full {
-  flex: 1;
-}
-
 .menubar-pro-lock {
   font-size: 11px;
   line-height: 1;

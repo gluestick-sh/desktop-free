@@ -18,7 +18,7 @@
     "browse": "Duyệt qua",
     "installed": "Đã cài đặt",
     "updates": "Cập nhật",
-    "activity": "Nhật ký hoạt động",
+    "activity": "Lịch sử",
     "storage": "Kho",
     "recipes": "Danh mục"
   },
@@ -28,8 +28,8 @@
     "installed": "Đã cài đặt",
     "updatable": "Cập nhật",
     "available": "Có sẵn",
-    "activity": "Hoạt động",
-    "activityHint": "Xem nhật ký hoạt động",
+    "activity": "Lịch sử",
+    "activityHint": "Xem lịch sử",
     "storage": "Kho",
     "manageBuckets": "Quản lý nhóm",
     "viewInstalled": "Xem các gói đã cài đặt",
@@ -253,7 +253,7 @@
     }
   },
   "activity": {
-    "title": "Nhật ký hoạt động",
+    "title": "Lịch sử",
     "timeAll": "Tất cả",
     "timeToday": "Hôm nay",
     "timeWeek": "Tuần này",
@@ -363,8 +363,7 @@
     "upgradePro": "Nâng cấp lên Pro…",
     "about": "Về",
     "ariaLabel": "Trình đơn ứng dụng",
-    "openRootDir": "Mở thư mục gốc…",
-    "snapshots": "Snapshots & rollback…"
+    "openRootDir": "Mở thư mục gốc…"
   },
   "table": {
     "sortColumn": "Sắp xếp theo {{column}}",
@@ -751,8 +750,8 @@
     "badge": "Pro",
     "feature": {
       "deviceSync": {
-        "title": "Đồng bộ đa thiết bị",
-        "desc": "Sau đăng nhập, căn chỉnh danh sách đã cài và tùy chọn giữa các thiết bị; khôi phục trạng thái hiện tại trên máy mới, vẫn dùng đầy đủ khi offline"
+        "title": "Đồng bộ hóa thiết bị",
+        "desc": "Sau khi đăng nhập, đẩy/kéo ảnh chụp môi trường giữa các thiết bị và khôi phục trên máy mới (cần mạng). Cài đặt và quản lý cục bộ hàng ngày không phụ thuộc vào đám mây"
       },
       "workspace": {
         "title": "Công thức",
@@ -781,7 +780,7 @@
     },
     "later": "Có lẽ sau này",
     "locked": "Tính năng chuyên nghiệp",
-    "lockedTitle": "Tính năng chuyên nghiệp: dọn dẹp nhật ký hoạt động hàng loạt",
+    "lockedTitle": "Tính năng chuyên nghiệp: dọn dẹp lịch sử hàng loạt",
     "clearLogsTitle": "Dọn dẹp hàng loạt bằng bộ lọc",
     "themeExclusive": "{{name}} (Độc quyền của Pro)",
     "themeMenuSuffix": "[Chuyên nghiệp]",
@@ -1031,13 +1030,13 @@
   "activityExt": {
     "subtitle": "Các lượt cài đặt, gỡ cài đặt, cập nhật và kiểm tra môi trường gần đây",
     "timeFilterAria": "Bộ lọc thời gian",
-    "clearLogs": "Xóa nhật ký",
-    "empty": "Không có hoạt động nào trong khoảng thời gian này",
+    "clearLogs": "Xóa lịch sử",
+    "empty": "Không có lịch sử nào trong khoảng thời gian này",
     "deleteTitle": "Xóa mục này",
-    "deleteAria": "Xóa hoạt động của {{name}}",
-    "deleteDialogTitle": "Xóa mục nhập hoạt động",
+    "deleteAria": "Xóa lịch sử của {{name}}",
+    "deleteDialogTitle": "Xóa mục lịch sử",
     "deleteConfirm": "Xóa mục này?",
-    "clearDialogTitle": "Xóa nhật ký hoạt động hàng loạt",
+    "clearDialogTitle": "Xóa lịch sử hàng loạt",
     "clearIntro": "Chọn những gì cần xóa. Điều này không thể hoàn tác được.",
     "clearScopeAria": "Xóa phạm vi",
     "clearFilter": "Bộ lọc hiện tại: {{label}}",
@@ -1047,11 +1046,11 @@
     "clearAllCounting": "Đang đếm…",
     "clearing": "Đang xóa…",
     "clearConfirm": "Thông thoáng",
-    "loadFailed": "Không tải được nhật ký hoạt động: {{error}}",
+    "loadFailed": "Không tải được lịch sử: {{error}}",
     "clearFailed": "Xóa hàng loạt không thành công: {{error}}",
     "deleteFailed": "Xóa không thành công: {{error}}",
-    "cleared": "Đã xóa mục nhập hoạt động {{count}}",
-    "nothingToClear": "Không có mục hoạt động nào để xóa"
+    "cleared": "Đã xóa {{count}} mục lịch sử",
+    "nothingToClear": "Không có mục lịch sử nào để xóa"
   },
   "officialRecipes": {
     "title": "Danh mục",
@@ -1167,51 +1166,5 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
-  },
-  "snapshot": {
-    "title": "Snapshots & rollback",
-    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
-    "create": "Create snapshot",
-    "import": "Import snapshot…",
-    "localList": "Local snapshots",
-    "loading": "Loading…",
-    "empty": "No local snapshots yet",
-    "detail": "Details",
-    "selectHint": "Select a snapshot to view details",
-    "fieldId": "Snapshot ID",
-    "fieldDevice": "Device",
-    "fieldSource": "Source",
-    "fieldCreated": "Created",
-    "preview": "Preview changes",
-    "apply": "Apply snapshot",
-    "export": "Export…",
-    "delete": "Delete",
-    "planTitle": "Apply plan",
-    "planHint": "Click Preview changes to see what will be applied.",
-    "planEmpty": "Already up to date — nothing to apply",
-    "planPackages": "Will install {{count}} packages",
-    "planActivate": "Will switch current version for {{count}} packages",
-    "planBuckets": "Will add {{count}} buckets",
-    "planConfig": "Will update {{count}} config values",
-    "planMore": "…and {{count}} more",
-    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
-    "createOk": "Created snapshot {{id}}",
-    "createFailed": "Failed to create snapshot: {{error}}",
-    "exportDialogTitle": "Export environment snapshot",
-    "importDialogTitle": "Import environment snapshot",
-    "filterJson": "Environment snapshot (*.json)",
-    "exportOk": "Snapshot exported: {{path}}",
-    "exportFailed": "Failed to export snapshot: {{error}}",
-    "importFailed": "Failed to import snapshot: {{error}}",
-    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
-    "previewFailed": "Failed to preview: {{error}}",
-    "applyOk": "Snapshot applied",
-    "applyFailed": "Failed to apply snapshot: {{error}}",
-    "deleteOk": "Snapshot deleted",
-    "deleteFailed": "Failed to delete snapshot: {{error}}",
-    "loadFailed": "Failed to load snapshots: {{error}}",
-    "applying": "Applying snapshot…",
-    "applyProgress": "Processing {{name}}…",
-    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

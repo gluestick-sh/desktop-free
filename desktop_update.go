@@ -143,7 +143,15 @@ func openInBrowser(url string) error {
 		// explorer hands the URL to ShellExecute, which resolves the default
 		// browser association. Same mechanism used to open folders in the app,
 		// and it avoids cmd's finicky "start" argument parsing.
-		return exec.Command("explorer", url).Start()
+		if err := exec.Command("explorer", url).Start(); err == nil {
+			return nil
+		}
+		// Fallbacks for machines where ShellExecute via explorer fails with
+		// "Application not found" (common when http/https handlers are broken).
+		if err := exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start(); err == nil {
+			return nil
+		}
+		return exec.Command("cmd", "/c", "start", "", url).Start()
 	case "darwin":
 		return exec.Command("open", url).Start()
 	default:

@@ -18,7 +18,7 @@
     "browse": "먹다",
     "installed": "설치됨",
     "updates": "업데이트",
-    "activity": "활동 로그",
+    "activity": "기록",
     "storage": "저장",
     "recipes": "목록"
   },
@@ -28,8 +28,8 @@
     "installed": "설치됨",
     "updatable": "업데이트",
     "available": "사용 가능",
-    "activity": "활동",
-    "activityHint": "활동 로그 보기",
+    "activity": "기록",
+    "activityHint": "기록 보기",
     "storage": "저장",
     "manageBuckets": "버킷 관리",
     "viewInstalled": "설치된 패키지 보기",
@@ -253,7 +253,7 @@
     }
   },
   "activity": {
-    "title": "활동 로그",
+    "title": "기록",
     "timeAll": "모두",
     "timeToday": "오늘",
     "timeWeek": "이번주",
@@ -363,8 +363,7 @@
     "upgradePro": "프로로 업그레이드…",
     "about": "에 대한",
     "ariaLabel": "애플리케이션 메뉴",
-    "openRootDir": "루트 디렉터리 열기…",
-    "snapshots": "Snapshots & rollback…"
+    "openRootDir": "루트 디렉터리 열기…"
   },
   "table": {
     "sortColumn": "{{column}} 기준으로 정렬",
@@ -751,8 +750,8 @@
     "badge": "Pro",
     "feature": {
       "deviceSync": {
-        "title": "멀티 디바이스 동기화",
-        "desc": "로그인 후 설치 목록과 설정을 기기 간 맞추고, 새 기기에서 현재 환경을 원클릭 복원. 오프라인에서도 완전 사용"
+        "title": "장치 동기화",
+        "desc": "로그인 후 기기 간 환경 스냅샷을 푸시/풀하고 새 PC에서 복원(네트워크 필요). 일상적인 로컬 설치와 관리는 클라우드에 의존하지 않습니다"
       },
       "workspace": {
         "title": "레시피",
@@ -781,7 +780,7 @@
     },
     "later": "어쩌면 나중에",
     "locked": "프로 기능",
-    "lockedTitle": "프로 기능: 대량 활동 로그 정리",
+    "lockedTitle": "프로 기능: 대량 기록 정리",
     "clearLogsTitle": "필터를 통한 대량 정리",
     "themeExclusive": "{{name}}(Pro 전용)",
     "themeMenuSuffix": "[찬성]",
@@ -1031,13 +1030,13 @@
   "activityExt": {
     "subtitle": "최근 설치, 제거, 업데이트 및 환경 확인",
     "timeFilterAria": "시간 필터",
-    "clearLogs": "로그 지우기",
-    "empty": "이 기간에는 활동이 없습니다.",
+    "clearLogs": "기록 지우기",
+    "empty": "이 기간에는 기록이 없습니다.",
     "deleteTitle": "이 항목 삭제",
-    "deleteAria": "{{name}}님의 활동 삭제",
-    "deleteDialogTitle": "활동 항목 삭제",
+    "deleteAria": "{{name}}의 기록 삭제",
+    "deleteDialogTitle": "기록 항목 삭제",
     "deleteConfirm": "이 항목을 삭제하시겠습니까?",
-    "clearDialogTitle": "활동 로그 대량 지우기",
+    "clearDialogTitle": "기록 대량 지우기",
     "clearIntro": "지울 내용을 선택하세요. 이 작업은 취소할 수 없습니다.",
     "clearScopeAria": "명확한 범위",
     "clearFilter": "현재 필터: {{label}}",
@@ -1047,11 +1046,11 @@
     "clearAllCounting": "계산 중…",
     "clearing": "청산…",
     "clearConfirm": "분명한",
-    "loadFailed": "활동 로그를 로드하지 못했습니다: {{error}}",
+    "loadFailed": "기록을 로드하지 못했습니다: {{error}}",
     "clearFailed": "일괄 삭제 실패: {{error}}",
     "deleteFailed": "삭제 실패: {{error}}",
-    "cleared": "{{count}}개의 활동 항목을 삭제했습니다.",
-    "nothingToClear": "삭제할 활동 항목이 없습니다."
+    "cleared": "{{count}}개의 기록 항목을 삭제했습니다.",
+    "nothingToClear": "삭제할 기록 항목이 없습니다."
   },
   "officialRecipes": {
     "title": "목록",
@@ -1167,51 +1166,5 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
-  },
-  "snapshot": {
-    "title": "Snapshots & rollback",
-    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
-    "create": "Create snapshot",
-    "import": "Import snapshot…",
-    "localList": "Local snapshots",
-    "loading": "Loading…",
-    "empty": "No local snapshots yet",
-    "detail": "Details",
-    "selectHint": "Select a snapshot to view details",
-    "fieldId": "Snapshot ID",
-    "fieldDevice": "Device",
-    "fieldSource": "Source",
-    "fieldCreated": "Created",
-    "preview": "Preview changes",
-    "apply": "Apply snapshot",
-    "export": "Export…",
-    "delete": "Delete",
-    "planTitle": "Apply plan",
-    "planHint": "Click Preview changes to see what will be applied.",
-    "planEmpty": "Already up to date — nothing to apply",
-    "planPackages": "Will install {{count}} packages",
-    "planActivate": "Will switch current version for {{count}} packages",
-    "planBuckets": "Will add {{count}} buckets",
-    "planConfig": "Will update {{count}} config values",
-    "planMore": "…and {{count}} more",
-    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
-    "createOk": "Created snapshot {{id}}",
-    "createFailed": "Failed to create snapshot: {{error}}",
-    "exportDialogTitle": "Export environment snapshot",
-    "importDialogTitle": "Import environment snapshot",
-    "filterJson": "Environment snapshot (*.json)",
-    "exportOk": "Snapshot exported: {{path}}",
-    "exportFailed": "Failed to export snapshot: {{error}}",
-    "importFailed": "Failed to import snapshot: {{error}}",
-    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
-    "previewFailed": "Failed to preview: {{error}}",
-    "applyOk": "Snapshot applied",
-    "applyFailed": "Failed to apply snapshot: {{error}}",
-    "deleteOk": "Snapshot deleted",
-    "deleteFailed": "Failed to delete snapshot: {{error}}",
-    "loadFailed": "Failed to load snapshots: {{error}}",
-    "applying": "Applying snapshot…",
-    "applyProgress": "Processing {{name}}…",
-    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }

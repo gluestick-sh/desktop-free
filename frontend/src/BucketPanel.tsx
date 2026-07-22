@@ -18,7 +18,6 @@ import ModalCloseButton from './ModalCloseButton'
 import ModalOverlay from './ModalOverlay'
 import ListPagination from './ListPagination'
 import TableIconButton from './TableIconButton'
-import type { PageSizeMode } from './listPageSize'
 import PackageDataTable, { type PackageDataTableColumn } from './PackageDataTable'
 import './BucketPanel.css'
 
@@ -65,10 +64,6 @@ interface BucketPanelProps {
   onOpenAddConsumed?: () => void
   onBucketsChanged: () => void
   pageSize: number
-  pageSizeMode: PageSizeMode
-  autoPageSize: number
-  onPageSizeChange: (size: number) => void
-  onPageSizeAuto: () => void
   listScrollRef?: RefObject<HTMLDivElement | null>
 }
 
@@ -78,10 +73,6 @@ export default function BucketPanel({
   onOpenAddConsumed,
   onBucketsChanged,
   pageSize,
-  pageSizeMode,
-  autoPageSize,
-  onPageSizeChange,
-  onPageSizeAuto,
   listScrollRef,
 }: BucketPanelProps) {
   const { t, i18n } = useTranslation()
@@ -716,11 +707,6 @@ export default function BucketPanel({
             onPrev={() => setPage((p) => p - 1)}
             onNext={() => setPage((p) => p + 1)}
             disabled={loading}
-            pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoPageSize}
-            onPageSizeChange={onPageSizeChange}
-            onPageSizeAuto={onPageSizeAuto}
           />
         </div>
       )}

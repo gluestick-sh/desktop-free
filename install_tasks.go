@@ -29,8 +29,8 @@ func (a *App) tryStartInstall(key string) error {
 	if _, exists := a.installTasks[key]; exists {
 		return fmt.Errorf("package %q is already being installed", key)
 	}
-	if len(a.installTasks) > 0 {
-		return fmt.Errorf("an install task is already in progress")
+	if len(a.installTasks) >= MaxParallelInstalls {
+		return fmt.Errorf("too many installs in progress (max %d)", MaxParallelInstalls)
 	}
 	a.installTasks[key] = nil
 	return nil

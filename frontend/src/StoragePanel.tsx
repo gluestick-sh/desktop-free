@@ -13,7 +13,6 @@ import ModalOverlay from './ModalOverlay'
 import ListPagination from './ListPagination'
 import PackageIcon from './PackageIcon'
 import TableIconButton from './TableIconButton'
-import type { PageSizeMode } from './listPageSize'
 import { useCacheTasks } from './TabTopProgress'
 import PackageDataTable, { type PackageDataTableColumn } from './PackageDataTable'
 import './StoragePanel.css'
@@ -29,10 +28,6 @@ function formatBytes(bytes: number): string {
 interface StoragePanelProps {
   refreshKey: number
   pageSize: number
-  pageSizeMode: PageSizeMode
-  autoPageSize: number
-  onPageSizeChange: (size: number) => void
-  onPageSizeAuto: () => void
   listScrollRef?: RefObject<HTMLDivElement | null>
   onChanged?: (message: string) => void
   onStatusMessage?: (status: string | null) => void
@@ -41,10 +36,6 @@ interface StoragePanelProps {
 export default function StoragePanel({
   refreshKey,
   pageSize,
-  pageSizeMode,
-  autoPageSize,
-  onPageSizeChange,
-  onPageSizeAuto,
   listScrollRef,
   onChanged,
   onStatusMessage,
@@ -332,11 +323,6 @@ export default function StoragePanel({
             onPrev={() => setPage((p) => p - 1)}
             onNext={() => setPage((p) => p + 1)}
             disabled={loading || opsBusy}
-            pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoPageSize}
-            onPageSizeChange={onPageSizeChange}
-            onPageSizeAuto={onPageSizeAuto}
           />
         </div>
       )}

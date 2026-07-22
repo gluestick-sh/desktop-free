@@ -18,7 +18,7 @@
     "browse": "浏览",
     "installed": "已安装",
     "updates": "更新中心",
-    "activity": "活动日志",
+    "activity": "历史记录",
     "storage": "占用空间",
     "recipes": "配方"
   },
@@ -28,8 +28,8 @@
     "installed": "已安装",
     "updatable": "可更新",
     "available": "可用包数",
-    "activity": "活动日志",
-    "activityHint": "查看活动日志",
+    "activity": "历史记录",
+    "activityHint": "查看历史记录",
     "storage": "占用空间",
     "manageBuckets": "管理仓库",
     "viewInstalled": "查看已安装软件包",
@@ -258,7 +258,7 @@
     "rerunDiagnosis": "重新诊断"
   },
   "activity": {
-    "title": "活动日志",
+    "title": "历史记录",
     "timeAll": "全部",
     "timeToday": "今天",
     "timeWeek": "本周",
@@ -368,8 +368,7 @@
     "upgradePro": "高级功能…",
     "about": "关于",
     "ariaLabel": "应用菜单",
-    "openRootDir": "打开根目录…",
-    "snapshots": "快照与回滚…"
+    "openRootDir": "打开根目录…"
   },
   "table": {
     "sortColumn": "按{{column}}排序",
@@ -757,7 +756,7 @@
     "feature": {
       "deviceSync": {
         "title": "多设备同步",
-        "desc": "登录后对齐各设备的已装清单与偏好；换机一键恢复当前环境，离线仍可完整使用"
+        "desc": "登录后在各设备间推送/拉取环境快照，换机可一键恢复（需联网）。本机已装软件与日常管理不依赖云端"
       },
       "workspace": {
         "title": "配方",
@@ -786,8 +785,8 @@
     },
     "later": "稍后再说",
     "locked": "Pro 功能",
-    "lockedTitle": "Pro 功能：按条件批量清理活动日志",
-    "clearLogsTitle": "按条件批量清理活动日志",
+    "lockedTitle": "Pro 功能：按条件批量清理历史记录",
+    "clearLogsTitle": "按条件批量清理历史记录",
     "themeExclusive": "{{name}}（Pro 专属）",
     "themeMenuSuffix": " [Pro]",
     "trialDev": "试用 Pro（开发模式）"
@@ -1036,13 +1035,13 @@
   "activityExt": {
     "subtitle": "查看近期安装、卸载、更新与环境诊断活动",
     "timeFilterAria": "时间筛选",
-    "clearLogs": "清理日志",
-    "empty": "该时间范围内暂无活动记录",
+    "clearLogs": "清理记录",
+    "empty": "该时间范围内暂无历史记录",
     "deleteTitle": "删除此条记录",
-    "deleteAria": "删除 {{name}} 的活动记录",
-    "deleteDialogTitle": "删除活动记录",
+    "deleteAria": "删除 {{name}} 的历史记录",
+    "deleteDialogTitle": "删除历史记录",
     "deleteConfirm": "确定要删除这条记录吗？",
-    "clearDialogTitle": "批量清理活动日志",
+    "clearDialogTitle": "批量清理历史记录",
     "clearIntro": "选择要清理的范围。此操作不可撤销。",
     "clearScopeAria": "清理范围",
     "clearFilter": "当前筛选：{{label}}",
@@ -1052,11 +1051,11 @@
     "clearAllCounting": "统计中…",
     "clearing": "清理中…",
     "clearConfirm": "清理",
-    "loadFailed": "加载活动日志失败: {{error}}",
+    "loadFailed": "加载历史记录失败: {{error}}",
     "clearFailed": "批量清理失败: {{error}}",
     "deleteFailed": "删除失败: {{error}}",
-    "cleared": "已清理 {{count}} 条活动日志",
-    "nothingToClear": "没有可清理的活动日志"
+    "cleared": "已清理 {{count}} 条历史记录",
+    "nothingToClear": "没有可清理的历史记录"
   },
   "officialRecipes": {
     "title": "官方配方",
@@ -1172,51 +1171,5 @@
         "description": "常用关系型、内存与文档数据库，可按技术栈选择安装用于本地开发。"
       }
     }
-  },
-  "snapshot": {
-    "title": "快照与回滚",
-    "intro": "保存当前已装软件、仓库与关键配置；换机或装坏后可按快照补齐缺失项（install-missing）。",
-    "create": "创建快照",
-    "import": "导入快照…",
-    "localList": "本地快照",
-    "loading": "加载中…",
-    "empty": "还没有本地快照",
-    "detail": "详情",
-    "selectHint": "选择左侧快照查看详情",
-    "fieldId": "快照 ID",
-    "fieldDevice": "设备",
-    "fieldSource": "来源",
-    "fieldCreated": "创建时间",
-    "preview": "预览变更",
-    "apply": "应用快照",
-    "export": "导出…",
-    "delete": "删除",
-    "planTitle": "变更计划",
-    "planHint": "点击「预览变更」查看将执行的操作。",
-    "planEmpty": "已与快照一致，无需变更",
-    "planPackages": "将安装 {{count}} 个包",
-    "planActivate": "将切换 {{count}} 个包的当前版本",
-    "planBuckets": "将添加 {{count}} 个仓库",
-    "planConfig": "将更新 {{count}} 项配置",
-    "planMore": "…另有 {{count}} 项",
-    "itemMeta": "{{packages}} 个包 · {{buckets}} 个仓库",
-    "createOk": "已创建快照 {{id}}",
-    "createFailed": "创建快照失败：{{error}}",
-    "exportDialogTitle": "导出环境快照",
-    "importDialogTitle": "导入环境快照",
-    "filterJson": "环境快照 (*.json)",
-    "exportOk": "快照已导出：{{path}}",
-    "exportFailed": "导出快照失败：{{error}}",
-    "importFailed": "导入快照失败：{{error}}",
-    "importInvalidFormat": "不是有效的环境快照文件，请选择由 GlueStick 导出的快照 JSON。",
-    "previewFailed": "预览失败：{{error}}",
-    "applyOk": "快照已应用",
-    "applyFailed": "应用快照失败：{{error}}",
-    "deleteOk": "已删除快照",
-    "deleteFailed": "删除快照失败：{{error}}",
-    "loadFailed": "加载快照列表失败：{{error}}",
-    "applying": "正在应用快照…",
-    "applyProgress": "正在处理 {{name}}…",
-    "applyProgressNamed": "正在处理 {{name}}（{{percent}}%）"
   }
 }

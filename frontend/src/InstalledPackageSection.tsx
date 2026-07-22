@@ -9,7 +9,6 @@ import PackageIcon from './PackageIcon'
 import PackageOpenButton from './PackageOpenButton'
 import TableIconButton from './TableIconButton'
 import { openExternalUrl } from './openExternalUrl'
-import type { PageSizeMode } from './listPageSize'
 import PackageDataTable, { type PackageDataTableColumn } from './PackageDataTable'
 import {
   isInstalledFavorite,
@@ -78,10 +77,6 @@ interface InstalledPackageSectionProps {
   page: number
   onPageChange: (page: number | ((prev: number) => number)) => void
   pageSize: number
-  pageSizeMode: PageSizeMode
-  autoPageSize: number
-  onPageSizeChange: (size: number) => void
-  onPageSizeAuto: () => void
   loading: boolean
   listScrollRef?: RefObject<HTMLDivElement>
   onRefresh: () => void
@@ -111,10 +106,6 @@ export default function InstalledPackageSection({
   page,
   onPageChange,
   pageSize,
-  pageSizeMode,
-  autoPageSize,
-  onPageSizeChange,
-  onPageSizeAuto,
   loading,
   listScrollRef,
   onRefresh,
@@ -440,11 +431,6 @@ export default function InstalledPackageSection({
             onPrev={() => onPageChange((p) => p - 1)}
             onNext={() => onPageChange((p) => p + 1)}
             disabled={loading}
-            pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoPageSize}
-            onPageSizeChange={onPageSizeChange}
-            onPageSizeAuto={onPageSizeAuto}
           />
         </>
       )}

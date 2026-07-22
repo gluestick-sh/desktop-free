@@ -174,15 +174,13 @@ func (a *App) runBootstrapStep(step bootstrapStep) {
 	defer a.finishBootstrapTask(step.tool)
 
 	a.emitBootstrapTaskStart(step.tool)
-	// Keep percentage at 0 until ensure() finishes so the bar stays indeterminate.
-	// Fixed mid-values looked "stuck" because download/extract emit no byte progress.
 	if step.detectKey != "" {
-		a.emitBootstrapTaskProgress(step.tool, "detect", step.detectKey, nil, 0)
+		a.emitBootstrapTaskProgress(step.tool, "detect", step.detectKey, nil, 5)
 	}
 	if step.discoverKey != "" {
-		a.emitBootstrapTaskProgress(step.tool, "discover", step.discoverKey, nil, 0)
+		a.emitBootstrapTaskProgress(step.tool, "discover", step.discoverKey, nil, 12)
 	}
-	a.emitBootstrapTaskProgress(step.tool, "download", step.downloadKey, nil, 0)
+	a.emitBootstrapTaskProgress(step.tool, "download", step.downloadKey, nil, 30)
 
 	path, err := step.ensure(a.ctx)
 	if err != nil {
@@ -191,7 +189,7 @@ func (a *App) runBootstrapStep(step bootstrapStep) {
 		return
 	}
 
-	a.emitBootstrapTaskProgress(step.tool, "extract", step.extractKey, nil, 0)
+	a.emitBootstrapTaskProgress(step.tool, "extract", step.extractKey, nil, 85)
 	a.emitBootstrapTaskProgress(step.tool, "complete", step.completeKey, map[string]interface{}{
 		"path": path,
 	}, 100)

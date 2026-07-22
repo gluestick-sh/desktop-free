@@ -18,7 +18,7 @@
     "browse": "Parcourir",
     "installed": "Installé",
     "updates": "Mises à jour",
-    "activity": "Journal d'activité",
+    "activity": "Historique",
     "storage": "Stockage",
     "recipes": "Catalogue"
   },
@@ -28,8 +28,8 @@
     "installed": "Installé",
     "updatable": "Mises à jour",
     "available": "Disponible",
-    "activity": "Activité",
-    "activityHint": "Afficher le journal d'activité",
+    "activity": "Historique",
+    "activityHint": "Afficher l'historique",
     "storage": "Stockage",
     "manageBuckets": "Gérer les buckets",
     "viewInstalled": "Afficher les packages installés",
@@ -253,7 +253,7 @@
     }
   },
   "activity": {
-    "title": "Journal d'activité",
+    "title": "Historique",
     "timeAll": "Tous",
     "timeToday": "Aujourd'hui",
     "timeWeek": "Cette semaine",
@@ -747,8 +747,8 @@
     "badge": "Pro",
     "feature": {
       "deviceSync": {
-        "title": "Sync multi-appareils",
-        "desc": "Après connexion, alignez inventaire et préférences entre appareils ; restaurez l'état actuel sur une nouvelle machine, usage hors ligne complet"
+        "title": "Synchronisation des appareils",
+        "desc": "Après connexion, poussez/tirez des instantanés d'environnement entre appareils et restaurez sur une nouvelle machine (réseau requis). Les installations et la gestion locale quotidienne ne dépendent pas du cloud"
       },
       "workspace": {
         "title": "Recettes",
@@ -777,11 +777,11 @@
     },
     "later": "Peut-être plus tard",
     "locked": "Fonctionnalité professionnelle",
-    "lockedTitle": "Fonctionnalité Pro : nettoyage groupé du journal d'activité",
+    "lockedTitle": "Fonctionnalité Pro : nettoyage groupé de l'historique",
     "clearLogsTitle": "Nettoyage en masse par filtre",
     "themeExclusive": "{{name}} (exclusivité Pro)",
     "themeMenuSuffix": "[Pro]",
-    "trialDev": "Essayer Pro (mode développement)"
+    "trialDev": "Essayez Pro (mode développement)"
   },
   "theme": {
     "preview": "Aperçu",
@@ -1027,13 +1027,13 @@
   "activityExt": {
     "subtitle": "Installations, désinstallations, mises à jour et vérifications d'environnement récentes",
     "timeFilterAria": "Filtre temporel",
-    "clearLogs": "Effacer les journaux",
-    "empty": "Aucune activité dans cette plage horaire",
+    "clearLogs": "Effacer l'historique",
+    "empty": "Aucun historique dans cette plage horaire",
     "deleteTitle": "Supprimer cette entrée",
-    "deleteAria": "Supprimer l'activité pour {{name}}",
-    "deleteDialogTitle": "Supprimer l'entrée d'activité",
+    "deleteAria": "Supprimer l'historique pour {{name}}",
+    "deleteDialogTitle": "Supprimer l'entrée d'historique",
     "deleteConfirm": "Supprimer cette entrée ?",
-    "clearDialogTitle": "Effacement groupé du journal d'activité",
+    "clearDialogTitle": "Effacement groupé de l'historique",
     "clearIntro": "Choisissez ce que vous souhaitez effacer. Cela ne peut pas être annulé.",
     "clearScopeAria": "Champ d'application clair",
     "clearFilter": "Filtre actuel : {{label}}",
@@ -1043,11 +1043,11 @@
     "clearAllCounting": "Compte…",
     "clearing": "Clairière…",
     "clearConfirm": "Clair",
-    "loadFailed": "Échec du chargement du journal d'activité : {{error}}",
+    "loadFailed": "Échec du chargement de l'historique : {{error}}",
     "clearFailed": "Échec de la suppression groupée : {{error}}",
     "deleteFailed": "Échec de la suppression : {{error}}",
-    "cleared": "{{count}} entrées d'activité effacées",
-    "nothingToClear": "Aucune entrée d'activité à effacer"
+    "cleared": "{{count}} entrées d'historique effacées",
+    "nothingToClear": "Aucune entrée d'historique à effacer"
   },
   "officialRecipes": {
     "title": "Catalogue",

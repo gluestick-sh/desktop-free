@@ -6,8 +6,6 @@ export function ActiveInstallCount():Promise<number>;
 
 export function AddBucket(arg1:string,arg2:string):Promise<void>;
 
-export function ApplyLocalSnapshot(arg1:string):Promise<main.SnapshotPlanDTO>;
-
 export function CancelInstall(arg1:string):Promise<void>;
 
 export function CheckBucketUpdates():Promise<Record<string, main.BucketUpdateStatus>>;
@@ -22,19 +20,13 @@ export function ClearManifestDownloadOverride(arg1:string):Promise<void>;
 
 export function ClearManifestJSONOverride(arg1:string):Promise<void>;
 
-export function CreateLocalSnapshot(arg1:string):Promise<main.SnapshotSummary>;
-
 export function DeleteActivityLog(arg1:number):Promise<void>;
-
-export function DeleteLocalSnapshot(arg1:string):Promise<void>;
 
 export function DismissDesktopUpdate(arg1:string,arg2:string):Promise<void>;
 
 export function DownloadAndRunDesktopUpdate(arg1:string):Promise<void>;
 
 export function ExportInventoryReport(arg1:string,arg2:string,arg3:string):Promise<string>;
-
-export function ExportLocalSnapshot(arg1:string,arg2:string,arg3:string):Promise<string>;
 
 export function ExportTemplateDefinitions(arg1:string,arg2:string,arg3:string):Promise<string>;
 
@@ -66,8 +58,6 @@ export function GetStats(arg1:main.StatsQuery):Promise<Record<string, any>>;
 
 export function HideCatalogPackage(arg1:string):Promise<void>;
 
-export function ImportSnapshotFromFile(arg1:string,arg2:string,arg3:boolean):Promise<main.SnapshotPlanDTO>;
-
 export function ImportTemplateDefinitions(arg1:string,arg2:string):Promise<string>;
 
 export function Install(arg1:string,arg2:boolean,arg3:boolean,arg4:string,arg5:boolean):Promise<void>;
@@ -90,8 +80,6 @@ export function ListInstalledQuick():Promise<Array<main.InstalledPackage>>;
 
 export function ListKnownBuckets():Promise<Array<main.KnownBucketInfo>>;
 
-export function ListLocalSnapshots():Promise<Array<main.SnapshotSummary>>;
-
 export function ListPackageLaunchMenu(arg1:string):Promise<Array<main.PackageLaunchEntry>>;
 
 export function ListPackageLaunchers(arg1:string):Promise<Array<main.PackageLauncher>>;
@@ -107,8 +95,6 @@ export function OpenPackageLauncher(arg1:string,arg2:string):Promise<void>;
 export function PickAndAddPackageLaunchExecutable(arg1:string,arg2:string,arg3:string):Promise<main.PackageLaunchEntry>;
 
 export function PlanInstall(arg1:string):Promise<main.InstallPlan>;
-
-export function PreviewLocalSnapshot(arg1:string):Promise<main.SnapshotPlanDTO>;
 
 export function PurgeCachePackage(arg1:string):Promise<void>;
 

@@ -25,9 +25,7 @@ import {
   SetBucketSyncMode,
   RecordCheckUpdatesResult,
   RunDoctor,
-  ExportInventoryReport,
-  ExportTemplateDefinitions,
-  ImportTemplateDefinitions,
+  IsProActive,
 } from '../wailsjs/go/main/App'
 import InstalledPackageSection, { type SelectedPackage } from './InstalledPackageSection'
 import ActivityLogPanel from './ActivityLogPanel'
@@ -49,14 +47,15 @@ import ModalOverlay from './ModalOverlay'
 import InstallPackageDialog, { type PendingInstallPlan } from './InstallPackageDialog'
 import SwitchVersionDialog from './SwitchVersionDialog'
 import PackageManifestDialog from './PackageManifestDialog'
-import { countTemplates, applyImportedTemplateBundle } from './templateStore'
-import { buildExportableTemplateBundle, parseImportedTemplateBundle } from './templates/io'
+import { countTemplates } from './templateStore'
 import { loadHideDeprecated, saveHideDeprecated } from './browsePreferences'
 import { packageInstallRef, packageNameFromInstallRef } from './templateLibrary'
 import ThemePicker from './ThemePicker'
+import ThemeEditor from './ThemeEditor'
 import {
   applyTheme,
-  canUseTheme,
+  cloneTokens,
+  createThemeFromTokens,
   loadCustomThemes,
   loadStoredThemeId,
   resolveTheme,
@@ -65,6 +64,7 @@ import {
   saveThemeId,
   type ThemeDefinition,
   type ThemeId,
+  type ThemeTokens,
 } from './themes'
 import NavIcon, { type NavIconName } from './NavIcon'
 import { useListPageSize } from './listPageSize'
@@ -101,6 +101,9 @@ function installPackageKey(ref: string): string {
   if (at >= 0) base = base.slice(0, at)
   return base.toLowerCase()
 }
+
+/** Keep in sync with MaxParallelInstalls in app.go. */
+const MAX_PARALLEL_INSTALLS = 4
 
 function isRefInstalling(ref: string, active: Record<string, InstallProgress>): boolean {
   const key = installPackageKey(ref)
@@ -304,11 +307,6 @@ function clampZoom(value: number): number {
   return Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, Math.round(value * 10) / 10))
 }
 
-function isVersionedInstallRef(ref: string): boolean {
-  const at = ref.lastIndexOf('@')
-  return at > 0 && at < ref.length - 1
-}
-
 function App() {
   const { t } = useTranslation()
   const TAB_ITEMS = useMemo(
@@ -408,18 +406,20 @@ function App() {
   const [installedListRefreshing, setInstalledListRefreshing] = useState(false)
   const [showQuitConfirm, setShowQuitConfirm] = useState(false)
   const listScrollRef = useRef<HTMLDivElement | null>(null)
-  const [isPro] = useState(true)
+  const [isPro, setIsPro] = useState(false)
   const [customThemes, setCustomThemes] = useState<ThemeDefinition[]>(loadCustomThemes)
   const [themeId, setThemeId] = useState<ThemeId>(() =>
-    sanitizeThemeIdOnLoad(loadStoredThemeId(), loadCustomThemes(), true),
+    sanitizeThemeIdOnLoad(loadStoredThemeId(), loadCustomThemes(), false),
   )
   const [showThemePicker, setShowThemePicker] = useState(false)
+  const [showThemeEditor, setShowThemeEditor] = useState(false)
+  const [editingTheme, setEditingTheme] = useState<ThemeDefinition | null>(null)
   const [zoom, setZoom] = useState(loadStoredZoom)
   const updatablePackages = useMemo(
     () => installedPackages.filter(isPackageUpdatable),
     [installedPackages],
   )
-  const { pageSize, mode: pageSizeMode, autoSize, setPageSize, setAutoMode } = useListPageSize(
+  const { pageSize, mode: pageSizeMode, setPageSize, setAutoMode } = useListPageSize(
     listScrollRef,
     [
       activeTab,
@@ -431,6 +431,10 @@ function App() {
       zoom,
     ],
   )
+
+  useEffect(() => {
+    void IsProActive().then(setIsPro).catch(() => setIsPro(false))
+  }, [])
 
   const applyStats = useCallback((raw: Record<string, unknown>) => {
     const s = raw as Record<string, number | boolean>
@@ -688,12 +692,20 @@ function App() {
   }, [themeId, customThemes])
 
   const selectTheme = useCallback((id: ThemeId) => {
-    if (!canUseTheme(id, isPro)) {
-      setShowProModal(true)
-      return
-    }
     applyThemeById(id)
-  }, [applyThemeById, isPro])
+  }, [applyThemeById])
+
+  const handleSaveCustomTheme = useCallback((theme: ThemeDefinition) => {
+    setCustomThemes((prev) => {
+      const existing = prev.findIndex((t) => t.id === theme.id)
+      const next = existing >= 0
+        ? prev.map((t, i) => (i === existing ? theme : t))
+        : [...prev, theme]
+      saveCustomThemes(next)
+      applyThemeById(theme.id, next)
+      return next
+    })
+  }, [applyThemeById])
 
   const handleDeleteCustomTheme = useCallback((id: ThemeId) => {
     setCustomThemes((prev) => {
@@ -706,10 +718,28 @@ function App() {
     }
   }, [applyThemeById, themeId])
 
-  const openThemeEditor = useCallback((_theme: ThemeDefinition | null = null) => {
+  const openThemeEditor = useCallback((theme: ThemeDefinition | null = null) => {
+    setEditingTheme(theme)
+    setShowThemeEditor(true)
     setShowThemePicker(false)
-    setShowProModal(true)
   }, [])
+
+  const handleThemeEditorPreview = useCallback((tokens: ThemeTokens) => {
+    const preview = createThemeFromTokens(
+      editingTheme?.id ?? 'custom:preview',
+      editingTheme?.name ?? t('theme.preview'),
+      'free',
+      cloneTokens(tokens),
+    )
+    applyTheme(preview)
+  }, [editingTheme, t])
+
+  useEffect(() => {
+    const sanitized = sanitizeThemeIdOnLoad(loadStoredThemeId(), customThemes)
+    if (sanitized !== themeId) {
+      applyThemeById(sanitized)
+    }
+  }, [customThemes, applyThemeById, themeId])
 
   useEffect(() => {
     localStorage.setItem(ZOOM_STORAGE_KEY, String(zoom))
@@ -1282,7 +1312,11 @@ function App() {
         setShowThemePicker(true)
         break
       case 'theme:custom-edit':
-        setShowProModal(true)
+        openThemeEditor(
+          themeId.startsWith('custom:')
+            ? customThemes.find((t) => t.id === themeId) ?? null
+            : null,
+        )
         break
       case 'page-size:auto':
         setAutoMode()
@@ -1309,82 +1343,6 @@ function App() {
       case 'deprecated:show':
         setHideDeprecated(false)
         saveHideDeprecated(false)
-        break
-      case 'export-inventory':
-        void (async () => {
-          dismissInfoMessage()
-          try {
-            const path = await ExportInventoryReport(
-              t('appExt.exportInventoryDialogTitle'),
-              t('appExt.exportInventoryFilterJson'),
-              t('appExt.exportInventoryFilterCsv'),
-            )
-            if (path) {
-              showInfoMessage(t('appExt.exportInventoryOk', { path }), {
-                centered: true,
-                autoHideMs: INFO_BANNER_AUTO_HIDE_MS,
-              })
-            }
-          } catch (err) {
-            setError(t('appExt.exportInventoryFailed', { error: String(err) }))
-          }
-        })()
-        break
-      case 'template-definitions:export':
-        void (async () => {
-          dismissInfoMessage()
-          try {
-            const bundle = buildExportableTemplateBundle()
-            const path = await ExportTemplateDefinitions(
-              JSON.stringify(bundle, null, 2),
-              t('appExt.exportRecipeDefinitionsDialogTitle'),
-              t('appExt.recipeDefinitionsFilterJson'),
-            )
-            if (path) {
-              showInfoMessage(t('appExt.exportRecipeDefinitionsOk', { path }), {
-                centered: true,
-                autoHideMs: INFO_BANNER_AUTO_HIDE_MS,
-              })
-            }
-          } catch (err) {
-            setError(t('appExt.exportRecipeDefinitionsFailed', { error: String(err) }))
-          }
-        })()
-        break
-      case 'template-definitions:import':
-        void (async () => {
-          dismissInfoMessage()
-          try {
-            const content = await ImportTemplateDefinitions(
-              t('appExt.importRecipeDefinitionsDialogTitle'),
-              t('appExt.recipeDefinitionsFilterJson'),
-            )
-            if (!content?.trim()) return
-            const parsed = parseImportedTemplateBundle(content)
-            const result = applyImportedTemplateBundle(parsed.bundle.templates)
-            if (result.applied === 0) {
-              setError(t('appExt.importRecipeDefinitionsNone', {
-                skipped: result.skipped.join(', ') || t('common.dash'),
-              }))
-              return
-            }
-            setTemplateRefreshKey((k) => k + 1)
-            refreshTemplateStat()
-            const skippedSuffix = result.skipped.length > 0
-              ? t('appExt.importRecipeDefinitionsSkipped', { ids: result.skipped.join(', ') })
-              : ''
-            showInfoMessage(t('appExt.importRecipeDefinitionsOk', {
-              applied: result.applied,
-              packages: result.packageCount,
-              skipped: skippedSuffix,
-            }), {
-              centered: true,
-              autoHideMs: INFO_BANNER_AUTO_HIDE_MS,
-            })
-          } catch (err) {
-            setError(t('appExt.importRecipeDefinitionsFailed', { error: String(err) }))
-          }
-        })()
         break
       case 'open-root-dir':
         OpenGlueDataDir()
@@ -1502,12 +1460,6 @@ function App() {
       } else if (mod(e) && e.shiftKey && (e.key === 'P' || e.key === 'p')) {
         e.preventDefault()
         handleMenuAction('pro')
-      } else if (mod(e) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
-        e.preventDefault()
-        handleMenuAction('export-inventory')
-      } else if (mod(e) && e.shiftKey && (e.key === 'T' || e.key === 't')) {
-        e.preventDefault()
-        handleMenuAction('template-definitions:export')
       } else if (e.key === 'F1') {
         e.preventDefault()
         handleMenuAction('docs')
@@ -1521,17 +1473,6 @@ function App() {
     setInstalledPage(1)
     setUpdatesPage(1)
   }, [pageSize])
-
-  const handlePageSizeChange = useCallback(
-    (size: number) => {
-      setPageSize(size)
-    },
-    [setPageSize],
-  )
-
-  const handlePageSizeAuto = useCallback(() => {
-    setAutoMode()
-  }, [setAutoMode])
 
   const bumpBuckets = useCallback(() => {
     setBucketRefreshKey((k) => k + 1)
@@ -1682,7 +1623,7 @@ function App() {
     (ref: string) => isRefInstalling(ref, activeInstalls),
     [activeInstalls],
   )
-  const operationBusy = gcRunning || (!isPro && hasActiveInstalls) || !!currentUninstall
+  const operationBusy = gcRunning || !!currentUninstall
 
   const isPackageDetailExpanded = useCallback(
     (name: string) => selectedPackage?.name === name,
@@ -1718,13 +1659,9 @@ function App() {
 
   const beginInstall = async (name: string, intent: 'install' | 'upgrade' = 'install') => {
     if (gcRunning) return
-    if (!isPro && (hasActiveInstalls || currentUninstall)) return
+    if (currentUninstall) return
     if (isPackageInstalling(name)) return
-    if (isVersionedInstallRef(name) && !isPro) {
-      setShowProModal(true)
-      showInfoMessage(t('appExt.versionInstallPro'))
-      return
-    }
+    if (Object.keys(activeInstalls).length >= MAX_PARALLEL_INSTALLS) return
     try {
       const plan = await PlanInstall(name)
       if (intent === 'upgrade' && plan.localActivateVersion) {
@@ -1802,7 +1739,7 @@ function App() {
   const handleConfirmInstall = async () => {
     if (!pendingInstallPlan) return
     if (gcRunning) return
-    if (!isPro && hasActiveInstalls) return
+    if (Object.keys(activeInstalls).length >= MAX_PARALLEL_INSTALLS) return
     const { name, force, selectedArchitecture, installMode } = pendingInstallPlan
     setPendingInstallPlan(null)
     await runInstall(name, force, selectedArchitecture, installMode === 'interactive')
@@ -2100,10 +2037,6 @@ function App() {
             onOpenAddConsumed={() => setBucketOpenAdd(false)}
             onBucketsChanged={bumpBuckets}
             pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoSize}
-            onPageSizeChange={handlePageSizeChange}
-            onPageSizeAuto={handlePageSizeAuto}
             listScrollRef={listScrollRef}
           />
         </div>
@@ -2132,10 +2065,6 @@ function App() {
             hideDeprecated={hideDeprecated}
             indexReady={searchIndexReady}
             pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoSize}
-            onPageSizeChange={handlePageSizeChange}
-            onPageSizeAuto={handlePageSizeAuto}
             listScrollRef={listScrollRef}
             isPackageInstalled={isPackageInstalled}
             operationBusy={operationBusy}
@@ -2159,10 +2088,6 @@ function App() {
             page={installedPage}
             onPageChange={setInstalledPage}
             pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoSize}
-            onPageSizeChange={handlePageSizeChange}
-            onPageSizeAuto={handlePageSizeAuto}
             loading={installedListRefreshing}
             listScrollRef={listScrollRef}
             onRefresh={() => void handleRefreshInstalledList('installed-tab-refresh')}
@@ -2195,10 +2120,6 @@ function App() {
             page={updatesPage}
             onPageChange={setUpdatesPage}
             pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoSize}
-            onPageSizeChange={handlePageSizeChange}
-            onPageSizeAuto={handlePageSizeAuto}
             loading={installedListRefreshing}
             listScrollRef={listScrollRef}
             onRefresh={() => void handleRefreshUpdatesCenter()}
@@ -2226,10 +2147,6 @@ function App() {
           <StoragePanel
             refreshKey={storageRefreshKey}
             pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoSize}
-            onPageSizeChange={handlePageSizeChange}
-            onPageSizeAuto={handlePageSizeAuto}
             listScrollRef={listScrollRef}
             onStatusMessage={setFooterRightStatus}
             onChanged={(message) => {
@@ -2244,10 +2161,6 @@ function App() {
           <ActivityLogPanel
             refreshKey={activityRefreshKey}
             pageSize={pageSize}
-            pageSizeMode={pageSizeMode}
-            autoPageSize={autoSize}
-            onPageSizeChange={handlePageSizeChange}
-            onPageSizeAuto={handlePageSizeAuto}
             listScrollRef={listScrollRef}
             onCleared={(deleted) => {
               showInfoMessage(
@@ -2646,10 +2559,26 @@ function App() {
             selectTheme(id)
             setShowThemePicker(false)
           }}
-          onEditCustom={() => openThemeEditor(null)}
+          onEditCustom={(theme) => openThemeEditor(theme)}
           onDeleteCustom={handleDeleteCustomTheme}
           onCreateCustom={() => openThemeEditor(null)}
           onClose={() => setShowThemePicker(false)}
+        />
+      )}
+
+      {showThemeEditor && (
+        <ThemeEditor
+          initialTheme={editingTheme}
+          customThemeCount={customThemes.length}
+          copyFromTokens={resolveTheme(themeId, customThemes)?.tokens}
+          onSave={handleSaveCustomTheme}
+          onApply={handleThemeEditorPreview}
+          onDelete={editingTheme ? handleDeleteCustomTheme : undefined}
+          onClose={() => {
+            setShowThemeEditor(false)
+            setEditingTheme(null)
+            applyThemeById(themeId)
+          }}
         />
       )}
 
@@ -2684,7 +2613,7 @@ function App() {
                     <p>{t('pro.feature.snapshot.desc')}</p>
                   </div>
                 </button>
-                <button type="button" className="pro-feature pro-feature-action" onClick={() => { setShowProModal(false); handleMenuAction('export-inventory') }}>
+                <button type="button" className="pro-feature pro-feature-action" onClick={() => setShowProModal(false)}>
                   <div className="pro-feature-icon" aria-hidden="true">🛡️</div>
                   <div className="pro-feature-content">
                     <h4>{t('pro.feature.complianceAudit.title')}</h4>

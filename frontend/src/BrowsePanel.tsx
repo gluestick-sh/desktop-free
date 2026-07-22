@@ -2,7 +2,6 @@ import { type RefObject } from 'react'
 import type { main } from '../wailsjs/go/models'
 import BrowseManifestPanel from './BrowseManifestPanel'
 import BucketBrowsePanel from './BucketBrowsePanel'
-import type { PageSizeMode } from './listPageSize'
 import './BrowsePanel.css'
 
 interface BrowsePanelProps {
@@ -11,10 +10,6 @@ interface BrowsePanelProps {
   hideDeprecated: boolean
   indexReady: boolean
   pageSize: number
-  pageSizeMode: PageSizeMode
-  autoPageSize: number
-  onPageSizeChange: (size: number) => void
-  onPageSizeAuto: () => void
   listScrollRef?: RefObject<HTMLDivElement>
   isPackageInstalled: (name: string) => boolean
   operationBusy: boolean
@@ -34,10 +29,6 @@ export default function BrowsePanel({
   hideDeprecated,
   indexReady,
   pageSize,
-  pageSizeMode,
-  autoPageSize,
-  onPageSizeChange,
-  onPageSizeAuto,
   listScrollRef,
   isPackageInstalled,
   operationBusy,
@@ -58,10 +49,6 @@ export default function BrowsePanel({
         hideDeprecated={hideDeprecated}
         indexReady={indexReady}
         pageSize={pageSize}
-        pageSizeMode={pageSizeMode}
-        autoPageSize={autoPageSize}
-        onPageSizeChange={onPageSizeChange}
-        onPageSizeAuto={onPageSizeAuto}
         listScrollRef={listScrollRef}
         isPackageInstalled={isPackageInstalled}
         operationBusy={operationBusy}

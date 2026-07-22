@@ -39,9 +39,6 @@ export type MenuAction =
   | 'deprecated:hide'
   | 'deprecated:show'
   | 'pro'
-  | 'export-inventory'
-  | 'template-definitions:export'
-  | 'template-definitions:import'
   | 'search'
   | 'check-updates'
   | 'docs'
@@ -96,26 +93,14 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[]): MenuGro
     { label: t('menu.deprecatedShow'), action: 'deprecated:show' },
   ]
 
-  const bucketSyncSubmenu: MenuEntry[] = [
+  const bucketSyncSubmenu: MenuEntry[] = [ 
+    { label: t('menu.bucketSyncAuto'), action: 'bucket-sync-mode:auto' },
+    { label: t('menu.bucketSyncManual'), action: 'bucket-sync-mode:manual' },
+    { type: 'separator' },
     ...([5, 15, 30] as const).map((n) => ({
       label: t('menu.bucketSyncIntervalMin', { n }),
       action: `bucket-check-interval:${n}` as MenuAction,
     })),
-    { type: 'separator' },
-    { label: t('menu.bucketSyncAuto'), action: 'bucket-sync-mode:auto' },
-    { label: t('menu.bucketSyncManual'), action: 'bucket-sync-mode:manual' },
-  ]
-
-  const recipeDefinitionsSubmenu: MenuEntry[] = [
-    {
-      label: t('menu.recipeDefinitionsExport'),
-      action: 'template-definitions:export',
-      shortcut: 'Ctrl+Shift+T',
-    },
-    {
-      label: t('menu.recipeDefinitionsImport'),
-      action: 'template-definitions:import',
-    },
   ]
 
   return [
@@ -124,16 +109,6 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[]): MenuGro
       label: t('menu.file'),
       accessKey: 'F',
       items: [
-        {
-          label: t('menu.exportInventory'),
-          action: 'export-inventory',
-          shortcut: 'Ctrl+Shift+E',
-        },
-        {
-          label: t('menu.recipeDefinitions'),
-          submenu: recipeDefinitionsSubmenu,
-        },
-        { type: 'separator' },
         { label: t('menu.openRootDir'), action: 'open-root-dir' },
         { type: 'separator' },
         { label: t('menu.quit'), action: 'quit', shortcut: 'Ctrl+Q' },
@@ -155,10 +130,6 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[]): MenuGro
         { label: t('menu.zoomIn'), action: 'zoom:in', shortcut: 'Ctrl+=' },
         { label: t('menu.zoomOut'), action: 'zoom:out', shortcut: 'Ctrl+-' },
         { label: t('menu.zoomReset'), action: 'zoom:reset', shortcut: 'Ctrl+0' },
-        { type: 'separator' },
-        { label: t('menu.theme'), submenu: themeSubmenu },
-        { label: t('menu.pageSize'), submenu: pageSizeSubmenu },
-        { label: t('menu.deprecatedPackages'), submenu: deprecatedSubmenu },
       ],
     },
     {
@@ -178,12 +149,11 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[]): MenuGro
     {
       id: 'tools',
       label: t('menu.tools'),
-      accessKey: 'T',
+      accessKey: 'S',
       items: [
-        { label: t('menu.environment'), action: 'environment' },
-        { label: t('menu.githubProxy'), action: 'github-proxy' },
-        { label: t('menu.downloadWorkers'), action: 'download-workers' },
-        { label: t('menu.bucketSync'), submenu: bucketSyncSubmenu },
+        { label: t('menu.theme'), submenu: themeSubmenu },
+        { label: t('menu.pageSize'), submenu: pageSizeSubmenu },
+        { label: t('menu.deprecatedPackages'), submenu: deprecatedSubmenu },
         { type: 'separator' },
         {
           label: t('menu.language'),
@@ -192,6 +162,11 @@ function buildMenuGroups(t: TFunction, customThemes: ThemeDefinition[]): MenuGro
             action: `locale:${code}` as LocaleMenuAction,
           })),
         },
+        { label: t('menu.downloadWorkers'), action: 'download-workers' },
+        { label: t('menu.bucketSync'), submenu: bucketSyncSubmenu },
+        { type: 'separator' },
+        { label: t('menu.environment'), action: 'environment' },
+        { label: t('menu.githubProxy'), action: 'github-proxy' },
       ],
     },
     {

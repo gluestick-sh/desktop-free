@@ -38,7 +38,7 @@ const lightTokens: ThemeTokens = {
 export const BUILTIN_THEMES: ThemeDefinition[] = [
   createThemeFromTokens('dark', 'Dark', 'free', darkTokens),
   createThemeFromTokens('light', 'Light', 'free', lightTokens),
-  createThemeFromTokens('midnight', 'Midnight blue', 'pro', {
+  createThemeFromTokens('midnight', 'Midnight blue', 'free', {
     'bg-primary': '#0d1117',
     'bg-secondary': '#161b22',
     'bg-tertiary': '#1c2333',
@@ -54,7 +54,7 @@ export const BUILTIN_THEMES: ThemeDefinition[] = [
     'border': '#30363d',
     'border-light': '#484f58',
   }),
-  createThemeFromTokens('forest', 'Forest green', 'pro', {
+  createThemeFromTokens('forest', 'Forest green', 'free', {
     'bg-primary': '#0f1a14',
     'bg-secondary': '#152620',
     'bg-tertiary': '#1a3328',
@@ -70,7 +70,7 @@ export const BUILTIN_THEMES: ThemeDefinition[] = [
     'border': '#2e4a3a',
     'border-light': '#3d5c4a',
   }),
-  createThemeFromTokens('dracula', 'Dracula', 'pro', {
+  createThemeFromTokens('dracula', 'Dracula', 'free', {
     'bg-primary': '#282a36',
     'bg-secondary': '#313443',
     'bg-tertiary': '#3a3d4e',
@@ -86,7 +86,7 @@ export const BUILTIN_THEMES: ThemeDefinition[] = [
     'border': '#44475a',
     'border-light': '#6272a4',
   }),
-  createThemeFromTokens('nord', 'Nord', 'pro', {
+  createThemeFromTokens('nord', 'Nord', 'free', {
     'bg-primary': '#2e3440',
     'bg-secondary': '#3b4252',
     'bg-tertiary': '#434c5e',
@@ -102,7 +102,7 @@ export const BUILTIN_THEMES: ThemeDefinition[] = [
     'border': '#4c566a',
     'border-light': '#5e81ac',
   }),
-  createThemeFromTokens('solarized', 'Solarized', 'pro', {
+  createThemeFromTokens('solarized', 'Solarized', 'free', {
     'bg-primary': '#002b36',
     'bg-secondary': '#073642',
     'bg-tertiary': '#0a4452',
@@ -123,8 +123,6 @@ export const BUILTIN_THEMES: ThemeDefinition[] = [
 export const BUILTIN_THEME_MAP = new Map(
   BUILTIN_THEMES.map((theme) => [theme.id as BuiltinThemeId, theme]),
 )
-
-export const PRO_PRESET_THEMES = BUILTIN_THEMES.filter((t) => t.tier === 'pro')
 
 export function getBuiltinTheme(id: BuiltinThemeId): ThemeDefinition {
   return BUILTIN_THEME_MAP.get(id) ?? BUILTIN_THEME_MAP.get('dark')!

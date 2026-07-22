@@ -212,6 +212,8 @@
 .github-proxy-presets-label {
   font-size: 11px;
   font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--text-tertiary, var(--text-secondary));
 }
 
@@ -255,6 +257,8 @@
 .github-proxy-preview-label {
   font-size: 11px;
   font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
   color: var(--text-tertiary, var(--text-secondary));
 }
 

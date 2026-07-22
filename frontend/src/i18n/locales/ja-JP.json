@@ -18,7 +18,7 @@
     "browse": "ブラウズ",
     "installed": "インストール済み",
     "updates": "アップデート",
-    "activity": "アクティビティログ",
+    "activity": "履歴",
     "storage": "ストレージ",
     "recipes": "カタログ"
   },
@@ -28,8 +28,8 @@
     "installed": "インストール済み",
     "updatable": "アップデート",
     "available": "利用可能",
-    "activity": "活動",
-    "activityHint": "アクティビティログを表示する",
+    "activity": "履歴",
+    "activityHint": "履歴を表示",
     "storage": "ストレージ",
     "manageBuckets": "バケットの管理",
     "viewInstalled": "インストールされているパッケージを表示する",
@@ -253,7 +253,7 @@
     }
   },
   "activity": {
-    "title": "アクティビティログ",
+    "title": "履歴",
     "timeAll": "全て",
     "timeToday": "今日",
     "timeWeek": "今週",
@@ -363,8 +363,7 @@
     "upgradePro": "プロにアップグレード…",
     "about": "について",
     "ariaLabel": "アプリケーションメニュー",
-    "openRootDir": "ルートディレクトリを開く…",
-    "snapshots": "Snapshots & rollback…"
+    "openRootDir": "ルートディレクトリを開く…"
   },
   "table": {
     "sortColumn": "{{column}} で並べ替え",
@@ -751,8 +750,8 @@
     "badge": "Pro",
     "feature": {
       "deviceSync": {
-        "title": "マルチデバイス同期",
-        "desc": "ログイン後、インストール一覧と設定を端末間で揃え、乗り換え時に現状をワンクリック復元。オフラインでもフル利用可"
+        "title": "デバイスの同期",
+        "desc": "サインイン後、デバイス間で環境スナップショットをプッシュ/プルし、新しいマシンで復元（ネットワークが必要）。日常のローカルインストールと管理はクラウドに依存しません"
       },
       "workspace": {
         "title": "レシピ",
@@ -781,7 +780,7 @@
     },
     "later": "たぶん後で",
     "locked": "プロの機能",
-    "lockedTitle": "Pro 機能: アクティビティ ログの一括クリーンアップ",
+    "lockedTitle": "Pro 機能: 履歴の一括クリーンアップ",
     "clearLogsTitle": "フィルターによる一括クリーンアップ",
     "themeExclusive": "{{name}} (Pro 限定)",
     "themeMenuSuffix": "[プロ]",
@@ -1031,13 +1030,13 @@
   "activityExt": {
     "subtitle": "最近のインストール、アンインストール、アップデート、環境チェック",
     "timeFilterAria": "時間フィルター",
-    "clearLogs": "ログをクリアする",
-    "empty": "この時間範囲にはアクティビティはありません",
+    "clearLogs": "履歴をクリア",
+    "empty": "この時間範囲には履歴がありません",
     "deleteTitle": "このエントリを削除します",
-    "deleteAria": "{{name}} のアクティビティを削除",
-    "deleteDialogTitle": "アクティビティエントリを削除する",
+    "deleteAria": "{{name}} の履歴を削除",
+    "deleteDialogTitle": "履歴エントリを削除する",
     "deleteConfirm": "このエントリを削除しますか?",
-    "clearDialogTitle": "アクティビティログを一括クリアする",
+    "clearDialogTitle": "履歴を一括クリアする",
     "clearIntro": "何をクリアするかを選択します。これを元に戻すことはできません。",
     "clearScopeAria": "明確な範囲",
     "clearFilter": "現在のフィルタ: {{label}}",
@@ -1047,11 +1046,11 @@
     "clearAllCounting": "数えています…",
     "clearing": "クリア中…",
     "clearConfirm": "クリア",
-    "loadFailed": "アクティビティ ログの読み込みに失敗しました: {{error}}",
+    "loadFailed": "履歴の読み込みに失敗しました: {{error}}",
     "clearFailed": "一括クリアに失敗しました: {{error}}",
     "deleteFailed": "削除に失敗しました: {{error}}",
-    "cleared": "{{count}} 個のアクティビティ エントリをクリアしました",
-    "nothingToClear": "クリアするアクティビティエントリはありません"
+    "cleared": "{{count}} 個の履歴エントリをクリアしました",
+    "nothingToClear": "クリアする履歴エントリはありません"
   },
   "officialRecipes": {
     "title": "カタログ",
@@ -1167,51 +1166,5 @@
         "description": "MariaDB, MySQL, Redis, MongoDB, PostgreSQL, and SQLite from the main bucket — pick what your stack needs for local development."
       }
     }
-  },
-  "snapshot": {
-    "title": "Snapshots & rollback",
-    "intro": "Save installed packages, buckets, and syncable config. Restore by installing what is missing (install-missing).",
-    "create": "Create snapshot",
-    "import": "Import snapshot…",
-    "localList": "Local snapshots",
-    "loading": "Loading…",
-    "empty": "No local snapshots yet",
-    "detail": "Details",
-    "selectHint": "Select a snapshot to view details",
-    "fieldId": "Snapshot ID",
-    "fieldDevice": "Device",
-    "fieldSource": "Source",
-    "fieldCreated": "Created",
-    "preview": "Preview changes",
-    "apply": "Apply snapshot",
-    "export": "Export…",
-    "delete": "Delete",
-    "planTitle": "Apply plan",
-    "planHint": "Click Preview changes to see what will be applied.",
-    "planEmpty": "Already up to date — nothing to apply",
-    "planPackages": "Will install {{count}} packages",
-    "planActivate": "Will switch current version for {{count}} packages",
-    "planBuckets": "Will add {{count}} buckets",
-    "planConfig": "Will update {{count}} config values",
-    "planMore": "…and {{count}} more",
-    "itemMeta": "{{packages}} packages · {{buckets}} buckets",
-    "createOk": "Created snapshot {{id}}",
-    "createFailed": "Failed to create snapshot: {{error}}",
-    "exportDialogTitle": "Export environment snapshot",
-    "importDialogTitle": "Import environment snapshot",
-    "filterJson": "Environment snapshot (*.json)",
-    "exportOk": "Snapshot exported: {{path}}",
-    "exportFailed": "Failed to export snapshot: {{error}}",
-    "importFailed": "Failed to import snapshot: {{error}}",
-    "importInvalidFormat": "Not a valid environment snapshot. Choose a GlueStick-exported snapshot JSON.",
-    "previewFailed": "Failed to preview: {{error}}",
-    "applyOk": "Snapshot applied",
-    "applyFailed": "Failed to apply snapshot: {{error}}",
-    "deleteOk": "Snapshot deleted",
-    "deleteFailed": "Failed to delete snapshot: {{error}}",
-    "loadFailed": "Failed to load snapshots: {{error}}",
-    "applying": "Applying snapshot…",
-    "applyProgress": "Processing {{name}}…",
-    "applyProgressNamed": "Processing {{name}} ({{percent}}%)"
   }
 }
